@@ -20,4 +20,13 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TRA.Entities\TRA.Entities.csproj" />
+    <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Concrete\EntityFramework\Mappings\" />
+  </ItemGroup>
+
 </Project>
