@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRA.Shared.Entities.Abstract;
 
 namespace TRA.Entities.Concrete
 {
-    public class Post
+    public class Post : EntityBase, IEntity
     {
         public string Title { get; set; }
         public string Content { get; set; }
