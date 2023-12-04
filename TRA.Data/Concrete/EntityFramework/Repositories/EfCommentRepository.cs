@@ -5,21 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TRA.Data.Abstract;
-using TRA.Data.Concrete.EntityFramework.Contexts;
 using TRA.Entities.Concrete;
 using TRA.Shared.Data.Concrete.EntityFramework;
 
 namespace TRA.Data.Concrete.EntityFramework.Repositories
 {
-    public class EfCategoryRepository : EfEntityRepositoryBase<Category>, ICategoryRepository
+    public class EfCommentRepository : EfEntityRepositoryBase<Comment>, ICommentRepository
     {
-        public EfCategoryRepository(DbContext context) : base(context)
+        public EfCommentRepository(DbContext context) : base(context)
         {
-        }
-
-        public async Task<Category> GetById(int categoryId)
-        {
-            //return await TRADbContext
         }
     }
 }

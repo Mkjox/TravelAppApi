@@ -25,8 +25,4 @@
     <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Concrete\EntityFramework\Mappings\" />
-  </ItemGroup>
-
 </Project>
