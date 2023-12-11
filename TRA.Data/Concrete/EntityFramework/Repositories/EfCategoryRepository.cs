@@ -19,7 +19,15 @@ namespace TRA.Data.Concrete.EntityFramework.Repositories
 
         public async Task<Category> GetById(int categoryId)
         {
-            //return await TRADbContext
+            return await TRADbContext.Categories.SingleOrDefaultAsync(c => c.Id == categoryId);
+        }
+
+        private TRADbContext TRADbContext
+        {
+            get
+            {
+                return _context as TRADbContext;
+            }
         }
     }
 }

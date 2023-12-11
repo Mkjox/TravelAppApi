@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TRA.Data.Abstract;
+using TRA.Data.Concrete.EntityFramework.Contexts;
 using TRA.Data.Concrete.EntityFramework.Repositories;
 
 namespace TRA.Data.Concrete
