@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TRA.Entities.Dtos
 {
-    public class UserAddDto
+    public class UserUpdateDto
     {
+        [Required]
+        public int Id { get; set; }
+
         [DisplayName("Username")]
         [Required(ErrorMessage = "{0} can't be empty.")]
         [MaxLength(50, ErrorMessage = "{0} can't be more than {1} characters.")]
@@ -21,14 +24,8 @@ namespace TRA.Entities.Dtos
         [Required(ErrorMessage = "{0} can't be empty.")]
         [MaxLength(100, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(10, ErrorMessage = "{0} can't be less than {1} characters.")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-        [DisplayName("Password")]
-        [Required(ErrorMessage = "{0} can't be empty.")]
-        [MaxLength(30, ErrorMessage = "{0} can't be more than {1} characters.")]
-        [MinLength(5, ErrorMessage = "{0} can't be less than {1} characters.")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
 
         [DisplayName("Phone Number")]
         [Required(ErrorMessage = "{0} can't be empty.")]
@@ -37,10 +34,11 @@ namespace TRA.Entities.Dtos
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        [DisplayName("Picture")]
-        [Required(ErrorMessage = "Please select a {0}.")]
+        [DisplayName("Add a Picture")]
         [DataType(DataType.Upload)]
         public IFormFile PictureFile { get; set; }
+
+        [DisplayName("Picture")]
         public string Picture { get; set; }
 
         [DisplayName("Name")]
