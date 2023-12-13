@@ -10,4 +10,16 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TRA.Entities\TRA.Entities.csproj" />
+    <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
+    <Folder Include="Concrete\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+
 </Project>
