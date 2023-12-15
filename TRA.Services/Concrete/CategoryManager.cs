@@ -161,29 +161,93 @@ namespace TRA.Services.Concrete
                 Messages.Category.NotFound(isPlural: true), null);
         }
 
-        public Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync()
+        public async Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync()
         {
-            throw new NotImplementedException();
+            var categories = await UnitOfWork.Categories.GetAllAsync(c => !c.IsDeleted);
+            if (categories.Count > -1)
+            {
+                return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
+                {
+                    Categories = categories,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+
+            return new DataResult<CategoryListDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: true), new CategoryListDto
+            {
+                Categories = null,
+                ResultStatus = ResultStatus.Error,
+                Message = Messages.Category.NotFound(isPlural: true)
+            });
         }
 
-        public Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync()
+        public async Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync()
         {
-            throw new NotImplementedException();
+            var categories = await UnitOfWork.Categories.GetAllAsync(c => !c.IsDeleted && c.IsActive);
+            if (categories.Count > -1)
+            {
+                return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
+                {
+                    Categories = categories,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+            return new DataResult<CategoryListDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: true), null);
         }
 
-        public Task<IDataResult<CategoryUpdateDto>> GetCategoryUpdateDtoAsync(int categoryId)
+        public async Task<IDataResult<CategoryUpdateDto>> GetCategoryUpdateDtoAsync(int categoryId)
         {
-            throw new NotImplementedException();
+            var result = await UnitOfWork.Categories.AnyAsync(c => c.Id == categoryId);
+            if (result)
+            {
+                var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+                var categoryUpdateDto = Mapper.Map<CategoryUpdateDto>(category);
+                return new DataResult<CategoryUpdateDto>(ResultStatus.Success, categoryUpdateDto);
+            }
+            else
+            {
+                return new DataResult<CategoryUpdateDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: false), null);
+            }
         }
 
-        public Task<IResult> HardDeleteAsync(int categoryId)
+        public async Task<IResult> HardDeleteAsync(int categoryId)
         {
-            throw new NotImplementedException();
+            var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            if (category != null)
+            {
+                await UnitOfWork.Categories.DeleteAsync(category);
+                await UnitOfWork.SaveAsync();
+                return new Result(ResultStatus.Success, Messages.Category.HardDelete(category.Name));
+            }
+
+            return new Result(ResultStatus.Error, Messages.Category.NotFound(isPlural: false));
         }
 
-        public Task<IDataResult<CategoryDto>> UndoDeleteAsync(int categoryId, string modifiedByName)
+        public async Task<IDataResult<CategoryDto>> UndoDeleteAsync(int categoryId, string modifiedByName)
         {
-            throw new NotImplementedException();
+            var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            if (category != null)
+            {
+                category.IsDeleted = false;
+                category.IsActive = true;
+                category.ModifiedByName = modifiedByName;
+                category.ModifiedDate = DateTime.Now;
+                var deletedCategory = await UnitOfWork.Categories.UpdateAsync(category);
+                await UnitOfWork.SaveAsync();
+
+                return new DataResult<CategoryDto>(ResultStatus.Success, Messages.Category.UndoDelete(deletedCategory.Name), new CategoryDto
+                {
+                    Category = deletedCategory,
+                    ResultStatus = ResultStatus.Success,
+                    Message = Messages.Category.UndoDelete(deletedCategory.Name)
+                });
+            }
+            return new DataResult<CategoryDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: false), new CategoryDto
+            {
+                Category = null,
+                ResultStatus = ResultStatus.Error,
+                Message = Messages.Category.NotFound(isPlural: false)
+            });
         }
 
     }
