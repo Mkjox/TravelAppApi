@@ -1,0 +1,190 @@
+﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TRA.Data.Abstract;
+using TRA.Entities.Concrete;
+using TRA.Entities.Dtos;
+using TRA.Services.Abstract;
+using TRA.Services.Utilities;
+using TRA.Shared.Utilities.Results.Abstract;
+using TRA.Shared.Utilities.Results.ComplexTypes;
+using TRA.Shared.Utilities.Results.Concrete;
+
+namespace TRA.Services.Concrete
+{
+    public class CategoryManager : ManagerBase, ICategoryService
+    {
+        public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        {
+        }
+
+        public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto categoryAddDto, string createdByName)
+        {
+            var category = Mapper.Map<Category>(categoryAddDto);
+            category.CreatedByName = createdByName;
+            category.ModifiedByName = createdByName;
+            var addedCategory = await UnitOfWork.Categories.AddAsync(category);
+            await UnitOfWork.SaveAsync();
+
+            return new DataResult<CategoryDto>(ResultStatus.Success, Messages.Category.Add(addedCategory.Name), new CategoryDto
+            {
+                Category = addedCategory,
+                ResultStatus = ResultStatus.Success,
+                Message = Messages.Category.Add(addedCategory.Name)
+
+            });
+        }
+
+        public async Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto categoryUpdateDto, string modifiedByName)
+        {
+            var oldCategory = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryUpdateDto.Id);
+            var category = Mapper.Map<CategoryUpdateDto, Category>(categoryUpdateDto, oldCategory);
+            category.ModifiedByName = modifiedByName;
+            var updatedCategory = await UnitOfWork.Categories.UpdateAsync(category);
+            await UnitOfWork.SaveAsync();
+            return new DataResult<CategoryDto>(ResultStatus.Success, Messages.Category.Update(updatedCategory.Name), new CategoryDto
+            {
+                Category = updatedCategory,
+                ResultStatus = ResultStatus.Success,
+                Message = Messages.Category.Update(updatedCategory.Name)
+            });
+        }
+
+        public async Task<IDataResult<CategoryDto>> DeleteAsync(int categoryId, string modifiedByName)
+        {
+            var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            if (category != null)
+            {
+                category.IsDeleted = true;
+                category.IsActive = false;
+                category.ModifiedByName = modifiedByName;
+                category.ModifiedDate = DateTime.Now;
+                var deletedCategory = await UnitOfWork.Categories.UpdateAsync(category);
+                await UnitOfWork.SaveAsync();
+                return new DataResult<CategoryDto>(ResultStatus.Success, Messages.Category.Delete(deletedCategory.Name), new CategoryDto
+                {
+                    Category = deletedCategory,
+                    ResultStatus = ResultStatus.Success,
+                    Message = Messages.Category.Delete(deletedCategory.Name)
+                });
+            }
+
+            return new DataResult<CategoryDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: false), new CategoryDto
+            {
+                Category = null,
+                ResultStatus = ResultStatus.Error,
+                Message = Messages.Category.NotFound(isPlural: false)
+            });
+        }
+
+        public async Task<IDataResult<int>> CountAsync()
+        {
+            var categoriesCount = await UnitOfWork.Categories.CountAsync();
+            if (categoriesCount > -1)
+            {
+                return new DataResult<int>(ResultStatus.Success, categoriesCount);
+            }
+            else
+            {
+                return new DataResult<int>(ResultStatus.Error, $"Encountered an unexpected error.", -1);
+            }
+        }
+
+        public async Task<IDataResult<int>> CountByNonDeletedAsync()
+        {
+            var categoriesCount = await UnitOfWork.Categories.CountAsync(c => !c.IsDeleted);
+            if (categoriesCount > -1)
+            {
+                return new DataResult<int>(ResultStatus.Success, categoriesCount);
+            }
+            else
+            {
+                return new DataResult<int>(ResultStatus.Error, $"Encountered an unexpected error.", -1);
+            }
+        }
+
+        public async Task<IDataResult<CategoryDto>> GetAsync(int categoryId)
+        {
+            var category = await UnitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            if (category != null)
+            {
+                return new DataResult<CategoryDto>(ResultStatus.Success, new CategoryDto
+                {
+                    Category = category,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+
+            return new DataResult<CategoryDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: false), new CategoryDto
+            {
+                Category = null,
+                ResultStatus = ResultStatus.Error,
+                Message = Messages.Category.NotFound(isPlural: false)
+            });
+        }
+
+        public async Task<IDataResult<CategoryListDto>> GetAllAsync()
+        {
+            var categories = await UnitOfWork.Categories.GetAllAsync(null);
+            if (categories.Count > -1)
+            {
+                return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
+                {
+                    Categories = categories,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+
+            return new DataResult<CategoryListDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: true), new CategoryListDto
+            {
+                Categories = null,
+                ResultStatus = ResultStatus.Error,
+                Message = Messages.Category.NotFound(isPlural: true)
+            });
+        }
+
+        public async Task<IDataResult<CategoryListDto>> GetAllByDeletedAsync()
+        {
+            var categories = await UnitOfWork.Categories.GetAllAsync(c => c.IsDeleted);
+            if (categories.Count > -1)
+            {
+                return new DataResult<CategoryListDto>(ResultStatus.Success, new CategoryListDto
+                {
+                    Categories = categories,
+                    ResultStatus = ResultStatus.Success
+                });
+            }
+            return new DataResult<CategoryListDto>(ResultStatus.Error,
+                Messages.Category.NotFound(isPlural: true), null);
+        }
+
+        public Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<CategoryUpdateDto>> GetCategoryUpdateDtoAsync(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResult> HardDeleteAsync(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IDataResult<CategoryDto>> UndoDeleteAsync(int categoryId, string modifiedByName)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+}

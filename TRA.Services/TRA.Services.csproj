@@ -11,14 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TRA.Data\TRA.Data.csproj" />
     <ProjectReference Include="..\TRA.Entities\TRA.Entities.csproj" />
     <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>
