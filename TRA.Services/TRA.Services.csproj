@@ -16,8 +16,4 @@
     <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
 </Project>
