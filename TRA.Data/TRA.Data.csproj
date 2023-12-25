@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TRA.Entities\TRA.Entities.csproj" />
-    <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
   </ItemGroup>
 
 </Project>

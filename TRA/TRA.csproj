@@ -27,4 +27,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TRA.Data\TRA.Data.csproj" />
+	  <ProjectReference Include="..\TRA.Services\TRA.Services.csproj" />
+	  <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
