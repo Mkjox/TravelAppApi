@@ -1,4 +1,8 @@
+using TRA.Data.Concrete.EntityFramework.Contexts;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<TRADbContext>
 
 // Add services to the container.
 
