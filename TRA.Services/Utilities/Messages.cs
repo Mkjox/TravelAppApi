@@ -19,6 +19,11 @@ namespace TRA.Services.Utilities
                 return "Couldn't find this category.";
             }
 
+            public static string OperationError(string categoryName)
+            {
+                return $"There has been an error while adding {categoryName} named category.";
+            }
+
             public static string Add(string categoryName)
             {
                 return $"{categoryName} named category has been added.";
@@ -43,6 +48,7 @@ namespace TRA.Services.Utilities
             {
                 return $"{categoryName} named category has been successfully retrieved from the archive.";
             }
+
         }
 
         public static class Post
@@ -54,6 +60,11 @@ namespace TRA.Services.Utilities
                     return "Couldn't find the Posts.";
                 }
                 return "Couldn't find this post.";
+            }
+
+            public static string OperationError(string PostTitle)
+            {
+                return $"There has been an error while adding {PostTitle} named post.";
             }
 
             public static string Add(string PostTitle)
@@ -91,6 +102,11 @@ namespace TRA.Services.Utilities
                     return "Couldn't find any comments.";
                 }
                 return "Couldn't find this comment.";
+            }
+
+            public static string OperationError()
+            {
+                return "There has been an error while adding your comment.";
             }
 
             public static string Approve(int commentId)
