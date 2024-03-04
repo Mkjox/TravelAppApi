@@ -11,5 +11,6 @@ namespace TRA.Entities.Concrete
     {
         public int PostId { get; set; }
         public Post Post { get; set; }
+        public bool IsLiked { get; set; } = false;
     }
 }
