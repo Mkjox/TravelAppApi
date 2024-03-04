@@ -115,7 +115,7 @@ namespace TRA.Services.Concrete
             return new DataResult<PostListDto>(ResultStatus.Error, Messages.Post.NotFound(isPlural: false), null);
         }
 
-        /* public async Task<IDataResult<PostListDto>> GetAllByDeletedAsync()
+        public async Task<IDataResult<PostListDto>> GetAllByDeletedAsync()
         {
             var posts = await UnitOfWork.Posts.GetAllAsync(p => p.IsDeleted && !p.IsActive, p => p.User, p => p.Category);
             if (posts.Count > -1)
@@ -127,7 +127,7 @@ namespace TRA.Services.Concrete
                 });
             }
             return new DataResult<PostListDto>(ResultStatus.Error, Messages.Post.NotFound(isPlural: true), null);
-        }*/
+        }
 
         public async Task<IDataResult<PostListDto>> GetAllByNonDeletedAsync()
         {
@@ -143,6 +143,33 @@ namespace TRA.Services.Concrete
             return new DataResult<PostListDto>(ResultStatus.Error, Messages.Post.NotFound(isPlural: true), null);
         }
 
+        public async Task<IDataResult<PostListDto>> GetAllByViewCountAsync(bool isAscending, int? takeSize)
+        {
+            var posts = await UnitOfWork.Posts.GetAllAsync(p => p.IsActive && !p.IsDeleted, p => p.User, p => p.Category);
+            var sortedPosts = isAscending ? posts.OrderBy(p => p.ViewCount) : posts.OrderByDescending(p => p.ViewCount);
+            return new DataResult<PostListDto>(ResultStatus.Success, new PostListDto
+            {
+                Posts = takeSize == null ? sortedPosts.ToList() : sortedPosts.Take(takeSize.Value).ToList()
+            });
+        }
+
+        public async Task<IDataResult<PostListDto>> GetAllByPagingAsync(int? categoryId, int currentPage = 1, int pageSize = 5, bool isAscending = false)
+        {
+            pageSize = pageSize > 20 ? 20 : pageSize;
+            var posts = categoryId == null ? await UnitOfWork.Posts.GetAllAsync(p => p.IsActive && !p.IsDeleted, p => p.Category, p => p.User) : await UnitOfWork.Posts.GetAllAsync(p => p.CategoryId == categoryId && p.IsActive && !p.IsDeleted, p => p.Category, p => p.User);
+            var sortedPosts = isAscending ? posts.OrderBy(p => p.Date).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() : posts.OrderByDescending(p => p.Date).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            return new DataResult<PostListDto>(ResultStatus.Success, new PostListDto
+            {
+                Posts = sortedPosts,
+                CategoryId = categoryId == null ? null : categoryId.Value,
+                CurrentPage = currentPage,
+                PageSize = pageSize,
+                TotalCount = posts.Count,
+                IsAscending = isAscending
+
+            });
+        }
+
         public async Task<IDataResult<PostListDto>> GetAllByNonDeletedAndActiveAsync()
         {
             var posts = await UnitOfWork.Posts.GetAllAsync(p => !p.IsDeleted && p.IsActive, p => p.User, p => p.Category);
@@ -156,16 +183,6 @@ namespace TRA.Services.Concrete
             }
             return new DataResult<PostListDto>(ResultStatus.Error, Messages.Post.NotFound(isPlural: true), null);
         }
-
-        /* public Task<IDataResult<PostListDto>> GetAllByPagingAsync(Guid? categoryId, int currentPage = 1, int pageSize = 5, bool isAscending = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IDataResult<PostListDto>> GetAllByViewCountAsync(bool isAscending, int? takeSize)
-        {
-            throw new NotImplementedException();
-        } */
 
         public async Task<IResult> DeleteAsync(int postId, string modifiedByName)
         {
@@ -213,5 +230,6 @@ namespace TRA.Services.Concrete
             }
             return new Result(ResultStatus.Error, Messages.Post.NotFound(isPlural: false));
         }
+
     }
 }
