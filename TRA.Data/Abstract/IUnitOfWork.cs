@@ -11,6 +11,7 @@ namespace TRA.Data.Abstract
         IPostRepository Posts { get; }
         ICategoryRepository Categories { get; }
         ICommentRepository Comments { get; }
+        ILikedItemRepository LikedItems { get; }
         Task<int> SaveAsync();
     }
 }
