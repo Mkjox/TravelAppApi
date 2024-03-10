@@ -20,7 +20,7 @@ namespace TRA.Entities.Concrete
         public int UserId { get; set; }
         public User User { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public ICollection<LikedItems> LikedItems { get; set; }
+        public ICollection<LikedItem> LikedItems { get; set; }
         public bool IsPinned = false;
     }
 }

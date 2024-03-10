@@ -10,6 +10,6 @@ namespace TRA.Entities.Dtos
 {
     public class LikedItemDto : DtoGetBase
     {
-        public LikedItems LikedItems { get; set; }
+        public LikedItem LikedItem { get; set; }
     }
 }
