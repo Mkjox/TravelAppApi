@@ -9,11 +9,11 @@ using TRA.Entities.Concrete;
 
 namespace TRA.Data.Concrete.EntityFramework.Mappings
 {
-    public class LikedMap : IEntityTypeConfiguration<Liked>
+    public class LikedItemMap : IEntityTypeConfiguration<LikedItems>
     {
-        public void Configure(EntityTypeBuilder<Liked> builder)
+        public void Configure(EntityTypeBuilder<LikedItems> builder)
         {
-            builder.HasOne<Post>(c => c.Post).WithMany(p => p.Likeds).HasForeignKey(c => c.PostId);
+            builder.HasOne<Post>(c => c.Post).WithMany(p => p.LikedItems).HasForeignKey(c => c.PostId);
 
             builder.ToTable("Liked");
         }

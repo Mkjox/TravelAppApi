@@ -8,9 +8,10 @@ using TRA.Shared.Entities.Abstract;
 
 namespace TRA.Entities.Dtos
 {
-    public class LikedListDto : DtoGetBase
+    public class LikedItemListDto : DtoGetBase
     {
-        // Maybe Favorites instead of Likeds?
-        public IList<Liked> Likeds { get; set; }
+        public IList<LikedItems> LikedItems { get; set; }
+        public IList<Post> Posts { get; set; }
+        public int? postId { get; set; }
     }
 }

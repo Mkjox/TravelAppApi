@@ -7,10 +7,11 @@ using TRA.Shared.Entities.Abstract;
 
 namespace TRA.Entities.Concrete
 {
-    public class Liked : IEntity
+    public class LikedItems : IEntity
     {
         public int PostId { get; set; }
         public Post Post { get; set; }
+        public Comment Comment { get; set; }
         public bool IsLiked { get; set; } = false;
     }
 }

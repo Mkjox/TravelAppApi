@@ -8,8 +8,8 @@ using TRA.Shared.Entities.Abstract;
 
 namespace TRA.Entities.Dtos
 {
-    public class LikedDto : DtoGetBase
+    public class LikedItemDto : DtoGetBase
     {
-        public Liked Liked { get; set; }
+        public LikedItems LikedItems { get; set; }
     }
 }
