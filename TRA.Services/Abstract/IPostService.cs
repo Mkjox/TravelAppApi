@@ -23,6 +23,7 @@ namespace TRA.Services.Abstract
         Task<IDataResult<PostListDto>> GetAllByDeletedAsync();
         Task<IDataResult<PostListDto>> GetAllByViewCountAsync(bool isAscending, int? takeSize);
         Task<IDataResult<PostListDto>> GetAllByPagingAsync(int? categoryId, int currentPage = 1, int pageSize = 5, bool isAscending = false);
+        Task<IDataResult<PostListDto>> GetAllByLikedAsync(int postId, int userId, DateTime likedDate, string createdByName);
         Task<IDataResult<int>> CountAsync();
         Task<IDataResult<int>> CountByNonDeletedAsync();
     }

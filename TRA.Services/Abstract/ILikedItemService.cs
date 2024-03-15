@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TRA.Entities.Dtos;
+using TRA.Shared.Utilities.Results.Abstract;
 
 namespace TRA.Services.Abstract
 {
     public interface ILikedItemService
     {
-        Task<LikedItemDto> AddLikedItemAsync(LikedItemDto likedItemDto);
-        Task DeleteLikedItemAsync(int id);
-        Task<IEnumerable<LikedItemDto>> GetAllLikedItemsAsync();
-        Task<LikedItemDto> GetLikedItemByIdAsync(int id);
+        Task<IResult> AddLikedItemAsync(LikedItemUpdateDto likedItemUpdateDto);
+        Task<IResult> DeleteLikedItemAsync(int postId, int commentId);
+        Task<IEnumerable<LikedItemListDto>> GetAllLikedItemsAsync();
+        Task<IDataResult<LikedItemListDto>> GetLikedItemByIdAsync(int id);
     }
 }
