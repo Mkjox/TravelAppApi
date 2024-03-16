@@ -11,8 +11,10 @@ namespace TRA.Services.Abstract
     public interface ILikedItemService
     {
         Task<IResult> AddLikedItemAsync(LikedItemUpdateDto likedItemUpdateDto);
-        Task<IResult> DeleteLikedItemAsync(int postId, int commentId);
-        Task<IEnumerable<LikedItemListDto>> GetAllLikedItemsAsync();
-        Task<IDataResult<LikedItemListDto>> GetLikedItemByIdAsync(int id);
+        Task<IResult> DeleteLikedPostItemAsync(int postId);
+        Task<IResult> DeleteLikedCommentItemAsync(int commentId);
+        Task<IDataResult<LikedItemListDto>> GetAllLikedItemsAsync();
+        Task<IDataResult<LikedItemDto>> GetLikedItemByPostIdAsync(int postId);
+        Task<IDataResult<LikedItemDto>> GetLikedItemByCommentIdAsync(int commentId);
     }
 }

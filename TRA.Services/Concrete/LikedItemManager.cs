@@ -28,7 +28,7 @@ namespace TRA.Services.Concrete
             return new Result(ResultStatus.Success);
         }
 
-        public async Task<IResult> DeleteLikedItemAsync(int postId, int commentId)
+        public async Task<IResult> DeleteLikedPostItemAsync(int postId)
         {
             var result = await UnitOfWork.LikedItems.AnyAsync(p => p.Id == postId);
             if (result)
@@ -43,14 +43,54 @@ namespace TRA.Services.Concrete
             return new Result(ResultStatus.Error);
         }
 
-        public Task<IEnumerable<LikedItemListDto>> GetAllLikedItemsAsync()
+        public async Task<IResult> DeleteLikedCommentItemAsync(int commentId)
         {
-            throw new NotImplementedException();
+            var result = await UnitOfWork.LikedItems.AnyAsync(c => c.Id == commentId);
+            if (result)
+            {
+                var likedItem = await UnitOfWork.LikedItems.GetAsync(c => c.Id == commentId);
+                likedItem.IsDeleted = true;
+                likedItem.IsActive = false;
+                await UnitOfWork.LikedItems.UpdateAsync(likedItem);
+                await UnitOfWork.SaveAsync();
+                return new Result(ResultStatus.Success);
+            }
+            return new Result(ResultStatus.Error);
         }
 
-        public Task<IDataResult<LikedItemListDto>> GetLikedItemByIdAsync(int id)
+        public async Task<IDataResult<LikedItemListDto>> GetAllLikedItemsAsync()
         {
-            throw new NotImplementedException();
+            var likedItems = await UnitOfWork.LikedItems.GetAllAsync(l => l.IsActive && !l.IsDeleted, l => l.User, l => l.Category);
+            return new DataResult<LikedItemListDto>(ResultStatus.Success, new LikedItemListDto
+            {
+                LikedItems = likedItems.ToList()
+            });
+        }
+
+        public async Task<IDataResult<LikedItemDto>> GetLikedItemByPostIdAsync(int postId)
+        {
+            var likedItem = await UnitOfWork.LikedItems.GetAsync(l => l.Id == postId);
+            if (likedItem != null)
+            {
+                return new DataResult<LikedItemDto>(ResultStatus.Success, new LikedItemDto
+                {
+                    LikedItem = likedItem
+                });
+            }
+            return new DataResult<LikedItemDto>(ResultStatus.Error, null);
+        }
+
+        public async Task<IDataResult<LikedItemDto>> GetLikedItemByCommentIdAsync(int commentId)
+        {
+            var likedItem = await UnitOfWork.LikedItems.GetAsync(l => l.Id == commentId);
+            if (likedItem != null)
+            {
+                return new DataResult<LikedItemDto>(ResultStatus.Success, new LikedItemDto
+                {
+                    LikedItem = likedItem
+                });
+            }
+            return new DataResult<LikedItemDto>(ResultStatus.Error, null);
         }
     }
 }
