@@ -10,5 +10,6 @@ namespace TRA.Data.Abstract
 {
     public interface ILikedItemRepository : IEntityRepository<LikedItem>
     {
+        Task UpdateAsync(bool likedItem);
     }
 }
