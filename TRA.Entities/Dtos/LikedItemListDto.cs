@@ -11,7 +11,5 @@ namespace TRA.Entities.Dtos
     public class LikedItemListDto : DtoGetBase
     {
         public IList<LikedItem> LikedItems { get; set; }
-        public IList<Post> Posts { get; set; }
-        public int? postId { get; set; }
     }
 }
