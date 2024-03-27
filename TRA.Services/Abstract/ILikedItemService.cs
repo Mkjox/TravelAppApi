@@ -11,11 +11,11 @@ namespace TRA.Services.Abstract
 {
     public interface ILikedItemService
     {
-        Task<IResult> AddLikedItemAsync(LikedItem likedItem);
+        Task<IResult> AddAsync(LikedItem likedItem);
         Task<IResult> DeleteLikedPostItemAsync(int postId);
         Task<IResult> DeleteLikedCommentItemAsync(int commentId);
-        Task<IDataResult<LikedItemListDto>> GetAllLikedItemsAsync();
-        Task<IDataResult<LikedItemDto>> GetLikedItemByPostIdAsync(int postId);
-        Task<IDataResult<LikedItemDto>> GetLikedItemByCommentIdAsync(int commentId);
+        Task<IDataResult<LikedItemListDto>> GetAllAsync();
+        Task<IDataResult<LikedItemDto>> GetByPostIdAsync(int postId);
+        Task<IDataResult<LikedItemDto>> GetByCommentIdAsync(int commentId);
     }
 }

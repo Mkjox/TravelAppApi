@@ -27,7 +27,7 @@ namespace TRA.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
-            var result = _likedItemService.GetAllLikedItemsAsync();
+            var result = _likedItemService.GetAllAsync();
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
             else 
@@ -35,9 +35,9 @@ namespace TRA.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddLikes(LikedItem likedItem)
+        public async Task<IActionResult> AddLike(LikedItem likedItem)
         {
-            var result = _likedItemService.AddLikedItemAsync(likedItem);
+            var result = _likedItemService.AddAsync(likedItem);
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
             else 

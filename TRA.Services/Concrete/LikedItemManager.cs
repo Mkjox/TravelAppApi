@@ -20,7 +20,7 @@ namespace TRA.Services.Concrete
         {
         }
 
-        public async Task<IResult> AddLikedItemAsync(LikedItem likedItem)
+        public async Task<IResult> AddAsync(LikedItem likedItem)
         {
             var _likedItem = Mapper.Map<LikedItem>(likedItem);
             await UnitOfWork.LikedItems.UpdateAsync(_likedItem);
@@ -58,7 +58,7 @@ namespace TRA.Services.Concrete
             return new Result(ResultStatus.Error);
         }
 
-        public async Task<IDataResult<LikedItemListDto>> GetAllLikedItemsAsync()
+        public async Task<IDataResult<LikedItemListDto>> GetAllAsync()
         {
             var likedItems = await UnitOfWork.LikedItems.GetAllAsync(l => l.IsActive && !l.IsDeleted, l => l.User, l => l.Category);
             return new DataResult<LikedItemListDto>(ResultStatus.Success, new LikedItemListDto
@@ -67,7 +67,7 @@ namespace TRA.Services.Concrete
             });
         }
 
-        public async Task<IDataResult<LikedItemDto>> GetLikedItemByPostIdAsync(int postId)
+        public async Task<IDataResult<LikedItemDto>> GetByPostIdAsync(int postId)
         {
             var likedItem = await UnitOfWork.LikedItems.GetAsync(l => l.Id == postId);
             if (likedItem != null)
@@ -80,7 +80,7 @@ namespace TRA.Services.Concrete
             return new DataResult<LikedItemDto>(ResultStatus.Error, null);
         }
 
-        public async Task<IDataResult<LikedItemDto>> GetLikedItemByCommentIdAsync(int commentId)
+        public async Task<IDataResult<LikedItemDto>> GetByCommentIdAsync(int commentId)
         {
             var likedItem = await UnitOfWork.LikedItems.GetAsync(l => l.Id == commentId);
             if (likedItem != null)
