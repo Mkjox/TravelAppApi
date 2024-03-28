@@ -16,6 +16,7 @@ namespace TRA.Services.Abstract
         Task<IResult> UndoDeleteAsync(int postId, string modifiedByName);
         Task<IResult> HardDeleteAsync(int postId);
         Task<IDataResult<PostDto>> GetAsync(int postId);
+        Task<IDataResult<PostUpdateDto>> GetPostUpdateDtoAsync(int postId);
         Task<IDataResult<PostListDto>> GetAllAsync();
         Task<IDataResult<PostListDto>> GetAllByNonDeletedAsync();
         Task<IDataResult<PostListDto>> GetAllByNonDeletedAndActiveAsync();

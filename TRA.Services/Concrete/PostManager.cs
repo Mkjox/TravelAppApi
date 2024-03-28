@@ -82,6 +82,22 @@ namespace TRA.Services.Concrete
             return new DataResult<PostDto>(ResultStatus.Error, Messages.Post.NotFound(isPlural: false), null);
         }
 
+        public async Task<IDataResult<PostUpdateDto>> GetPostUpdateDtoAsync(int postId)
+        {
+            var result = await UnitOfWork.Posts.AnyAsync(p => p.Id == postId);
+
+            if (result)
+            {
+                var post = await UnitOfWork.Posts.GetAsync(p => p.Id == postId);
+                var postUpdateDto = Mapper.Map<PostUpdateDto>(post);
+                return new DataResult<PostUpdateDto>(ResultStatus.Success, postUpdateDto);
+            }
+            else
+            {
+                return new DataResult<PostUpdateDto>(ResultStatus.Error, Messages.Post.NotFound(isPlural: false), null);
+            }
+        }
+
         public async Task<IDataResult<PostListDto>> GetAllAsync()
         {
             var posts = await UnitOfWork.Posts.GetAllAsync(null, p => p.User, p => p.Category);
@@ -231,5 +247,9 @@ namespace TRA.Services.Concrete
             return new Result(ResultStatus.Error, Messages.Post.NotFound(isPlural: false));
         }
 
+        public Task<IDataResult<PostListDto>> GetAllByLikedAsync(int postId, int userId, DateTime likedDate, string createdByName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
