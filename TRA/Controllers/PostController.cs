@@ -33,6 +33,17 @@ namespace TRA.Controllers
             return Ok(_posts);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddPost()
+        {
+            var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Ok(result.Data.Categories);
+            }
+            return NotFound();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddPost([FromBody] PostAddDto postAddDto)
         {
