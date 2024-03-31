@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
 using TRA.Services.Abstract;
@@ -18,7 +19,6 @@ namespace TRA.Controllers
     {
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
-        private readonly List<Post> _posts = new List<Post>();
         private readonly IMapper _mapper;
 
         public PostController(UserManager<User> userManager, IMapper mapper, IPostService postService, ICategoryService categoryService) : base(userManager, mapper)
@@ -28,19 +28,8 @@ namespace TRA.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("getall")]
-        public async Task<IActionResult> GetPosts()
-        {
-            var result = await _postService.GetAllByNonDeletedAndActiveAsync();
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Ok(result);
-            }
-            else return NotFound();
-        }
-
         [HttpGet]
-        public async Task<IActionResult> AddPost()
+        public async Task<IActionResult> Add()
         {
             var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
             if (result.ResultStatus == ResultStatus.Success)
@@ -51,7 +40,7 @@ namespace TRA.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPost([FromBody] PostAddDto postAddDto)
+        public async Task<IActionResult> Add([FromBody] PostAddDto postAddDto)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +75,7 @@ namespace TRA.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdatePost(int postId)
+        public async Task<IActionResult> Update(int postId)
         {
             var postResult = await _postService.GetPostUpdateDtoAsync(postId);
             var categoriesResult = await _categoryService.GetAllByNonDeletedAndActiveAsync();
@@ -102,7 +91,7 @@ namespace TRA.Controllers
         }
 
         [HttpPost("update")]
-        public async Task<IActionResult> UpdatePost([FromBody] PostUpdateDto postUpdateDto)
+        public async Task<IActionResult> Update([FromBody] PostUpdateDto postUpdateDto)
         {
             var _postUpdateDto = _mapper.Map<PostUpdateDto>(postUpdateDto);
             var result = _postService.UpdateAsync(_postUpdateDto, LoggedInUser.UserName);
@@ -121,6 +110,28 @@ namespace TRA.Controllers
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
             var postResult = JsonSerializer.Serialize(result);
             return Json(postResult);
+        }
+
+        [HttpGet("getall")]
+        public async Task<JsonResult> GetPosts()
+        {
+            var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
+            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+            return Json(postResult);
+        }
+
+        [HttpGet("getalldeletedposts")]
+        public async Task<JsonResult> GetAllDeletedPosts()
+        {
+            var result = await _postService.GetAllByDeletedAsync();
+            var posts = JsonSerializer.Serialize(result, new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+            return Json(posts);
         }
 
     }
