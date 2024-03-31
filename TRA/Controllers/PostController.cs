@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
 using TRA.Services.Abstract;
@@ -30,7 +31,12 @@ namespace TRA.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetPosts()
         {
-            return Ok(_posts);
+            var result = await _postService.GetAllByNonDeletedAndActiveAsync();
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Ok(result);
+            }
+            else return NotFound();
         }
 
         [HttpGet]
@@ -41,7 +47,7 @@ namespace TRA.Controllers
             {
                 return Ok(result.Data.Categories);
             }
-            return NotFound();
+            else return NotFound();
         }
 
         [HttpPost]
@@ -107,6 +113,14 @@ namespace TRA.Controllers
             }
             else
                 return BadRequest(result);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Delete(int postId)
+        {
+            var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
+            var postResult = JsonSerializer.Serialize(result);
+            return Json(postResult);
         }
 
     }
