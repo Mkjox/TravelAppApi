@@ -90,7 +90,7 @@ namespace TRA.Controllers
             }
         }
 
-        [HttpPost("update")]
+        [HttpPost]
         public async Task<IActionResult> Update([FromBody] PostUpdateDto postUpdateDto)
         {
             var _postUpdateDto = _mapper.Map<PostUpdateDto>(postUpdateDto);
@@ -112,26 +112,98 @@ namespace TRA.Controllers
             return Json(postResult);
         }
 
-        [HttpGet("getall")]
+        [HttpPost]
+        public async Task<JsonResult> HardDelete(int postId)
+        {
+            var result = await _postService.HardDeleteAsync(postId);
+            var hardDeletePostResult = JsonSerializer.Serialize(result);
+            return Json(hardDeletePostResult);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UndoDelete(int postId)
+        {
+            var result = await _postService.UndoDeleteAsync(postId, LoggedInUser.UserName);
+            var undoDeletePostResult = JsonSerializer.Serialize(result);
+            return Json(undoDeletePostResult);
+        }
+
+        [HttpGet]
         public async Task<JsonResult> GetPosts()
         {
             var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
-            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+            if (posts != null)
             {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
-            return Json(postResult);
+                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                });
+                return Json(postResult);
+            }
+            else return Json(null);
         }
 
-        [HttpGet("getalldeletedposts")]
+        [HttpGet]
+        public async Task<JsonResult> GetAllPosts()
+        {
+            var posts = await _postService.GetAllAsync();
+            if (posts != null)
+            {
+                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                });
+                return Json(postResult);
+            }
+            else
+            {
+                return Json(null);
+            }
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetAllByNonDeletedAsync()
+        {
+            var posts = await _postService.GetAllByNonDeletedAsync();
+            if (posts != null)
+            {
+                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                });
+                return Json(postResult);
+            }
+            else return Json(null);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetAllByNonDeletedAndActiveAsync()
+        {
+            var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
+            if (posts != null)
+            {
+                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                });
+                return Json(postResult);
+            }
+            else return Json(null);
+        }
+
+        [HttpGet]
         public async Task<JsonResult> GetAllDeletedPosts()
         {
             var result = await _postService.GetAllByDeletedAsync();
-            var posts = JsonSerializer.Serialize(result, new JsonSerializerOptions
+            if (result != null)
             {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
-            return Json(posts);
+                var posts = JsonSerializer.Serialize(result, new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                });
+                return Json(posts);
+            }
+            else return Json(null);
         }
 
     }
