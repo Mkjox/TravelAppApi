@@ -20,9 +20,17 @@ namespace TRA.Services.Concrete
         {
         }
 
-        public async Task<IResult> AddAsync(LikedItem likedItem)
+        public async Task<IResult> AddAsync(LikedItemAddDto likedItemAddDto)
         {
-            var _likedItem = Mapper.Map<LikedItem>(likedItem);
+            var _likedItem = Mapper.Map<LikedItem>(likedItemAddDto);
+            await UnitOfWork.LikedItems.AddAsync(_likedItem);
+            await UnitOfWork.SaveAsync();
+            return new Result(ResultStatus.Success);
+        }
+
+        public async Task<IResult> UpdateAsync(LikedItemUpdateDto likedItemUpdateDto)
+        {
+            var _likedItem = Mapper.Map<LikedItem>(likedItemUpdateDto);
             await UnitOfWork.LikedItems.UpdateAsync(_likedItem);
             await UnitOfWork.SaveAsync();
             return new Result(ResultStatus.Success);
