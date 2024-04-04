@@ -50,11 +50,18 @@ namespace TRA.Controllers
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    return Ok(new { Message = result.Message, Title = "Successful Operation!" });
+                    return Json(new
+                    {
+                        result.Message,
+                        Title = "Post Added Successfully!"
+                    });
                 }
                 else
                 {
-                    return BadRequest(new { ErrorMessage = result.Message });
+                    return BadRequest(new
+                    {
+                        ErrorMessage = result.Message
+                    });
                 }
             }
             var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
