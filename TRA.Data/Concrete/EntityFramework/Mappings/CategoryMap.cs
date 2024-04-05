@@ -34,6 +34,93 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.IsDeleted).IsRequired();
 
             builder.ToTable("Categories");
+
+            builder.HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "Hiking",
+                    Description = "Hiking routes and experiences",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Bicycle",
+                    Description = "Cycling routes and experiences",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "Drive",
+                    Description = "Driving routes and experiences",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                },
+                new Category
+                {
+                    Id = 4,
+                    Name = "Kayak",
+                    Description = "Kayaking routes and experiences",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                },
+                new Category
+                {
+                    Id = 5,
+                    Name = "Ski",
+                    Description = "Skiing routes and experiences",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                },
+                new Category
+                {
+                    Id = 6,
+                    Name = "Water Ski",
+                    Description = "Water Skiing routes and experiences",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                },
+                new Category
+                {
+                    Id = 7,
+                    Name = "Swim",
+                    Description = "Swimming routes and experiences",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                }
+                );
         }
     }
 }
