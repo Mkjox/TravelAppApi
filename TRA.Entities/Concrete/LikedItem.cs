@@ -10,10 +10,11 @@ namespace TRA.Entities.Concrete
     public class LikedItem : EntityBase, IEntity
     {
         public int PostId { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public Post Post { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public bool IsLiked { get; set; } = false;
         public User User { get; set; }
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
     }
 }
