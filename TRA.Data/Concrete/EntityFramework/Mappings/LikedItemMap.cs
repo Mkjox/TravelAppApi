@@ -13,9 +13,10 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
     {
         public void Configure(EntityTypeBuilder<LikedItem> builder)
         {
-            builder.HasOne<Post>(c => c.Post).WithMany(p => p.LikedItems).HasForeignKey(c => c.PostId);
+            builder.HasOne<Post>(l => l.Post).WithMany(p => p.LikedItems).HasForeignKey(l => l.PostId);
+            builder.HasOne<Category>(l => l.Category).WithMany(c => c.LikedItems).HasForeignKey(l => l.CategoryId);
 
-            builder.ToTable("Liked");
+            builder.ToTable("LikedItems");
         }
     }
 }
