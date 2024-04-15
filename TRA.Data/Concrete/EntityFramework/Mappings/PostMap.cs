@@ -99,6 +99,78 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     UserId = 1,
+                },
+                new Post
+                {
+                    Id = 4,
+                    CategoryId = 4,
+                    Title = "Kayaking spot in Canada",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor iaculis nisl a ultrices. Vivamus non aliquet ante, sit amet malesuada risus. Nunc sollicitudin sed ante vel bibendum. Etiam vehicula faucibus lacus, efficitur porta dui auctor vitae. Proin auctor dapibus ligula. Quisque dignissim tincidunt lectus tempus auctor. Morbi suscipit facilisis lorem, ac lacinia quam venenatis quis. Curabitur accumsan dui nec dui.",
+                    Date = DateTime.Now,
+                    ViewCount = 1,
+                    CommentCount = 1,
+                    Thumbnail = "~postImages/defaultThumbnail.jpg",
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false,
+                    UserId = 1
+                },
+                new Post
+                {
+                    Id = 5,
+                    CategoryId = 5,
+                    Title = "Skiing place in France",
+                    Content = "In volutpat luctus finibus. Cras pulvinar, mi in elementum congue, quam quam ultrices enim, id dictum nunc nisl a ex. Proin convallis suscipit venenatis. Duis mattis eu lacus eget interdum. Etiam tincidunt, justo convallis pretium posuere, nibh orci tincidunt ligula, non pulvinar elit diam vel nibh. Fusce vel maximus mi.",
+                    Date = DateTime.Now,
+                    ViewCount = 2,
+                    CommentCount = 2,
+                    Thumbnail = "~postImages/defaultThumbnail.jpg",
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false,
+                    UserId = 1
+                },
+                new Post
+                {
+                    Id = 6,
+                    CategoryId = 6,
+                    Title = "Water Skii in Turkey",
+                    Content = "Suspendisse dolor odio, dapibus eget risus ut, interdum porttitor felis. In nulla magna, commodo ac faucibus eget, pretium sit amet arcu. Integer odio ante, dapibus aliquam congue at, viverra at lectus. Pellentesque sit amet elementum mi. Phasellus purus urna, aliquam id metus et, sagittis faucibus nisi.",
+                    Date = DateTime.Now,
+                    ViewCount = 2,
+                    CommentCount = 1,
+                    Thumbnail = "~postImages/defaultThumbnail.jpg",
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false,
+                    UserId = 1
+                },
+                new Post
+                {
+                    Id = 7,
+                    CategoryId = 7,
+                    Title = "Swimming areas in Greece",
+                    Content = "Aliquam erat volutpat. Etiam vitae auctor tellus, vel cursus mi. Integer ex eros, bibendum ac luctus ut, condimentum eu nibh. Etiam nibh neque, consectetur sed augue eu, lacinia lobortis ante. Integer ut molestie nunc.",
+                    Date = DateTime.Now,
+                    ViewCount = 2,
+                    CommentCount = 2,
+                    Thumbnail = "~postImages/defaultThumbnail.jpg",
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false,
+                    UserId = 1
                 }
                 );
         }
