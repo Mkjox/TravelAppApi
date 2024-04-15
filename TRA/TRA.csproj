@@ -33,4 +33,9 @@
 	  <ProjectReference Include="..\TRA.Shared\TRA.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="img\userImages\" />
+    <Folder Include="img\postImages\" />
+  </ItemGroup>
+
 </Project>
