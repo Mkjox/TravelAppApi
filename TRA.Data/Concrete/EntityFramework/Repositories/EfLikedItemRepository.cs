@@ -15,5 +15,10 @@ namespace TRA.Data.Concrete.EntityFramework.Repositories
         public EfLikedItemRepository(DbContext context) : base(context)
         {
         }
+
+        public Task UpdateAsync(bool likedItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
