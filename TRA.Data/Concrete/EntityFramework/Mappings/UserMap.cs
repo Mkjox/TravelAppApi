@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.Property(u => u.LastName).HasMaxLength(30);
             builder.Property(u => u.About).HasMaxLength(1000);
 
+            builder.HasKey(u => u.Id);
+
             builder.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
             builder.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
 
@@ -50,6 +53,35 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
+            var adminUser = new User
+            {
+                Id = 1,
+                UserName = "adminuser",
+                NormalizedUserName = "ADMINUSER",
+                Email = "adminuser@gmail.com",
+                NormalizedEmail = "ADMINUSER@GMAIL.COM",
+                PhoneNumber = "+905555555555",
+                Picture = "~/userImages/defaultUser.png",
+                FirstName = "Admin",
+                LastName = "User",
+                About = "Admin User of Travel App",
+                TwitterLink = "https://twitter.com/adminuser",
+                InstagramLink = "https://instagram.com/adminuser",
+                YoutubeLink = "https://youtube.com/adminuser",
+                WebsiteLink = "https://programmersblog.com/",
+                FacebookLink = "https://facebook.com/adminuser",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            adminUser.PasswordHash = CreatePasswordHash(adminUser, "adminUser");
+        }
+
+        private string CreatePasswordHash(User user, string password)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            return passwordHasher.HashPassword(user, password);
         }
     }
 }
