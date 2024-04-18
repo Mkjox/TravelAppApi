@@ -13,8 +13,8 @@ namespace TRA.Services.AutoMapper.Profiles
     {
         public PostProfile()
         {
-            CreateMap<PostAddDto, Post>().ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(x => DateTime.Now));
-            CreateMap<PostUpdateDto, Post>().ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(x => DateTime.Now));
+            CreateMap<PostAddDto, Post>().ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(x => DateTime.UtcNow));
+            CreateMap<PostUpdateDto, Post>().ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(x => DateTime.UtcNow));
             CreateMap<Post, PostUpdateDto>();
         }
     }

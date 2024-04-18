@@ -61,7 +61,7 @@ namespace TRA.Services.Concrete
                 category.IsDeleted = true;
                 category.IsActive = false;
                 category.ModifiedByName = modifiedByName;
-                category.ModifiedDate = DateTime.Now;
+                category.ModifiedDate = DateTime.UtcNow;
                 var deletedCategory = await UnitOfWork.Categories.UpdateAsync(category);
                 await UnitOfWork.SaveAsync();
                 return new DataResult<CategoryDto>(ResultStatus.Success, Messages.Category.Delete(deletedCategory.Name), new CategoryDto
@@ -231,7 +231,7 @@ namespace TRA.Services.Concrete
                 category.IsDeleted = false;
                 category.IsActive = true;
                 category.ModifiedByName = modifiedByName;
-                category.ModifiedDate = DateTime.Now;
+                category.ModifiedDate = DateTime.UtcNow;
                 var deletedCategory = await UnitOfWork.Categories.UpdateAsync(category);
                 await UnitOfWork.SaveAsync();
 

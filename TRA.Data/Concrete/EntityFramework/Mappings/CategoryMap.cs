@@ -44,9 +44,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = DateTime.UtcNow,
                 },
                 new Category
                 {
@@ -56,9 +56,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = DateTime.UtcNow,
                 },
                 new Category
                 {
@@ -68,9 +68,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = DateTime.UtcNow,
                 },
                 new Category
                 {
@@ -80,9 +80,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = DateTime.UtcNow,
                 },
                 new Category
                 {
@@ -92,9 +92,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = DateTime.UtcNow,
                 },
                 new Category
                 {
@@ -104,9 +104,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = DateTime.UtcNow,
                 },
                 new Category
                 {
@@ -116,9 +116,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     IsActive = true,
                     IsDeleted = false,
                     CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
+                    ModifiedDate = DateTime.UtcNow,
                 }
                 );
         }

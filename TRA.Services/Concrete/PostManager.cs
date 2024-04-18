@@ -209,7 +209,7 @@ namespace TRA.Services.Concrete
                 post.IsDeleted = true;
                 post.IsActive = false;
                 post.ModifiedByName = modifiedByName;
-                post.ModifiedDate = DateTime.Now;
+                post.ModifiedDate = DateTime.UtcNow;
                 await UnitOfWork.Posts.UpdateAsync(post);
                 await UnitOfWork.SaveAsync();
                 return new Result(ResultStatus.Success, Messages.Post.Delete(post.Title));
@@ -239,7 +239,7 @@ namespace TRA.Services.Concrete
                 post.IsDeleted = false;
                 post.IsActive = true;
                 post.ModifiedByName = modifiedByName;
-                post.ModifiedDate = DateTime.Now;
+                post.ModifiedDate = DateTime.UtcNow;
                 await UnitOfWork.Posts.UpdateAsync(post);
                 await UnitOfWork.SaveAsync();
                 return new Result(ResultStatus.Success, Messages.Post.UndoDelete(post.Title));

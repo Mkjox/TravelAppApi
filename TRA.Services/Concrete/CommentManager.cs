@@ -39,7 +39,7 @@ namespace TRA.Services.Concrete
             {
                 comment.IsActive = true;
                 comment.ModifiedByName = modifiedByName;
-                comment.ModifiedDate = DateTime.Now;
+                comment.ModifiedDate = DateTime.UtcNow;
                 var updatedComment = await UnitOfWork.Comments.UpdateAsync(comment);
                 await UnitOfWork.SaveAsync();
                 return new DataResult<CommentDto>(ResultStatus.Success, Messages.Comment.Approve(commentId), new CommentDto
@@ -72,7 +72,7 @@ namespace TRA.Services.Concrete
                 comment.IsDeleted = true;
                 comment.IsActive = false;
                 comment.ModifiedByName = modifiedByName;
-                comment.ModifiedDate = DateTime.Now;
+                comment.ModifiedDate = DateTime.UtcNow;
                 var deletedComment = await UnitOfWork.Comments.UpdateAsync(comment);
                 return new DataResult<CommentDto>(ResultStatus.Success, Messages.Comment.Delete(deletedComment.CreatedByName), new CommentDto
                 {
@@ -226,7 +226,7 @@ namespace TRA.Services.Concrete
                 comment.IsDeleted = false;
                 comment.IsActive = true;
                 comment.ModifiedByName = modifiedByName;
-                comment.ModifiedDate = DateTime.Now;
+                comment.ModifiedDate = DateTime.UtcNow;
                 var deletedComment = await UnitOfWork.Comments.UpdateAsync(comment);
                 await UnitOfWork.SaveAsync();
                 return new DataResult<CommentDto>(ResultStatus.Success, Messages.Comment.UndoDelete(deletedComment.CreatedByName), new CommentDto
