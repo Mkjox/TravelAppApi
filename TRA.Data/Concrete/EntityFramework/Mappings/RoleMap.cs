@@ -15,7 +15,6 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
         {
             builder.HasKey(r => r.Id);
             builder.HasIndex(r => r.NormalizedName).HasDatabaseName("RoleNameIndex").IsUnique();
-            builder.ToTable("Roles");
 
             builder.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();
             builder.Property(u => u.Name).HasMaxLength(100);
@@ -23,6 +22,8 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
 
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.RoleId).IsRequired();
             builder.HasMany<RoleClaim>().WithOne().HasForeignKey(rc => rc.RoleId).IsRequired();
+
+            builder.ToTable("Roles");
         }
     }
 }

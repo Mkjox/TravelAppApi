@@ -14,6 +14,9 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasKey(u => u.Id);
+            builder.Property(u => u.Id).ValueGeneratedOnAdd();
+
             builder.Property(u => u.Picture).IsRequired();
             builder.Property(u => u.Picture).HasMaxLength(250);
 
@@ -27,12 +30,8 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.Property(u => u.LastName).HasMaxLength(30);
             builder.Property(u => u.About).HasMaxLength(1000);
 
-            builder.HasKey(u => u.Id);
-
             builder.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
             builder.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
-
-            builder.ToTable("Users");
 
             builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
@@ -53,6 +52,8 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
+            builder.ToTable("Users");
 
             var adminUser = new User
             {
