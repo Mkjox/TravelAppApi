@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="img\userImages\" />
     <Folder Include="img\postImages\" />
   </ItemGroup>
 
