@@ -54,7 +54,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
 
             builder.ToTable("Users");
-
+            
             var adminUser = new User
             {
                 Id = 1,
@@ -63,7 +63,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 Email = "adminuser@gmail.com",
                 NormalizedEmail = "ADMINUSER@GMAIL.COM",
                 PhoneNumber = "+905555555555",
-                Picture = "~/userImages/defaultUser.png",
+                Picture = "img/userImages/defaultUser.png",
                 FirstName = "Admin",
                 LastName = "User",
                 About = "Admin User of Travel App",
@@ -77,6 +77,31 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 SecurityStamp = Guid.NewGuid().ToString()
             };
             adminUser.PasswordHash = CreatePasswordHash(adminUser, "adminUser");
+
+            var editorUser = new User
+            {
+                Id = 2,
+                UserName = "editoruser",
+                NormalizedUserName = "EDITORUSER",
+                Email = "editoruser@gmail.com",
+                NormalizedEmail = "EDITORUSER@GMAIL.COM",
+                PhoneNumber = "+905555555555",
+                Picture = "img/userImages/defaultUser.png",
+                FirstName = "Admin",
+                LastName = "User",
+                About = "Editor User of ProgrammersBlog",
+                TwitterLink = "https://twitter.com/editoruser",
+                InstagramLink = "https://instagram.com/editoruser",
+                YoutubeLink = "https://youtube.com/editoruser",
+                WebsiteLink = "https://programmersblog.com/",
+                FacebookLink = "https://facebook.com/editoruser",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            editorUser.PasswordHash = CreatePasswordHash(editorUser, "editoruser");
+
+            builder.HasData(adminUser, editorUser);
         }
 
         private string CreatePasswordHash(User user, string password)
