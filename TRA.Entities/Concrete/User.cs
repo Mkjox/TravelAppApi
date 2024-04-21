@@ -12,7 +12,7 @@ namespace TRA.Entities.Concrete
         public string Picture { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Nickname { get; set; }
+        public string UserName { get; set; }
         public ICollection<Post> Posts { get; set; }
         public string About { get; set; }
         public string YoutubeLink { get; set; }
