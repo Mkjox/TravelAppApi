@@ -25,7 +25,7 @@ namespace TRA.Controllers
             _likedItemService = likedItemService;
         }
 
-        [HttpGet("getall")]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var result = _likedItemService.GetAllAsync();
@@ -35,7 +35,7 @@ namespace TRA.Controllers
                 return BadRequest(result);
         }
 
-        [HttpPost]
+        [HttpPost("AddLiked")]
         public async Task<IActionResult> Add([FromBody] LikedItemAddDto likedItemAddDto)
         {
             var _likedItemAddDto = _mapper.Map<LikedItemAddDto>(likedItemAddDto);
@@ -60,7 +60,7 @@ namespace TRA.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("UpdateLiked")]
         public async Task<IActionResult> Update([FromBody] LikedItemUpdateDto likedItemUpdateDto)
         {
             var _likedItemUpdateDto = _mapper.Map<LikedItemUpdateDto>(likedItemUpdateDto);

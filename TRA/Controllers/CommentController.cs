@@ -23,13 +23,13 @@ namespace TRA.Controllers
             _commentService = commentService;
         }
 
-        [HttpGet]
+        [HttpGet("GetComments")]
         public async Task<IActionResult> GetComments()
         {
             return Ok(_comments);
         }
 
-        [HttpPost]
+        [HttpPost("AddComments")]
         public async Task<IActionResult> AddComments([FromBody] Comment comment)
         {
             if (ModelState.IsValid)

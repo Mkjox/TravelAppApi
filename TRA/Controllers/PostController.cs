@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -7,9 +6,7 @@ using System.Text.Json.Serialization;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
 using TRA.Services.Abstract;
-using TRA.Services.Utilities;
 using TRA.Shared.Utilities.Results.ComplexTypes;
-using TRA.Shared.Utilities.Results.Concrete;
 
 namespace TRA.Controllers
 {
@@ -19,16 +16,18 @@ namespace TRA.Controllers
     {
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
+        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
         public PostController(UserManager<User> userManager, IMapper mapper, IPostService postService, ICategoryService categoryService) : base(userManager, mapper)
         {
             _postService = postService;
             _categoryService = categoryService;
+            _userManager = userManager;
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetAdd")]
         public async Task<IActionResult> Add()
         {
             var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
@@ -36,10 +35,10 @@ namespace TRA.Controllers
             {
                 return Ok(result.Data.Categories);
             }
-            else return NotFound();
+            else return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("PostAdd")]
         public async Task<IActionResult> Add([FromBody] PostAddDto postAddDto)
         {
             if (ModelState.IsValid)
@@ -57,12 +56,7 @@ namespace TRA.Controllers
                     });
                 }
                 else
-                {
-                    return BadRequest(new
-                    {
-                        ErrorMessage = result.Message
-                    });
-                }
+                    return Json(null);
             }
             var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
             postAddDto.Category = (Category)categories.Data.Categories;
@@ -81,7 +75,7 @@ namespace TRA.Controllers
             //return CreatedAtAction(nameof(GetPosts), new { id = post.Id }, post);
         }
 
-        [HttpGet]
+        [HttpGet("GetUpdate")]
         public async Task<IActionResult> Update(int postId)
         {
             var postResult = await _postService.GetPostUpdateDtoAsync(postId);
@@ -92,12 +86,10 @@ namespace TRA.Controllers
                 return Json(postUpdateDto);
             }
             else
-            {
-                return NotFound();
-            }
+                return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("PostUpdate")]
         public async Task<IActionResult> Update([FromBody] PostUpdateDto postUpdateDto)
         {
             var _postUpdateDto = _mapper.Map<PostUpdateDto>(postUpdateDto);
@@ -108,10 +100,10 @@ namespace TRA.Controllers
                 return Ok(result);
             }
             else
-                return BadRequest(result);
+                return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("PostDelete")]
         public async Task<JsonResult> Delete(int postId)
         {
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
@@ -119,7 +111,7 @@ namespace TRA.Controllers
             return Json(postResult);
         }
 
-        [HttpPost]
+        [HttpPost("PostHardDelete")]
         public async Task<JsonResult> HardDelete(int postId)
         {
             var result = await _postService.HardDeleteAsync(postId);
@@ -127,7 +119,7 @@ namespace TRA.Controllers
             return Json(hardDeletePostResult);
         }
 
-        [HttpPost]
+        [HttpPost("PostUndoDelete")]
         public async Task<JsonResult> UndoDelete(int postId)
         {
             var result = await _postService.UndoDeleteAsync(postId, LoggedInUser.UserName);
@@ -150,8 +142,8 @@ namespace TRA.Controllers
             else return Json(null);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetAllPosts()
+        [HttpGet("GetAllPosts")]
+        public async Task<IActionResult> GetAllPosts()
         {
             var posts = await _postService.GetAllAsync();
             if (posts != null)
@@ -160,15 +152,15 @@ namespace TRA.Controllers
                 {
                     ReferenceHandler = ReferenceHandler.Preserve
                 });
-                return Json(postResult);
+                return Ok(postResult);
             }
             else
             {
-                return Json(null);
+                return NoContent();
             }
         }
 
-        [HttpGet]
+        [HttpGet("GetAllByNonDeleted")]
         public async Task<JsonResult> GetAllByNonDeletedAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAsync();
@@ -183,7 +175,7 @@ namespace TRA.Controllers
             else return Json(null);
         }
 
-        [HttpGet]
+        [HttpGet("GetAllByNonDeletedAndActive")]
         public async Task<JsonResult> GetAllByNonDeletedAndActiveAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
@@ -198,7 +190,7 @@ namespace TRA.Controllers
             else return Json(null);
         }
 
-        [HttpGet]
+        [HttpGet("GetAllDeleted")]
         public async Task<JsonResult> GetAllDeletedPosts()
         {
             var result = await _postService.GetAllByDeletedAsync();
