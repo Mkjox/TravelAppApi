@@ -35,7 +35,7 @@ namespace TRA.Controllers
                 return BadRequest(result);
         }
 
-        [HttpPost("AddLiked")]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] LikedItemAddDto likedItemAddDto)
         {
             var _likedItemAddDto = _mapper.Map<LikedItemAddDto>(likedItemAddDto);
@@ -60,7 +60,7 @@ namespace TRA.Controllers
             }
         }
 
-        [HttpPost("UpdateLiked")]
+        [HttpPost("Liked")]
         public async Task<IActionResult> Update([FromBody] LikedItemUpdateDto likedItemUpdateDto)
         {
             var _likedItemUpdateDto = _mapper.Map<LikedItemUpdateDto>(likedItemUpdateDto);

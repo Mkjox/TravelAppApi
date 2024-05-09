@@ -16,29 +16,16 @@ namespace TRA.Controllers
     {
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
-        private readonly UserManager<User> _userManager;
+        private ILogger _logger;
         private readonly IMapper _mapper;
 
         public PostController(UserManager<User> userManager, IMapper mapper, IPostService postService, ICategoryService categoryService) : base(userManager, mapper)
         {
             _postService = postService;
             _categoryService = categoryService;
-            _userManager = userManager;
-            _mapper = mapper;
         }
 
-        [HttpGet("GetAdd")]
-        public async Task<IActionResult> Add()
-        {
-            var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Ok(result.Data.Categories);
-            }
-            else return Json(null);
-        }
-
-        [HttpPost("PostAdd")]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] PostAddDto postAddDto)
         {
             if (ModelState.IsValid)
@@ -75,21 +62,7 @@ namespace TRA.Controllers
             //return CreatedAtAction(nameof(GetPosts), new { id = post.Id }, post);
         }
 
-        [HttpGet("GetUpdate")]
-        public async Task<IActionResult> Update(int postId)
-        {
-            var postResult = await _postService.GetPostUpdateDtoAsync(postId);
-            var categoriesResult = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            if (postResult.ResultStatus == ResultStatus.Success && categoriesResult.ResultStatus == ResultStatus.Success)
-            {
-                var postUpdateDto = Mapper.Map<PostUpdateDto>(postResult.Data);
-                return Json(postUpdateDto);
-            }
-            else
-                return Json(null);
-        }
-
-        [HttpPost("PostUpdate")]
+        [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] PostUpdateDto postUpdateDto)
         {
             var _postUpdateDto = _mapper.Map<PostUpdateDto>(postUpdateDto);
@@ -127,19 +100,29 @@ namespace TRA.Controllers
             return Json(undoDeletePostResult);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetPosts()
+        [HttpGet("GetPosts")]
+        public async Task<IActionResult> GetPosts()
         {
-            var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
-            if (posts != null)
+            try
             {
-                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+                var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
+                if (posts != null)
                 {
-                    ReferenceHandler = ReferenceHandler.Preserve
-                });
-                return Json(postResult);
+                    var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve
+                    });
+                    return Json(postResult);
+                }
+                else
+                { return NoContent(); }
             }
-            else return Json(null);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occured while retrieving posts.");
+
+                return StatusCode(500, "An error occured while proccessing your request.");
+            }
         }
 
         [HttpGet("GetAllPosts")]

@@ -19,6 +19,7 @@ namespace TRA
             services.AddDbContext<TRADbContext>();
             services.AddSingleton(provider => new MapperConfiguration(cfg =>
             {
+                cfg.AddProfile(new UserProfile());
                 cfg.AddProfile(new PostProfile());
                 cfg.AddProfile(new CategoryProfile());
                 cfg.AddProfile(new CommentProfile());
