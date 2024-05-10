@@ -66,11 +66,11 @@ namespace TRA.Controllers
         public async Task<IActionResult> Update([FromBody] PostUpdateDto postUpdateDto)
         {
             var _postUpdateDto = _mapper.Map<PostUpdateDto>(postUpdateDto);
-            var result = _postService.UpdateAsync(_postUpdateDto, LoggedInUser.UserName);
+            var result = await _postService.UpdateAsync(_postUpdateDto, LoggedInUser.UserName);
 
-            if (result.IsCompletedSuccessfully)
+            if (result.ResultStatus == ResultStatus.Success)
             {
-                return Ok(result);
+                return Json(result);
             }
             else
                 return Json(null);
