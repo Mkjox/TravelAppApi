@@ -31,7 +31,6 @@ namespace TRA.Controllers
             if (ModelState.IsValid)
             {
                 var _postAddDto = _mapper.Map<PostAddDto>(postAddDto);
-
                 var result = await _postService.AddAsync(_postAddDto, LoggedInUser.UserName, LoggedInUser.Id);
 
                 if (result.ResultStatus == ResultStatus.Success)
@@ -70,7 +69,11 @@ namespace TRA.Controllers
 
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Json(result);
+                return Json(new
+                {
+                    result.Message,
+                    Title = "Post Updated Successfully!"
+                });
             }
             else
                 return Json(null);
@@ -81,7 +84,12 @@ namespace TRA.Controllers
         {
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
             var postResult = JsonSerializer.Serialize(result);
-            return Json(postResult);
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(postResult);
+            }
+            else
+                return Json(null);
         }
 
         [HttpPost("PostHardDelete")]
@@ -89,7 +97,12 @@ namespace TRA.Controllers
         {
             var result = await _postService.HardDeleteAsync(postId);
             var hardDeletePostResult = JsonSerializer.Serialize(result);
-            return Json(hardDeletePostResult);
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(hardDeletePostResult);
+            }
+            else
+                return Json(null);
         }
 
         [HttpPost("PostUndoDelete")]
@@ -97,78 +110,57 @@ namespace TRA.Controllers
         {
             var result = await _postService.UndoDeleteAsync(postId, LoggedInUser.UserName);
             var undoDeletePostResult = JsonSerializer.Serialize(result);
-            return Json(undoDeletePostResult);
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(undoDeletePostResult);
+            }
+            else
+                return Json(null);
         }
 
         [HttpGet("GetPosts")]
         public async Task<IActionResult> GetPosts()
         {
-            try
+            var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
+            if (posts.ResultStatus == ResultStatus.Success)
             {
-                var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
-                if (posts != null)
-                {
-                    var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
-                    {
-                        ReferenceHandler = ReferenceHandler.Preserve
-                    });
-                    return Json(postResult);
-                }
-                else
-                { return NoContent(); }
+                return Json(posts);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occured while retrieving posts.");
-
-                return StatusCode(500, "An error occured while proccessing your request.");
-            }
+            else
+                return Json(null);
         }
 
         [HttpGet("GetAllPosts")]
         public async Task<IActionResult> GetAllPosts()
         {
             var posts = await _postService.GetAllAsync();
-            if (posts != null)
+            if (posts.ResultStatus == ResultStatus.Success)
             {
-                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
-                {
-                    ReferenceHandler = ReferenceHandler.Preserve
-                });
-                return Ok(postResult);
+                return Json(posts);
             }
             else
-            {
-                return NoContent();
-            }
+                return Json(null);
         }
 
         [HttpGet("GetAllByNonDeleted")]
         public async Task<JsonResult> GetAllByNonDeletedAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAsync();
-            if (posts != null)
+            if (posts.ResultStatus == ResultStatus.Success)
             {
-                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
-                {
-                    ReferenceHandler = ReferenceHandler.Preserve
-                });
-                return Json(postResult);
+                return Json(posts);
             }
-            else return Json(null);
+            else
+                return Json(null);
         }
 
         [HttpGet("GetAllByNonDeletedAndActive")]
         public async Task<JsonResult> GetAllByNonDeletedAndActiveAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
-            if (posts != null)
+            if (posts.ResultStatus == ResultStatus.Success)
             {
-                var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
-                {
-                    ReferenceHandler = ReferenceHandler.Preserve
-                });
-                return Json(postResult);
+                return Json(posts);
             }
             else return Json(null);
         }
@@ -176,16 +168,13 @@ namespace TRA.Controllers
         [HttpGet("GetAllDeleted")]
         public async Task<JsonResult> GetAllDeletedPosts()
         {
-            var result = await _postService.GetAllByDeletedAsync();
-            if (result != null)
+            var posts = await _postService.GetAllByDeletedAsync();
+            if (posts.ResultStatus == ResultStatus.Success)
             {
-                var posts = JsonSerializer.Serialize(result, new JsonSerializerOptions
-                {
-                    ReferenceHandler = ReferenceHandler.Preserve
-                });
                 return Json(posts);
             }
-            else return Json(null);
+            else
+                return Json(null);
         }
 
     }
