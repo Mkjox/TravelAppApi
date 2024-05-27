@@ -16,8 +16,6 @@ namespace TRA.Controllers
     {
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
-        private ILogger _logger;
-        private readonly IMapper _mapper;
 
         public PostController(UserManager<User> userManager, IMapper mapper, IPostService postService, ICategoryService categoryService) : base(userManager, mapper)
         {
@@ -30,7 +28,7 @@ namespace TRA.Controllers
         {
             if (ModelState.IsValid)
             {
-                var _postAddDto = _mapper.Map<PostAddDto>(postAddDto);
+                var _postAddDto = Mapper.Map<PostAddDto>(postAddDto);
                 var result = await _postService.AddAsync(_postAddDto, LoggedInUser.UserName, LoggedInUser.Id);
 
                 if (result.ResultStatus == ResultStatus.Success)
@@ -64,7 +62,7 @@ namespace TRA.Controllers
         [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] PostUpdateDto postUpdateDto)
         {
-            var _postUpdateDto = _mapper.Map<PostUpdateDto>(postUpdateDto);
+            var _postUpdateDto = Mapper.Map<PostUpdateDto>(postUpdateDto);
             var result = await _postService.UpdateAsync(_postUpdateDto, LoggedInUser.UserName);
 
             if (result.ResultStatus == ResultStatus.Success)
