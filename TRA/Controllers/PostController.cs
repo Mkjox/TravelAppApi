@@ -116,16 +116,31 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
+        //Get All Active Posts
         [HttpGet("GetPosts")]
         public async Task<IActionResult> GetPosts()
         {
             var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
+
             if (posts.ResultStatus == ResultStatus.Success)
             {
-                return Json(posts);
+                return Ok(posts);
             }
             else
-                return Json(null);
+            {
+                var errorResponse = new
+                {
+                    Status = posts.ResultStatus,
+                    Message = posts.Message
+                };
+
+                return BadRequest(errorResponse);
+            }
+
+            if (posts == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data");
+            }
         }
 
         [HttpGet("GetAllPosts")]
