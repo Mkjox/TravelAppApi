@@ -118,27 +118,23 @@ namespace TRA.Controllers
 
         //Get All Active Posts
         [HttpGet("GetPosts")]
-        public async Task<IActionResult> GetPosts()
+        public async Task<IActionResult> GetPosts(PostListDto postListDto)
         {
-            var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
+            var _postListDto = Mapper.Map<PostListDto>(postListDto);
+            var result = await _postService.GetAllByNonDeletedAndActiveAsync();
 
-            if (posts.ResultStatus == ResultStatus.Success)
+            if (result.ResultStatus == ResultStatus.Success)
             {
-                return Ok(posts);
+                return Ok(result);
             }
             else
             {
                 var errorResponse = new
                 {
-                    Status = posts.ResultStatus,
-                    Message = posts.Message
+                    Status = result.ResultStatus,
+                    Message = result.Message
                 };
 
-                return BadRequest(errorResponse);
-            }
-
-            if (posts == null)
-            {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data");
             }
         }

@@ -16,6 +16,6 @@ namespace TRA.Controllers
 
         protected UserManager<User> UserManager { get; }
         protected IMapper Mapper { get; }
-        protected User LoggedInUser => UserManager.GetUserAsync(HttpContext.User).Result;
+        protected User LoggedInUser => UserManager.GetUserAsync(User).Result;
     }
 }
