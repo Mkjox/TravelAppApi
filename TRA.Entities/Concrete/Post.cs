@@ -22,6 +22,6 @@ namespace TRA.Entities.Concrete
         public User User { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public bool IsPinned { get; set; } = false;
-        public ICollection<LikedItem> LikedItems { get; set; }
+        public ICollection<LikedItem>? LikedItems { get; set; }
     }
 }

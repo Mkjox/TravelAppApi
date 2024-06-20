@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,11 @@ namespace TRA.Services.Concrete
 {
     public class PostManager : ManagerBase, IPostService
     {
-        public PostManager(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        private readonly UserManager<User> _userManager;
+
+        public PostManager(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager) : base(unitOfWork, mapper)
         {
+            _userManager = userManager;
         }
 
         public async Task<IResult> AddAsync(PostAddDto postAddDto, string createdByName, int userId)
