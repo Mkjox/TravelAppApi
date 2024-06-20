@@ -24,7 +24,7 @@ namespace TRA.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] PostAddDto postAddDto)
+        public async Task<IActionResult> Add(PostAddDto postAddDto)
         {
             if (ModelState.IsValid)
             {
@@ -33,17 +33,11 @@ namespace TRA.Controllers
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    return Json(new
-                    {
-                        result.Message,
-                        Title = "Post Added Successfully!"
-                    });
+                    return Json(result);
                 }
                 else
                     return Json(null);
             }
-            var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            postAddDto.Category = (Category)categories.Data.Categories;
 
             if (!ModelState.IsValid)
             {
@@ -52,11 +46,16 @@ namespace TRA.Controllers
 
                 //return BadRequest(new { ErrorMessage = "ModelState is not valid", ModelStateErrors = ModelState.Values.SelectMany(v => v.Errors) });
             }
-            return Json(new { Result = false, Message = "There has been an error adding the post." });
 
+            var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
+            postAddDto.Category = categories.Data.Categories.FirstOrDefault(x => x.Id == postAddDto.CategoryId);
+            return Json(
+                new
+                {
+                    Result = false,
+                    Message = "There has been an error adding the post."
+                });
 
-            // _posts.Add(post);
-            //return CreatedAtAction(nameof(GetPosts), new { id = post.Id }, post);
         }
 
         [HttpPost("Update")]
@@ -67,11 +66,7 @@ namespace TRA.Controllers
 
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Json(new
-                {
-                    result.Message,
-                    Title = "Post Updated Successfully!"
-                });
+                return Json(result);
             }
             else
                 return Json(null);

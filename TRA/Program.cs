@@ -29,7 +29,7 @@ builder.Services.AddIdentity<User, Role>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile), typeof(UserProfile), typeof(CommentProfile));
-builder.Services.AddAuthorization(); // Bu satýrý ekleyin
+builder.Services.AddAuthorization();
 
 //builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
