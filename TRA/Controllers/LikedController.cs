@@ -25,18 +25,8 @@ namespace TRA.Controllers
             _likedItemService = likedItemService;
         }
 
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = _likedItemService.GetAllAsync();
-            if (result.IsCompletedSuccessfully)
-                return Ok(result);
-            else
-                return BadRequest(result);
-        }
-
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] LikedItemAddDto likedItemAddDto)
+        public async Task<IActionResult> Add(LikedItemAddDto likedItemAddDto)
         {
             var _likedItemAddDto = _mapper.Map<LikedItemAddDto>(likedItemAddDto);
 
@@ -61,7 +51,7 @@ namespace TRA.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] LikedItemUpdateDto likedItemUpdateDto)
+        public async Task<IActionResult> Update(LikedItemUpdateDto likedItemUpdateDto)
         {
             var _likedItemUpdateDto = _mapper.Map<LikedItemUpdateDto>(likedItemUpdateDto);
             var result = await _likedItemService.UpdateAsync(_likedItemUpdateDto);
@@ -82,6 +72,19 @@ namespace TRA.Controllers
                     Message = "There has been an error while unliking the content."
                 });
             }
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<JsonResult> GetAll()
+        {
+            var result = await _likedItemService.GetAllAsync();
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(result);
+            }
+
+            else
+                return Json(null);
         }
     }
 }

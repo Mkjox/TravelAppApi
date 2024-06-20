@@ -49,17 +49,12 @@ namespace TRA.Controllers
 
             var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
             postAddDto.Category = categories.Data.Categories.FirstOrDefault(x => x.Id == postAddDto.CategoryId);
-            return Json(
-                new
-                {
-                    Result = false,
-                    Message = "There has been an error adding the post."
-                });
+            return Json(postAddDto);
 
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> Update([FromBody] PostUpdateDto postUpdateDto)
+        public async Task<IActionResult> Update(PostUpdateDto postUpdateDto)
         {
             var _postUpdateDto = Mapper.Map<PostUpdateDto>(postUpdateDto);
             var result = await _postService.UpdateAsync(_postUpdateDto, LoggedInUser.UserName);
@@ -111,27 +106,17 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        //Get All Active Posts
+        //Get Post by Id
         [HttpGet("GetPosts")]
-        public async Task<IActionResult> GetPosts(PostListDto postListDto)
+        public async Task<JsonResult> GetPostById(int postId)
         {
-            var _postListDto = Mapper.Map<PostListDto>(postListDto);
-            var result = await _postService.GetAllByNonDeletedAndActiveAsync();
-
-            if (result.ResultStatus == ResultStatus.Success)
+            var posts = await _postService.GetAsync(postId);
+            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
             {
-                return Ok(result);
-            }
-            else
-            {
-                var errorResponse = new
-                {
-                    Status = result.ResultStatus,
-                    Message = result.Message
-                };
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data");
-            }
+            return Json(postResult);
         }
 
         [HttpGet("GetAllPosts")]
@@ -142,6 +127,7 @@ namespace TRA.Controllers
             {
                 return Json(posts);
             }
+
             else
                 return Json(null);
         }
