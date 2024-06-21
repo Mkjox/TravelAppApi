@@ -107,11 +107,11 @@ namespace TRA.Controllers
         }
 
         //Get Post by Id
-        [HttpGet("GetPosts")]
+        [HttpGet("GetPost")]
         public async Task<JsonResult> GetPostById(int postId)
         {
-            var posts = await _postService.GetAsync(postId);
-            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+            var post = await _postService.GetAsync(postId);
+            var postResult = JsonSerializer.Serialize(post, new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve
             });
