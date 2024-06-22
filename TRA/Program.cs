@@ -2,6 +2,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TRA.AutoMapper.Profiles;
+using TRA.Data.Abstract;
+using TRA.Data.Concrete;
 using TRA.Data.Concrete.EntityFramework.Contexts;
 using TRA.Entities.Concrete;
 using TRA.Services.Abstract;
@@ -13,8 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TRADbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
 
 //builder.Services.AddScoped<UserManager<User>>();
-//builder.Services.AddScoped<IPostService, PostManager>();
-//builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPostService, PostManager>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<ICommentService, CommentManager>();
+builder.Services.AddScoped<ILikedItemService, LikedItemManager>();
 
 builder.Services.AddSingleton(provider => new MapperConfiguration(cfg =>
 {

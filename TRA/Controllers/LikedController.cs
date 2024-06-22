@@ -50,7 +50,7 @@ namespace TRA.Controllers
             }
         }
 
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(LikedItemUpdateDto likedItemUpdateDto)
         {
             var _likedItemUpdateDto = _mapper.Map<LikedItemUpdateDto>(likedItemUpdateDto);

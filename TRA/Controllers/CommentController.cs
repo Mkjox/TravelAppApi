@@ -89,7 +89,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("GetAllByNonDeleted")]
         public async Task<IActionResult> GetAllByNonDeletedComments()
         {
             var comments = await _commentService.GetAllByNonDeletedAsync();
@@ -100,7 +100,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("GetAllByNonDeletedAndActive")]
         public async Task<IActionResult> GetAllByNonDeletedAndActiveComments()
         {
             var comments = await _commentService.GetAllByNonDeletedAndActiveAsync();
@@ -110,7 +110,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("CountComments")]
         public async Task<IActionResult> CountComments()
         {
             var comments = await _commentService.CountAsync();

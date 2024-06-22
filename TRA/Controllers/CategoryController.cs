@@ -42,7 +42,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
         {
             var _categoryUpdateDto = Mapper.Map<CategoryUpdateDto>(categoryUpdateDto);
@@ -56,7 +56,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete("Delete")]
         public async Task<JsonResult> Delete(int categoryId)
         {
             var result = await _categoryService.DeleteAsync(categoryId, LoggedInUser.UserName);
@@ -76,7 +76,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("GetCategories")]
         public async Task<JsonResult> GetCategories()
         {
             var result = await _categoryService.GetAllAsync();
@@ -88,7 +88,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost]
+        [HttpPost("GetDeletedCategories")]
         public async Task<JsonResult> GetDeletedCategories()
         {
             var result = await _categoryService.GetAllByDeletedAsync();

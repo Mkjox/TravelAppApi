@@ -53,7 +53,7 @@ namespace TRA.Controllers
 
         }
 
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(PostUpdateDto postUpdateDto)
         {
             var _postUpdateDto = Mapper.Map<PostUpdateDto>(postUpdateDto);
@@ -67,7 +67,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("PostDelete")]
+        [HttpDelete("PostDelete")]
         public async Task<JsonResult> Delete(int postId)
         {
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
@@ -80,7 +80,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("PostHardDelete")]
+        [HttpDelete("PostHardDelete")]
         public async Task<JsonResult> HardDelete(int postId)
         {
             var result = await _postService.HardDeleteAsync(postId);
