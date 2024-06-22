@@ -26,19 +26,6 @@ namespace TRA.Controllers
         [HttpPost("Add")]
         public async Task<IActionResult> Add(PostAddDto postAddDto)
         {
-            if (ModelState.IsValid)
-            {
-                var _postAddDto = Mapper.Map<PostAddDto>(postAddDto);
-                var result = await _postService.AddAsync(_postAddDto, LoggedInUser.UserName, LoggedInUser.Id);
-
-                if (result.ResultStatus == ResultStatus.Success)
-                {
-                    return Json(result);
-                }
-                else
-                    return Json(null);
-            }
-
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors.Select(x => x.ErrorMessage));
@@ -47,9 +34,16 @@ namespace TRA.Controllers
                 //return BadRequest(new { ErrorMessage = "ModelState is not valid", ModelStateErrors = ModelState.Values.SelectMany(v => v.Errors) });
             }
 
-            var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            postAddDto.Category = categories.Data.Categories.FirstOrDefault(x => x.Id == postAddDto.CategoryId);
-            return Json(postAddDto);
+            var _postAddDto = Mapper.Map<PostAddDto>(postAddDto);
+            var result = await _postService.AddAsync(_postAddDto, LoggedInUser.UserName, LoggedInUser.Id);
+
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(result);
+            }
+            else
+                return Json(null);
+
 
         }
 

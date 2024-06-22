@@ -56,11 +56,19 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("DeleteCategory")]
         public async Task<JsonResult> Delete(int categoryId)
         {
             var result = await _categoryService.DeleteAsync(categoryId, LoggedInUser.UserName);
             var categoryResult = JsonSerializer.Serialize(result.Data);
+            return Json(categoryResult);
+        }
+
+        [HttpDelete("HardDeleteCategory")]
+        public async Task<IActionResult> HardDeleteCategory(int categoryId)
+        {
+            var result = await _categoryService.HardDeleteAsync(categoryId);
+            var categoryResult = JsonSerializer.Serialize(result);
             return Json(categoryResult);
         }
 

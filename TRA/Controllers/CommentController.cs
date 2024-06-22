@@ -24,20 +24,14 @@ namespace TRA.Controllers
             _commentService = commentService;
         }
 
-        [HttpGet("GetComments")]
-        public async Task<IActionResult> GetComments()
-        {
-            return Ok(_comments);
-        }
-
-        [HttpPost("AddComments")]
-        public async Task<IActionResult> AddComments([FromBody] Comment comment)
+        [HttpPost("AddComment")]
+        public async Task<IActionResult> AddComment(CommentAddDto commentAddDto)
         {
             if (ModelState.IsValid)
             {
-                var commentAddDto = Mapper.Map<CommentAddDto>(comment);
+                var _commentAddDto = Mapper.Map<CommentAddDto>(commentAddDto);
 
-                var result = await _commentService.AddAsync(commentAddDto);
+                var result = await _commentService.AddAsync(_commentAddDto);
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
@@ -58,7 +52,54 @@ namespace TRA.Controllers
             return Json(new { Result = false, Message = "There has been an error adding the comment." });
         }
 
-        [HttpPost("GetComment")]
+        [HttpPut("UpdateComment")]
+        public async Task<IActionResult> UpdateComment(CommentUpdateDto commentUpdateDto)
+        {
+            var _commentUpdateDto = Mapper.Map<CommentUpdateDto>(commentUpdateDto);
+            var result = await _commentService.UpdateAsync(_commentUpdateDto, LoggedInUser.UserName);
+
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(result);
+            }
+
+            else
+                return Json(null);
+        }
+
+        [HttpDelete("DeleteComment")]
+        public async Task<IActionResult> DeleteComment(int commentId)
+        {
+            var result = await _commentService.DeleteAsync(commentId, LoggedInUser.UserName);
+            var commentResult = JsonSerializer.Serialize(result);
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(commentResult);
+            }
+            else
+                return Json(null);
+        }
+
+        [HttpDelete("HardDeleteComment")]
+        public async Task<IActionResult> HardDeleteComment(int commentId)
+        {
+            var result = await _commentService.HardDeleteAsync(commentId);
+            var hardDeleteCommentResult = JsonSerializer.Serialize(result);
+            if (result.ResultStatus == ResultStatus.Success)
+            {
+                return Json(hardDeleteCommentResult);
+            }
+            else
+                return Json(null);
+        }
+
+        [HttpGet("GetComments")]
+        public async Task<IActionResult> GetComments()
+        {
+            return Ok(_comments);
+        }
+
+        [HttpPost("GetCommentById")]
         public async Task<IActionResult> GetCommentById(int commentId)
         {
             var comment = await _commentService.GetAsync(commentId);
@@ -114,7 +155,7 @@ namespace TRA.Controllers
         public async Task<IActionResult> CountComments()
         {
             var comments = await _commentService.CountAsync();
-            var commentResult = JsonSerializer.Serialize(comments.Data,new JsonSerializerOptions
+            var commentResult = JsonSerializer.Serialize(comments.Data, new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve
             });
