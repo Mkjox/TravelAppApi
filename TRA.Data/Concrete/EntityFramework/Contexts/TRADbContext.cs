@@ -33,7 +33,7 @@ namespace TRA.Data.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new UserLoginMap());
             modelBuilder.ApplyConfiguration(new UserRoleMap());
             modelBuilder.ApplyConfiguration(new UserTokenMap());
-            modelBuilder.ApplyConfiguration(new LikedItemMap());
+
         }
     }
 }

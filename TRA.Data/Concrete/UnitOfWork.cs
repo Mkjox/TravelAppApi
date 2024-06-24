@@ -15,7 +15,6 @@ namespace TRA.Data.Concrete
         public EfPostRepository _postRepository;
         public EfCategoryRepository _categoryRepository;
         public EfCommentRepository _commentRepository;
-        public EfLikedItemRepository _likedItemRepository;
 
         public UnitOfWork(TRADbContext context)
         {
@@ -28,7 +27,6 @@ namespace TRA.Data.Concrete
 
         public ICommentRepository Comments => _commentRepository ??= new EfCommentRepository(_context);
 
-        public ILikedItemRepository LikedItems => _likedItemRepository ??= new EfLikedItemRepository(_context);
 
         public async Task<int> SaveAsync()
         {
