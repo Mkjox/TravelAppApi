@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
 using TRA.Services.Abstract;
@@ -22,7 +23,7 @@ namespace TRA.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add(CategoryAddDto categoryAddDto)
+        public async Task<IActionResult> AddAsync(CategoryAddDto categoryAddDto)
         {
             if (ModelState.IsValid)
             {
@@ -43,7 +44,7 @@ namespace TRA.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
+        public async Task<IActionResult> UpdateAsync(CategoryUpdateDto categoryUpdateDto)
         {
             var _categoryUpdateDto = Mapper.Map<CategoryUpdateDto>(categoryUpdateDto);
             var result = await _categoryService.UpdateAsync(_categoryUpdateDto, LoggedInUser.UserName);
@@ -57,7 +58,7 @@ namespace TRA.Controllers
         }
 
         [HttpDelete("DeleteCategory")]
-        public async Task<JsonResult> Delete(int categoryId)
+        public async Task<JsonResult> DeleteAsync(int categoryId)
         {
             var result = await _categoryService.DeleteAsync(categoryId, LoggedInUser.UserName);
             var categoryResult = JsonSerializer.Serialize(result.Data);
@@ -65,27 +66,35 @@ namespace TRA.Controllers
         }
 
         [HttpDelete("HardDeleteCategory")]
-        public async Task<IActionResult> HardDeleteCategory(int categoryId)
+        public async Task<IActionResult> HardDeleteAsync(int categoryId)
         {
             var result = await _categoryService.HardDeleteAsync(categoryId);
             var categoryResult = JsonSerializer.Serialize(result);
             return Json(categoryResult);
         }
 
-        [HttpPost("HardDelete")]
-        public async Task<JsonResult> HardDelete(int categoryId)
+        [HttpPost("UndoDelete")]
+        public async Task<IActionResult> UndoDeleteAsync(int categoryId, string modifiedByName)
         {
-            var result = await _categoryService.HardDeleteAsync(categoryId);
+            var result = await _categoryService.UndoDeleteAsync(categoryId, modifiedByName);
             if (result.ResultStatus == ResultStatus.Success)
-            {
                 return Json(result);
-            }
+            else return Json(null);
+
+        }
+
+        [HttpPost("GetCategories")]
+        public async Task<IActionResult> GetAsync(int categoryId)
+        {
+            var result = await _categoryService.GetAsync(categoryId);
+            if (result.ResultStatus == ResultStatus.Success)
+                return Json(result);
             else
                 return Json(null);
         }
 
-        [HttpPost("GetCategories")]
-        public async Task<JsonResult> GetCategories()
+        [HttpPost("GetAllCategories")]
+        public async Task<JsonResult> GetAllAsync()
         {
             var result = await _categoryService.GetAllAsync();
             if (result.ResultStatus == ResultStatus.Success)
@@ -96,11 +105,49 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("GetDeletedCategories")]
-        public async Task<JsonResult> GetDeletedCategories()
+        [HttpPost("GetAllByDeleted")]
+        public async Task<JsonResult> GetAllByDeletedAsync()
         {
             var result = await _categoryService.GetAllByDeletedAsync();
             var categoryResult = JsonSerializer.Serialize(result.Data);
+            return Json(categoryResult);
+        }
+
+        [HttpPost("GetAllByNonDeleted")]
+        public async Task<IActionResult> GetAllByNonDeletedAsync()
+        {
+            var result = await _categoryService.GetAllByNonDeletedAsync();
+            var categoryResult = JsonSerializer.Serialize(result.Data);
+            return Json(categoryResult);
+        }
+
+        [HttpPost("GetAllByNonDeletedAndActive")]
+        public async Task<IActionResult> GetAllByNonDeletedAndActiveAsync()
+        {
+            var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
+            var categoryResult = JsonSerializer.Serialize(result.Data);
+            return Json(categoryResult);
+        }
+
+        [HttpPost("CountCategories")]
+        public async Task<IActionResult> CountAsync()
+        {
+            var categories = await _categoryService.CountAsync();
+            var categoryResult = JsonSerializer.Serialize(categories.Data, new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+            return Json(categoryResult);
+        }
+
+        [HttpPost("CountByNonDeletedCategories")]
+        public async Task<IActionResult> CountByNonDeletedAsync()
+        {
+            var categories = await _categoryService.CountByNonDeletedAsync();
+            var categoryResult = JsonSerializer.Serialize(categories.Data, new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
             return Json(categoryResult);
         }
     }

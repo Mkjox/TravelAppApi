@@ -93,12 +93,6 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpGet("GetComments")]
-        public async Task<IActionResult> GetComments()
-        {
-            return Ok(_comments);
-        }
-
         [HttpPost("GetCommentById")]
         public async Task<IActionResult> GetCommentById(int commentId)
         {
@@ -155,6 +149,17 @@ namespace TRA.Controllers
         public async Task<IActionResult> CountComments()
         {
             var comments = await _commentService.CountAsync();
+            var commentResult = JsonSerializer.Serialize(comments.Data, new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+            return Json(commentResult);
+        }
+
+        [HttpPost("CountNonDeletedComments")]
+        public async Task<IActionResult> CountNonDeletedComments()
+        {
+            var comments = await _commentService.CountByNonDeletedAsync();
             var commentResult = JsonSerializer.Serialize(comments.Data, new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve
