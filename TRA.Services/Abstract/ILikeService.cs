@@ -8,7 +8,10 @@ namespace TRA.Services.Abstract
 {
     public interface ILikeService
     {
-        Task LikePostAsync(int userId, int postId, int commentId);
-        Task UnlikePostAsync(int userId, int postId, int commentId);
+        Task LikePostAsync(int userId, int postId);
+        Task UnlikePostAsync(int userId, int postId);
+
+        Task LikeCommentAsync(int userId, int commentId);
+        Task UnlikeCommentAsync(int userId, int commentId);
     }
 }
