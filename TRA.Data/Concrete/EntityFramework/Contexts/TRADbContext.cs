@@ -16,6 +16,8 @@ namespace TRA.Data.Concrete.EntityFramework.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Log> Logs { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Follow> Follows { get; set; }
 
         public TRADbContext(DbContextOptions<TRADbContext> options) : base(options)
         {

@@ -20,5 +20,9 @@ namespace TRA.Entities.Concrete
         public string InstagramLink { get; set; }
         public string FacebookLink { get; set; }
         public string WebsiteLink { get; set; }
+
+        public ICollection<Like> Likes { get; set; }
+        public ICollection<Follow> Followers { get; set; }
+        public ICollection<Follow> Followees { get; set; }
     }
 }
