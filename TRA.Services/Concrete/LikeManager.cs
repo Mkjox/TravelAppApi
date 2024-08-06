@@ -20,16 +20,33 @@ namespace TRA.Services.Concrete
             _context = context;
         }
 
-        public async Task LikePostAsync(int userId, int postId, int commentId)
+        public async Task LikePostAsync(int userId, int postId)
         {
-            var like = new Like { UserId = userId, PostId = postId, CommentId = commentId, CreatedAt = DateTime.UtcNow };
+            var like = new Like { UserId = userId, PostId = postId, CreatedAt = DateTime.UtcNow };
             _context.Likes.Add(like);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UnlikePostAsync(int userId, int postId, int commentId)
+        public async Task LikeCommentAsync(int userId, int commentId)
         {
-            var like = await _context.Likes.FirstOrDefaultAsync(l => l.UserId == userId && l.PostId == postId && l.CommentId == commentId);
+            var like = new Like { UserId = userId, CommentId = commentId, CreatedAt = DateTime.UtcNow };
+            _context.Likes.Add(like);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UnlikePostAsync(int userId, int postId)
+        {
+            var like = await _context.Likes.FirstOrDefaultAsync(l => l.UserId == userId && l.PostId == postId);
+            if (like != null)
+            {
+                _context.Likes.Remove(like);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task UnlikeCommentAsync(int userId, int commentId)
+        {
+            var like = await _context.Likes.FirstOrDefaultAsync(l => l.UserId == userId && l.CommentId == commentId);
             if (like != null)
             {
                 _context.Likes.Remove(like);
