@@ -19,12 +19,12 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.HasOne(f=>f.Follower)
                 .WithMany(u=>u.Followees)
                 .HasForeignKey(f => f.FollowerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(f=>f.Followee)
                 .WithMany(u=>u.Followers)
                 .HasForeignKey(f=>f.FolloweeId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
