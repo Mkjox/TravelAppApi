@@ -29,9 +29,7 @@ namespace TRA.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors.Select(x => x.ErrorMessage));
-                return Json(new { Result = false, Message = "Please fill all the required spaces.", Errors = errors });
-
-                //return BadRequest(new { ErrorMessage = "ModelState is not valid", ModelStateErrors = ModelState.Values.SelectMany(v => v.Errors) });
+                return BadRequest(new { Result = false, Message = "Please fill all the required fields.", Errors = errors });
             }
 
             var _postAddDto = Mapper.Map<PostAddDto>(postAddDto);
@@ -39,12 +37,10 @@ namespace TRA.Controllers
 
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Json(result);
+                return Ok(result);
             }
             else
-                return Json(null);
-
-
+                return StatusCode(500, new { Result = false, Message = "An error occured while adding the post.", Details = result.Message });
         }
 
         [HttpPut("Update")]
@@ -55,39 +51,39 @@ namespace TRA.Controllers
 
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Json(result);
+                return Ok(result);
             }
             else
-                return Json(null);
+                return StatusCode(500, new { Result = false, Message = "An error occured while updating the post.", Details = result.Message });
         }
 
-        [HttpDelete("PostDelete")]
-        public async Task<JsonResult> Delete(int postId)
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int postId)
         {
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
             var postResult = JsonSerializer.Serialize(result);
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Json(postResult);
+                return Ok(postResult);
             }
             else
-                return Json(null);
+                return StatusCode(500, new { Result = false, Message = "An error occured while deleting the post.", Details = result.Message });
         }
 
-        [HttpDelete("PostHardDelete")]
-        public async Task<JsonResult> HardDelete(int postId)
+        [HttpDelete("HardDelete")]
+        public async Task<IActionResult> HardDelete(int postId)
         {
             var result = await _postService.HardDeleteAsync(postId);
             var hardDeletePostResult = JsonSerializer.Serialize(result);
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Json(hardDeletePostResult);
+                return Ok(hardDeletePostResult);
             }
             else
-                return Json(null);
+                return StatusCode(500, new { Result = false, Message = "An error occured while permamently deleting the post.", Details = result.Message });
         }
 
-        [HttpPost("PostUndoDelete")]
+        [HttpPost("UndoDelete")]
         public async Task<JsonResult> UndoDelete(int postId)
         {
             var result = await _postService.UndoDeleteAsync(postId, LoggedInUser.UserName);

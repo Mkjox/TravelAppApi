@@ -93,14 +93,14 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("GetCommentById")]
+        [HttpGet("GetCommentById")]
         public async Task<IActionResult> GetCommentById(int commentId)
         {
             var comment = await _commentService.GetAsync(commentId);
             return Json(comment);
         }
 
-        [HttpPost("GetAllComments")]
+        [HttpGet("GetAllComments")]
         public async Task<IActionResult> GetAllComments()
         {
             var comments = await _commentService.GetAllAsync();
@@ -113,7 +113,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("GetDeletedComments")]
+        [HttpGet("GetDeletedComments")]
         public async Task<IActionResult> GetDeletedComments()
         {
             var comments = await _commentService.GetAllByDeletedAsync();
@@ -124,7 +124,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("GetAllByNonDeleted")]
+        [HttpGet("GetAllByNonDeleted")]
         public async Task<IActionResult> GetAllByNonDeletedComments()
         {
             var comments = await _commentService.GetAllByNonDeletedAsync();
@@ -135,7 +135,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("GetAllByNonDeletedAndActive")]
+        [HttpGet("GetAllByNonDeletedAndActive")]
         public async Task<IActionResult> GetAllByNonDeletedAndActiveComments()
         {
             var comments = await _commentService.GetAllByNonDeletedAndActiveAsync();
@@ -145,7 +145,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("CountComments")]
+        [HttpGet("CountComments")]
         public async Task<IActionResult> CountComments()
         {
             var comments = await _commentService.CountAsync();
@@ -156,7 +156,7 @@ namespace TRA.Controllers
             return Json(commentResult);
         }
 
-        [HttpPost("CountNonDeletedComments")]
+        [HttpGet("CountNonDeletedComments")]
         public async Task<IActionResult> CountNonDeletedComments()
         {
             var comments = await _commentService.CountByNonDeletedAsync();
