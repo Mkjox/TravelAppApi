@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRA.Data.Abstract;
 using TRA.Data.Concrete.EntityFramework.Contexts;
 using TRA.Entities.Concrete;
 using TRA.Services.Abstract;
@@ -52,6 +53,18 @@ namespace TRA.Services.Concrete
                 _context.Likes.Remove(like);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> IsLikedPostAsync(int postId, int userId)
+        {
+            var like = await _context.Likes.FirstOrDefaultAsync(l => l.PostId == postId && l.UserId == userId);
+            return like != null;
+        }
+
+        public async Task<bool> IsLikedCommentAsync(int commentId, int userId)
+        {
+            var like = await _context.Likes.FirstOrDefaultAsync(l => l.CommentId == commentId && l.UserId == userId);
+            return like != null;
         }
     }
 }

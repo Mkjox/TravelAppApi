@@ -13,5 +13,8 @@ namespace TRA.Services.Abstract
 
         Task LikeCommentAsync(int userId, int commentId);
         Task UnlikeCommentAsync(int userId, int commentId);
+
+        Task<bool> IsLikedPostAsync(int postId, int userId);
+        Task<bool> IsLikedCommentAsync(int commentId, int userId);
     }
 }

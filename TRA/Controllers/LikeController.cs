@@ -43,5 +43,19 @@ namespace TRA.Controllers
             await _likeService.UnlikeCommentAsync(likeDto.UserId, likeDto.CommentId);
             return Ok();
         }
+
+        [HttpGet("isLikedPost")]
+        public async Task<IActionResult> IsLikedPost([FromBody] LikeDto likeDto)
+        {
+            await _likeService.IsLikedPostAsync(likeDto.PostId, likeDto.UserId);
+            return Ok();
+        }
+
+        [HttpGet("isLikedComment")]
+        public async Task<IActionResult> IsLikedComment([FromBody] LikeDto likeDto)
+        {
+            await _likeService.IsLikedCommentAsync(likeDto.CommentId, likeDto.UserId);
+            return Ok();
+        }
     }
 }
