@@ -44,14 +44,14 @@ namespace TRA.Controllers
             return Ok();
         }
 
-        [HttpGet("isLikedPost")]
+        [HttpGet("isLikedPost/{postId}/{userId}")]
         public async Task<IActionResult> IsLikedPost([FromBody] LikeDto likeDto)
         {
             await _likeService.IsLikedPostAsync(likeDto.PostId, likeDto.UserId);
             return Ok();
         }
 
-        [HttpGet("isLikedComment")]
+        [HttpGet("isLikedComment/{commentId}/{userId}")]
         public async Task<IActionResult> IsLikedComment([FromBody] LikeDto likeDto)
         {
             await _likeService.IsLikedCommentAsync(likeDto.CommentId, likeDto.UserId);

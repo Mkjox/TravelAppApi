@@ -83,7 +83,7 @@ namespace TRA.Controllers
 
         }
 
-        [HttpPost("GetCategories")]
+        [HttpGet("GetCategoryById")]
         public async Task<IActionResult> GetAsync(int categoryId)
         {
             var result = await _categoryService.GetAsync(categoryId);
@@ -93,7 +93,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("GetAllCategories")]
+        [HttpGet("GetAllCategories")]
         public async Task<JsonResult> GetAllAsync()
         {
             var result = await _categoryService.GetAllAsync();
@@ -105,7 +105,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpPost("GetAllByDeleted")]
+        [HttpGet("GetAllByDeleted")]
         public async Task<JsonResult> GetAllByDeletedAsync()
         {
             var result = await _categoryService.GetAllByDeletedAsync();
@@ -113,7 +113,7 @@ namespace TRA.Controllers
             return Json(categoryResult);
         }
 
-        [HttpPost("GetAllByNonDeleted")]
+        [HttpGet("GetAllByNonDeleted")]
         public async Task<IActionResult> GetAllByNonDeletedAsync()
         {
             var result = await _categoryService.GetAllByNonDeletedAsync();
@@ -121,7 +121,7 @@ namespace TRA.Controllers
             return Json(categoryResult);
         }
 
-        [HttpPost("GetAllByNonDeletedAndActive")]
+        [HttpGet("GetAllByNonDeletedAndActive")]
         public async Task<IActionResult> GetAllByNonDeletedAndActiveAsync()
         {
             var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
