@@ -93,7 +93,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpGet("GetCommentById")]
+        [HttpGet("GetCommentById/{commentId}")]
         public async Task<IActionResult> GetCommentById(int commentId)
         {
             var comment = await _commentService.GetAsync(commentId);

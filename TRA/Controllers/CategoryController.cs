@@ -83,7 +83,7 @@ namespace TRA.Controllers
 
         }
 
-        [HttpGet("GetCategoryById")]
+        [HttpGet("GetCategoryById/{categoryId}")]
         public async Task<IActionResult> GetAsync(int categoryId)
         {
             var result = await _categoryService.GetAsync(categoryId);

@@ -17,5 +17,17 @@ namespace TRA.Controllers
         protected UserManager<User> UserManager { get; }
         protected IMapper Mapper { get; }
         protected User LoggedInUser => UserManager.GetUserAsync(User).Result;
+
+        protected IActionResult GetLoggedInUserInfo()
+        {
+            var userInfo = new
+            {
+                Id = LoggedInUser.Id,
+                UserName = LoggedInUser.UserName,
+                Email = LoggedInUser.Email,
+                Roles = UserManager.GetRolesAsync(LoggedInUser).Result
+            };
+            return Ok(userInfo);
+        }
     }
 }
