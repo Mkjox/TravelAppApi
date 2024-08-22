@@ -31,7 +31,6 @@ namespace TRA.Entities.Dtos
         public string Password { get; set; }
 
         [DisplayName("Phone Number")]
-        [Required(ErrorMessage = "{0} can't be empty.")]
         [MaxLength(13, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(13, ErrorMessage = "{0} can't be less than {1} characters.")]
         [DataType(DataType.PhoneNumber)]

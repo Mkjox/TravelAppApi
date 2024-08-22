@@ -22,7 +22,6 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.Property(p => p.Content).IsRequired();
             builder.Property(p => p.Content).HasMaxLength(600);
 
-            builder.Property(p => p.Place).IsRequired();
             builder.Property(p => p.Place).HasMaxLength(100);
 
             builder.Property(p => p.Date).IsRequired();
@@ -59,7 +58,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     Date = DateTime.UtcNow,
                     ViewCount = 0,
                     CommentCount = 0,
-                    Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                    Thumbnail = "img/postImages/defaultPostImage.jpg",
                     CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
@@ -78,7 +77,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     Date = DateTime.UtcNow,
                     ViewCount = 0,
                     CommentCount = 0,
-                    Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                    Thumbnail = "img/postImages/defaultPostImage.jpg",
                     CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
@@ -97,7 +96,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     Date = DateTime.UtcNow,
                     ViewCount = 0,
                     CommentCount = 0,
-                    Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                    Thumbnail = "img/postImages/defaultPostImage.jpg",
                     CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
@@ -116,7 +115,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     Date = DateTime.UtcNow,
                     ViewCount = 1,
                     CommentCount = 1,
-                    Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                    Thumbnail = "img/postImages/defaultPostImage.jpg",
                     CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
@@ -135,7 +134,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     Date = DateTime.UtcNow,
                     ViewCount = 2,
                     CommentCount = 2,
-                    Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                    Thumbnail = "img/postImages/defaultPostImage.jpg",
                     CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
@@ -154,7 +153,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     Date = DateTime.UtcNow,
                     ViewCount = 2,
                     CommentCount = 1,
-                    Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                    Thumbnail = "img/postImages/defaultPostImage.jpg",
                     CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",
@@ -173,7 +172,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     Date = DateTime.UtcNow,
                     ViewCount = 2,
                     CommentCount = 2,
-                    Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                    Thumbnail = "img/postImages/defaultPostImage.jpg",
                     CreatedByName = "InitialCreate",
                     CreatedDate = DateTime.UtcNow,
                     ModifiedByName = "InitialCreate",

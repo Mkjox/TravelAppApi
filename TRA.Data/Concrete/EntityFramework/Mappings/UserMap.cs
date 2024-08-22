@@ -54,7 +54,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
 
             builder.ToTable("Users");
-            
+
             var adminUser = new User
             {
                 Id = 1,
@@ -70,7 +70,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 TwitterLink = "https://twitter.com/adminuser",
                 InstagramLink = "https://instagram.com/adminuser",
                 YoutubeLink = "https://youtube.com/adminuser",
-                WebsiteLink = "https://programmersblog.com/",
+                WebsiteLink = "https://travelapp.com/",
                 FacebookLink = "https://facebook.com/adminuser",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
@@ -87,19 +87,42 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 NormalizedEmail = "EDITORUSER@GMAIL.COM",
                 PhoneNumber = "+905555555555",
                 Picture = "img/userImages/defaultUser.png",
-                FirstName = "Admin",
+                FirstName = "Editor",
                 LastName = "User",
-                About = "Editor User of ProgrammersBlog",
+                About = "Editor User of Travel App",
                 TwitterLink = "https://twitter.com/editoruser",
                 InstagramLink = "https://instagram.com/editoruser",
                 YoutubeLink = "https://youtube.com/editoruser",
-                WebsiteLink = "https://programmersblog.com/",
+                WebsiteLink = "https://travelapp.com/",
                 FacebookLink = "https://facebook.com/editoruser",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString()
             };
             editorUser.PasswordHash = CreatePasswordHash(editorUser, "editoruser");
+
+            var testUser = new User
+            {
+                Id = 3,
+                UserName = "testUser",
+                NormalizedUserName = "TESTUSER",
+                Email = "testuser@gmail.com",
+                NormalizedEmail = "TESTUSER@GMAIL.COM",
+                PhoneNumber = "+905555555555",
+                Picture = "img/userImages/defaultUser.png",
+                FirstName = "Test",
+                LastName = "User",
+                About = "Test User of Travel App",
+                TwitterLink = "https://twitter.com/testuser",
+                InstagramLink = "https://instagram.com/testuser",
+                YoutubeLink = "https://youtube.com/testuser",
+                WebsiteLink = "https://travelapp.com/",
+                FacebookLink = "https://facebook.com/testuser",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            testUser.PasswordHash = CreatePasswordHash(testUser, "testuser");
 
             builder.HasData(adminUser, editorUser);
         }
