@@ -5,7 +5,7 @@ using TRA.Services.Abstract;
 
 namespace TRA.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/follow")]
     [ApiController]
     public class FollowController : ControllerBase
     {
@@ -16,18 +16,24 @@ namespace TRA.Controllers
             _followService = followService;
         }
 
-        [HttpPost("follow")]
+        [HttpPost("followUser")]
         public async Task<IActionResult> FollowUser([FromBody] FollowDto followDto)
         {
             await _followService.FollowUserAsync(followDto.FollowerId, followDto.FolloweeId);
             return Ok();
         }
 
-        [HttpPost("unfollow")]
+        [HttpPost("unfollowUser")]
         public async Task<IActionResult> UnfollowUser([FromBody] FollowDto followDto)
         {
             await _followService.UnfollowAsync(followDto.FollowerId, followDto.FolloweeId);
             return Ok();
+        }
+
+        [HttpGet("listFollowingUsers")]
+        public async Task<IActionResult> ListFollowingUsers([FromBody] FollowDto followDto)
+        {
+            await _followService.
         }
 
     }

@@ -5,7 +5,7 @@ using TRA.Entities.Concrete;
 
 namespace TRA.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/role")]
     [ApiController]
     public class RoleController : ControllerBase
     {

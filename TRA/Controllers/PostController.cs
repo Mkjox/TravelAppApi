@@ -10,7 +10,7 @@ using TRA.Shared.Utilities.Results.ComplexTypes;
 
 namespace TRA.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/post")]
     [ApiController]
     public class PostController : BaseController
     {

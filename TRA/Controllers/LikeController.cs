@@ -5,7 +5,7 @@ using TRA.Services.Abstract;
 
 namespace TRA.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/like")]
     [ApiController]
     public class LikeController : ControllerBase
     {

@@ -11,7 +11,7 @@ using TRA.Shared.Utilities.Results.ComplexTypes;
 
 namespace TRA.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/category")]
     [ApiController]
     public class CategoryController : BaseController
     {
