@@ -30,11 +30,6 @@ namespace TRA.Controllers
             return Ok();
         }
 
-        [HttpGet("listFollowingUsers")]
-        public async Task<IActionResult> ListFollowingUsers([FromBody] FollowDto followDto)
-        {
-            await _followService.
-        }
 
     }
 }
