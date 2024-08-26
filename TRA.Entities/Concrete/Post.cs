@@ -11,8 +11,11 @@ namespace TRA.Entities.Concrete
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public string Place {  get; set; }
+        public string Location {  get; set; }
         public string Thumbnail { get; set; }
+        public int Balance { get; set; }
+        public int Rating { get; set; }
+        public int Duration { get; set; }
         public DateTime Date { get; set; }
         public int ViewCount { get; set; } = 0;
         public int CommentCount { get; set; } = 0;

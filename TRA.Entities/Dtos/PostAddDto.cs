@@ -28,6 +28,24 @@ namespace TRA.Entities.Dtos
         [MinLength(5, ErrorMessage = "{0} can't be less than {1} characters.")]
         public string? Thumbnail { get; set; }
 
+        [DisplayName("Balance")]
+        [Required(ErrorMessage = "{0} can't be empty.")]
+        [MaxLength(6, ErrorMessage = "{0} can't be more than {1} characters.")]
+        [MinLength(1, ErrorMessage = "{0} can't be less than {1} characters.")]
+        public int Balance { get; set; }
+
+        [DisplayName("Rating")]
+        [Required(ErrorMessage = "{0} can't be empty.")]
+        [MaxLength(1, ErrorMessage = "{0} can't be more than {1} characters.")]
+        [MinLength(0, ErrorMessage = "{0} can't be less than {1} characters.")]
+        public int Rating { get; set; }
+
+        [DisplayName("Duration")]
+        [Required(ErrorMessage = "{0} can't be empty.")]
+        [MaxLength(2, ErrorMessage = "{0} can't be more than {1} characters.")]
+        [MinLength(1, ErrorMessage = "{0} can't be less than {1} characters.")]
+        public int Duration { get; set; }
+
         [DisplayName("Date")]
         [Required(ErrorMessage = "{0} can't be empty.")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
@@ -36,7 +54,6 @@ namespace TRA.Entities.Dtos
         [DisplayName("Category")]
         [Required(ErrorMessage = "{0} can't be empty.")]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
 
         [DisplayName("Is it Active?")]
         [Required(ErrorMessage = "{0} can't be empty.")]
