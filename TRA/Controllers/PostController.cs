@@ -57,7 +57,7 @@ namespace TRA.Controllers
                 return StatusCode(500, new { Result = false, Message = "An error occured while updating the post.", Details = result.Message });
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{postId}")]
         public async Task<IActionResult> Delete(int postId)
         {
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
@@ -70,7 +70,7 @@ namespace TRA.Controllers
                 return StatusCode(500, new { Result = false, Message = "An error occured while deleting the post.", Details = result.Message });
         }
 
-        [HttpDelete("HardDelete")]
+        [HttpDelete("HardDelete/{postId}")]
         public async Task<IActionResult> HardDelete(int postId)
         {
             var result = await _postService.HardDeleteAsync(postId);
@@ -83,7 +83,7 @@ namespace TRA.Controllers
                 return StatusCode(500, new { Result = false, Message = "An error occured while permamently deleting the post.", Details = result.Message });
         }
 
-        [HttpPost("UndoDelete")]
+        [HttpPost("UndoDelete/{postId}")]
         public async Task<JsonResult> UndoDelete(int postId)
         {
             var result = await _postService.UndoDeleteAsync(postId, LoggedInUser.UserName);

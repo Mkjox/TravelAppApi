@@ -57,7 +57,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpDelete("DeleteCategory")]
+        [HttpDelete("DeleteCategory/{categoryId}")]
         public async Task<JsonResult> DeleteAsync(int categoryId)
         {
             var result = await _categoryService.DeleteAsync(categoryId, LoggedInUser.UserName);
@@ -65,7 +65,7 @@ namespace TRA.Controllers
             return Json(categoryResult);
         }
 
-        [HttpDelete("HardDeleteCategory")]
+        [HttpDelete("HardDeleteCategory/{categoryId}")]
         public async Task<IActionResult> HardDeleteAsync(int categoryId)
         {
             var result = await _categoryService.HardDeleteAsync(categoryId);
@@ -73,7 +73,7 @@ namespace TRA.Controllers
             return Json(categoryResult);
         }
 
-        [HttpPost("UndoDelete")]
+        [HttpPost("UndoDelete/{categoryId}")]
         public async Task<IActionResult> UndoDeleteAsync(int categoryId, string modifiedByName)
         {
             var result = await _categoryService.UndoDeleteAsync(categoryId, modifiedByName);

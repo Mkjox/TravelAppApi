@@ -67,7 +67,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpDelete("DeleteComment")]
+        [HttpDelete("DeleteComment/{commentId}")]
         public async Task<IActionResult> DeleteComment(int commentId)
         {
             var result = await _commentService.DeleteAsync(commentId, LoggedInUser.UserName);
@@ -80,7 +80,7 @@ namespace TRA.Controllers
                 return Json(null);
         }
 
-        [HttpDelete("HardDeleteComment")]
+        [HttpDelete("HardDeleteComment/{commentId}")]
         public async Task<IActionResult> HardDeleteComment(int commentId)
         {
             var result = await _commentService.HardDeleteAsync(commentId);
