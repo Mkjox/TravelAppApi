@@ -37,7 +37,26 @@ namespace TRA.Controllers
 
             if (result.Succeeded)
             {
-                return Ok("Role assigned successfully");
+                return Ok("Role assigned successfully.");
+            }
+            return BadRequest(result.Errors);
+        }
+
+        [HttpDelete("RemoveRole")]
+        public async Task<IActionResult> RemoveRole(string userId, string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+
+            if (result.Succeeded)
+            {
+                return Ok("Role removed successfully.");
             }
             return BadRequest(result.Errors);
         }

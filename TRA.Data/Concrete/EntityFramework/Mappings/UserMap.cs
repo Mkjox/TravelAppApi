@@ -35,8 +35,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
 
             builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
-            // Normally i was gonna use 50 char limit for UserName but changed it
-            builder.Property(u => u.UserName).HasMaxLength(30);
+            builder.Property(u => u.UserName).HasMaxLength(50);
             builder.Property(u => u.NormalizedUserName).HasMaxLength(50);
             builder.Property(u => u.Email).HasMaxLength(100);
             builder.Property(u => u.NormalizedEmail).HasMaxLength(100);
@@ -124,7 +123,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             };
             testUser.PasswordHash = CreatePasswordHash(testUser, "testuser");
 
-            builder.HasData(adminUser, editorUser);
+            builder.HasData(adminUser, editorUser, testUser);
         }
 
         private string CreatePasswordHash(User user, string password)
