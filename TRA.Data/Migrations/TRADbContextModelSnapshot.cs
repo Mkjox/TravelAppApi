@@ -71,84 +71,84 @@ namespace TRA.Data.Migrations
                         {
                             Id = 1,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8131),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8109),
                             Description = "Hiking routes and experiences",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8132),
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8110),
                             Name = "Hiking"
                         },
                         new
                         {
                             Id = 2,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8134),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8113),
                             Description = "Cycling routes and experiences",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8135),
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8113),
                             Name = "Bicycle"
                         },
                         new
                         {
                             Id = 3,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8137),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8115),
                             Description = "Driving routes and experiences",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8137),
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8116),
                             Name = "Drive"
                         },
                         new
                         {
                             Id = 4,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8139),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8118),
                             Description = "Kayaking routes and experiences",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8140),
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8119),
                             Name = "Kayak"
                         },
                         new
                         {
                             Id = 5,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8142),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8121),
                             Description = "Skiing routes and experiences",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8142),
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8121),
                             Name = "Ski"
                         },
                         new
                         {
                             Id = 6,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8144),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8123),
                             Description = "Water Skiing routes and experiences",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8145),
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8124),
                             Name = "Water Ski"
                         },
                         new
                         {
                             Id = 7,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8147),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8150),
                             Description = "Swimming routes and experiences",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(8147),
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8151),
                             Name = "Swim"
                         });
                 });
@@ -303,6 +303,9 @@ namespace TRA.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Balance")
+                        .HasColumnType("integer");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
@@ -325,6 +328,9 @@ namespace TRA.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("Duration")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
@@ -334,6 +340,11 @@ namespace TRA.Data.Migrations
                     b.Property<bool>("IsPinned")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<string>("ModifiedByName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -342,10 +353,8 @@ namespace TRA.Data.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Place")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int>("Rating")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Thumbnail")
                         .IsRequired()
@@ -375,19 +384,22 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Balance = 0,
                             CategoryId = 1,
                             CommentCount = 0,
                             Content = "Camino de Santiago is a collection of ancient pilgrimage routes that converge at the Santiago de Compostela Cathedral in northwest Spain, the burial site of St. James. Some pilgrims carry a scallop shell during the journey, as its lines symbolize their own trek, and those of other pilgrims around the world. This is another long-distance adventure — to do the approximately 500-mile route in full may take 30 days or more.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6893),
-                            Date = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6892),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6787),
+                            Date = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6783),
+                            Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
+                            Location = "Spain",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6894),
-                            Place = "Spain",
-                            Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6788),
+                            Rating = 0,
+                            Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Hiking trail in Spain",
                             UserId = 1,
                             ViewCount = 0
@@ -395,19 +407,22 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 2,
+                            Balance = 0,
                             CategoryId = 2,
                             CommentCount = 0,
                             Content = "This cycling tour takes you along the Ourthe River from its mouth into the Meuse in Liège to Vieuxville and back. Highlights include cycling paths along the river bank, quiet climbs with views across the Condroz and Ardennes, the view at Roche au Faucons (last few meters access on foot only), and the rock faces at the river near Sy. The route uses RAVeL cycling paths along the river banks, but also includes climbs on both sides of the valley with great views.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6929),
-                            Date = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6928),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6792),
+                            Date = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6791),
+                            Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
+                            Location = "Belgium",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6930),
-                            Place = "Belgium",
-                            Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6793),
+                            Rating = 0,
+                            Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Bicycle route in Belgium",
                             UserId = 1,
                             ViewCount = 0
@@ -415,19 +430,22 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 3,
+                            Balance = 0,
                             CategoryId = 3,
                             CommentCount = 0,
                             Content = "In terms of a best directon of travel, the Grossglockner pass is so good, it really doesnt matter which way you drive it.  We tend to prefer an approach from the south, as the rise up to the summit is longer and more sweeping, so that bit more fun to drive.  Having said that, it tends to be more popular going the other way, as people make their way south from Germany, through Austria and into the Dolomites, just south of the pass.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6934),
-                            Date = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6933),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6835),
+                            Date = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6834),
+                            Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
+                            Location = "Austria",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6934),
-                            Place = "Austria",
-                            Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6836),
+                            Rating = 0,
+                            Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Driving route in Austria",
                             UserId = 1,
                             ViewCount = 0
@@ -435,19 +453,22 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 4,
+                            Balance = 0,
                             CategoryId = 4,
                             CommentCount = 1,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor iaculis nisl a ultrices. Vivamus non aliquet ante, sit amet malesuada risus. Nunc sollicitudin sed ante vel bibendum. Etiam vehicula faucibus lacus, efficitur porta dui auctor vitae. Proin auctor dapibus ligula. Quisque dignissim tincidunt lectus tempus auctor. Morbi suscipit facilisis lorem, ac lacinia quam venenatis quis. Curabitur accumsan dui nec dui.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6937),
-                            Date = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6936),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6839),
+                            Date = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6838),
+                            Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
+                            Location = "Canada",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6938),
-                            Place = "Canada",
-                            Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6840),
+                            Rating = 0,
+                            Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Kayaking spot in Canada",
                             UserId = 1,
                             ViewCount = 1
@@ -455,19 +476,22 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 5,
+                            Balance = 0,
                             CategoryId = 5,
                             CommentCount = 2,
                             Content = "In volutpat luctus finibus. Cras pulvinar, mi in elementum congue, quam quam ultrices enim, id dictum nunc nisl a ex. Proin convallis suscipit venenatis. Duis mattis eu lacus eget interdum. Etiam tincidunt, justo convallis pretium posuere, nibh orci tincidunt ligula, non pulvinar elit diam vel nibh. Fusce vel maximus mi.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6941),
-                            Date = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6940),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6843),
+                            Date = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6842),
+                            Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
+                            Location = "France",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6941),
-                            Place = "France",
-                            Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6843),
+                            Rating = 0,
+                            Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Skiing place in France",
                             UserId = 1,
                             ViewCount = 2
@@ -475,19 +499,22 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 6,
+                            Balance = 0,
                             CategoryId = 6,
                             CommentCount = 1,
                             Content = "Suspendisse dolor odio, dapibus eget risus ut, interdum porttitor felis. In nulla magna, commodo ac faucibus eget, pretium sit amet arcu. Integer odio ante, dapibus aliquam congue at, viverra at lectus. Pellentesque sit amet elementum mi. Phasellus purus urna, aliquam id metus et, sagittis faucibus nisi.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6944),
-                            Date = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6943),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6846),
+                            Date = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6845),
+                            Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
+                            Location = "Turkey",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6945),
-                            Place = "Turkey",
-                            Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6846),
+                            Rating = 0,
+                            Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Water Skii in Turkey",
                             UserId = 1,
                             ViewCount = 2
@@ -495,19 +522,22 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 7,
+                            Balance = 0,
                             CategoryId = 7,
                             CommentCount = 2,
                             Content = "Aliquam erat volutpat. Etiam vitae auctor tellus, vel cursus mi. Integer ex eros, bibendum ac luctus ut, condimentum eu nibh. Etiam nibh neque, consectetur sed augue eu, lacinia lobortis ante. Integer ut molestie nunc.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6948),
-                            Date = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6947),
+                            CreatedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6849),
+                            Date = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6848),
+                            Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
+                            Location = "Greece",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 8, 9, 10, 36, 18, 878, DateTimeKind.Utc).AddTicks(6948),
-                            Place = "Greece",
-                            Thumbnail = "img/postImages/defaultThumbnail.jpg",
+                            ModifiedDate = new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6850),
+                            Rating = 0,
+                            Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Swimming areas in Greece",
                             UserId = 1,
                             ViewCount = 2
@@ -541,6 +571,162 @@ namespace TRA.Data.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "788f28a4-d5ed-469a-b93b-619f90316980",
+                            Name = "Category.Create",
+                            NormalizedName = "CATEGORY.CREATE"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "5c2d7836-67eb-44ff-8886-f908b1ba92a3",
+                            Name = "Category.Read",
+                            NormalizedName = "CATEGORY.READ"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "ee997002-cff3-4f53-b29a-53cff4992759",
+                            Name = "Category.Update",
+                            NormalizedName = "CATEGORY.UPDATE"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "80599c10-0b8d-40be-ae1c-38936a39850c",
+                            Name = "Category.Delete",
+                            NormalizedName = "CATEGORY.DELETE"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ConcurrencyStamp = "52911886-d75b-414a-9432-09b61154b061",
+                            Name = "Post.Create",
+                            NormalizedName = "POST.CREATE"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ConcurrencyStamp = "5d376106-d10a-4301-b88a-e580024cb170",
+                            Name = "Post.Read",
+                            NormalizedName = "POST.READ"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ConcurrencyStamp = "75bef8e2-91f0-4b04-a79a-0bbb0a4eae37",
+                            Name = "Post.Update",
+                            NormalizedName = "POST.UPDATE"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ConcurrencyStamp = "e6b35a85-3868-490f-999c-1303e3c15958",
+                            Name = "Post.Delete",
+                            NormalizedName = "POST.DELETE"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ConcurrencyStamp = "e486d879-c911-4712-95fd-7f8b3396fd8b",
+                            Name = "User.Create",
+                            NormalizedName = "USER.CREATE"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ConcurrencyStamp = "b03ebffd-77de-4e19-88b4-741d6c88a9f4",
+                            Name = "User.Read",
+                            NormalizedName = "USER.READ"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ConcurrencyStamp = "c5667f95-1afe-49a0-ab83-c2307adb80cb",
+                            Name = "User.Update",
+                            NormalizedName = "USER.UPDATE"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ConcurrencyStamp = "ff1a4075-6dc6-4e68-bcbc-c246061b57d2",
+                            Name = "User.Delete",
+                            NormalizedName = "USER.DELETE"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ConcurrencyStamp = "2acdbbca-8eb6-4b8f-b265-fd5b06d2b572",
+                            Name = "Role.Create",
+                            NormalizedName = "ROLE.CREATE"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ConcurrencyStamp = "bfdc5879-5c56-49a7-a4a8-a45c6398f2df",
+                            Name = "Role.Read",
+                            NormalizedName = "ROLE.READ"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ConcurrencyStamp = "ab0b42cc-927d-45e7-b5c6-2bf2885f6092",
+                            Name = "Role.Update",
+                            NormalizedName = "ROLE.UPDATE"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ConcurrencyStamp = "c5537b9a-a80b-4b89-b012-cd73c2843381",
+                            Name = "Role.Delete",
+                            NormalizedName = "ROLE.DELETE"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ConcurrencyStamp = "216de620-886f-44a0-ae63-408ea319157e",
+                            Name = "Comment.Create",
+                            NormalizedName = "COMMENT.CREATE"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ConcurrencyStamp = "376a59fe-d967-464c-b485-05c7ec97b165",
+                            Name = "Comment.Read",
+                            NormalizedName = "COMMENT.READ"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ConcurrencyStamp = "fc2eb524-f284-45ba-877b-36cfa305e1f5",
+                            Name = "Comment.Update",
+                            NormalizedName = "COMMENT.UPDATE"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ConcurrencyStamp = "2754769f-e909-4137-b396-fd6b5b895214",
+                            Name = "Comment.Delete",
+                            NormalizedName = "COMMENT.DELETE"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ConcurrencyStamp = "6249ea0e-8be7-4333-ae95-a275916b23ff",
+                            Name = "AdminArea.Home.Read",
+                            NormalizedName = "ADMINAREA.HOME.READ"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ConcurrencyStamp = "bb7bf276-63ac-4de0-a86e-c6958f391615",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        });
                 });
 
             modelBuilder.Entity("TRA.Entities.Concrete.RoleClaim", b =>
@@ -655,8 +841,8 @@ namespace TRA.Data.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("WebsiteLink")
                         .IsRequired()
@@ -685,7 +871,7 @@ namespace TRA.Data.Migrations
                             Id = 1,
                             About = "Admin User of Travel App",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f488d5cc-28f7-48ce-874d-66bdcc027a7b",
+                            ConcurrencyStamp = "bba03a58-2ee8-4895-bbe8-942153bb96bf",
                             Email = "adminuser@gmail.com",
                             EmailConfirmed = true,
                             FacebookLink = "https://facebook.com/adminuser",
@@ -695,42 +881,68 @@ namespace TRA.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOcNPnvNHBrHm+L5fMqcZrOiGSQnt2rtIyC9GhV12IIJK2T1Abh03cz+WWAmLGHoVw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOmiWX0Vb38rdBlsymTIQGvBwJx24+ZsjBcQugbg2Jh0iWYUikN95ef/A1UY1fOM0Q==",
                             PhoneNumber = "+905555555555",
                             PhoneNumberConfirmed = true,
                             Picture = "img/userImages/defaultUser.png",
-                            SecurityStamp = "07c2c19f-d609-4efa-a8da-4e19cadc81b7",
+                            SecurityStamp = "51b5f174-1de5-47b0-bb32-c036da37242d",
                             TwitterLink = "https://twitter.com/adminuser",
                             TwoFactorEnabled = false,
                             UserName = "adminuser",
-                            WebsiteLink = "https://programmersblog.com/",
+                            WebsiteLink = "https://travelapp.com/",
                             YoutubeLink = "https://youtube.com/adminuser"
                         },
                         new
                         {
                             Id = 2,
-                            About = "Editor User of ProgrammersBlog",
+                            About = "Editor User of Travel App",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b6824d04-2991-43a5-90ae-db7ddbdfa5e7",
+                            ConcurrencyStamp = "79db06cb-6ed8-47cb-922e-9210f51c93bb",
                             Email = "editoruser@gmail.com",
                             EmailConfirmed = true,
                             FacebookLink = "https://facebook.com/editoruser",
-                            FirstName = "Admin",
+                            FirstName = "Editor",
                             InstagramLink = "https://instagram.com/editoruser",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITORUSER@GMAIL.COM",
                             NormalizedUserName = "EDITORUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEpvIWBI1143cijOosR/OMvH++ABqJ/gYvlrOcUavkDcxl58Oelo5EjYTw+ZIj26XQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE+3RQBGHirmt1tmhRvF0A3cDh2SRob7+WU16ON1cmZTgdH/YE3eEls56P8OMqrAYQ==",
                             PhoneNumber = "+905555555555",
                             PhoneNumberConfirmed = true,
                             Picture = "img/userImages/defaultUser.png",
-                            SecurityStamp = "67fddc4c-d86a-4149-b627-9553d3fceabf",
+                            SecurityStamp = "e53d591c-bc51-4613-a23d-7b3d720af482",
                             TwitterLink = "https://twitter.com/editoruser",
                             TwoFactorEnabled = false,
                             UserName = "editoruser",
-                            WebsiteLink = "https://programmersblog.com/",
+                            WebsiteLink = "https://travelapp.com/",
                             YoutubeLink = "https://youtube.com/editoruser"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            About = "Test User of Travel App",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7e69d38f-c593-403c-8593-21287f14a47a",
+                            Email = "testuser@gmail.com",
+                            EmailConfirmed = true,
+                            FacebookLink = "https://facebook.com/testuser",
+                            FirstName = "Test",
+                            InstagramLink = "https://instagram.com/testuser",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TESTUSER@GMAIL.COM",
+                            NormalizedUserName = "TESTUSER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBRcHtdlCWe7Amh0IFCWOZsw8HRtkWIVbCisXmC9AwzNVRtw04pW/IM12bWKOOObUQ==",
+                            PhoneNumber = "+905555555555",
+                            PhoneNumberConfirmed = true,
+                            Picture = "img/userImages/defaultUser.png",
+                            SecurityStamp = "5517f5da-c216-468c-9642-84889f64fd2a",
+                            TwitterLink = "https://twitter.com/testuser",
+                            TwoFactorEnabled = false,
+                            UserName = "testUser",
+                            WebsiteLink = "https://travelapp.com/",
+                            YoutubeLink = "https://youtube.com/testuser"
                         });
                 });
 
@@ -794,6 +1006,228 @@ namespace TRA.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 5
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 6
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 7
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 8
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 9
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 10
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 11
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 12
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 13
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 14
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 15
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 16
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 17
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 18
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 19
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 20
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 21
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 22
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 5
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 6
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 7
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 8
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 17
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 18
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 19
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 20
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 21
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 5
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 6
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 7
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 8
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 17
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 18
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 19
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 20
+                        });
                 });
 
             modelBuilder.Entity("TRA.Entities.Concrete.UserToken", b =>

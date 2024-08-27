@@ -267,7 +267,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     UserId = 3,
                     RoleId = 17
                 },
-                
+
                 new UserRole
                 {
                     UserId = 3,
@@ -279,7 +279,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                     UserId = 3,
                     RoleId = 19
                 },
-                
+
                 new UserRole
                 {
                     UserId = 3,

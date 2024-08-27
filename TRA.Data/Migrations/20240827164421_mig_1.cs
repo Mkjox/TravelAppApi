@@ -77,7 +77,7 @@ namespace TRA.Data.Migrations
                     Picture = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
                     FirstName = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     LastName = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    UserName = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    UserName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     About = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
                     YoutubeLink = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
                     TwitterLink = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
@@ -125,6 +125,33 @@ namespace TRA.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Follows",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FollowerId = table.Column<int>(type: "integer", nullable: false),
+                    FolloweeId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Follows", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Follows_Users_FolloweeId",
+                        column: x => x.FolloweeId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Follows_Users_FollowerId",
+                        column: x => x.FollowerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -132,8 +159,11 @@ namespace TRA.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Content = table.Column<string>(type: "character varying(600)", maxLength: 600, nullable: false),
-                    Place = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Location = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Thumbnail = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
+                    Balance = table.Column<int>(type: "integer", nullable: false),
+                    Rating = table.Column<int>(type: "integer", nullable: false),
+                    Duration = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ViewCount = table.Column<int>(type: "integer", nullable: false),
                     CommentCount = table.Column<int>(type: "integer", nullable: false),
@@ -250,46 +280,6 @@ namespace TRA.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LikedItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PostId = table.Column<int>(type: "integer", nullable: false),
-                    IsLiked = table.Column<bool>(type: "boolean", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedByName = table.Column<string>(type: "text", nullable: false),
-                    ModifiedByName = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LikedItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LikedItems_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LikedItems_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LikedItems_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -297,7 +287,6 @@ namespace TRA.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Text = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
                     PostId = table.Column<int>(type: "integer", nullable: false),
-                    LikedItemId = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -309,15 +298,43 @@ namespace TRA.Data.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_LikedItems_LikedItemId",
-                        column: x => x.LikedItemId,
-                        principalTable: "LikedItems",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    PostId = table.Column<int>(type: "integer", nullable: false),
+                    CommentId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Likes_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Likes_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Likes_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -327,13 +344,42 @@ namespace TRA.Data.Migrations
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(105), "Hiking routes and experiences", true, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(106), "Hiking" },
-                    { 2, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(108), "Cycling routes and experiences", true, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(109), "Bicycle" },
-                    { 3, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(111), "Driving routes and experiences", true, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(111), "Drive" },
-                    { 4, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(113), "Kayaking routes and experiences", true, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(114), "Kayak" },
-                    { 5, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(116), "Skiing routes and experiences", true, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(116), "Ski" },
-                    { 6, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(118), "Water Skiing routes and experiences", true, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(119), "Water Ski" },
-                    { 7, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(120), "Swimming routes and experiences", true, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 289, DateTimeKind.Utc).AddTicks(121), "Swim" }
+                    { 1, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8109), "Hiking routes and experiences", true, false, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8110), "Hiking" },
+                    { 2, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8113), "Cycling routes and experiences", true, false, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8113), "Bicycle" },
+                    { 3, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8115), "Driving routes and experiences", true, false, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8116), "Drive" },
+                    { 4, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8118), "Kayaking routes and experiences", true, false, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8119), "Kayak" },
+                    { 5, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8121), "Skiing routes and experiences", true, false, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8121), "Ski" },
+                    { 6, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8123), "Water Skiing routes and experiences", true, false, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8124), "Water Ski" },
+                    { 7, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8150), "Swimming routes and experiences", true, false, "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(8151), "Swim" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "788f28a4-d5ed-469a-b93b-619f90316980", "Category.Create", "CATEGORY.CREATE" },
+                    { 2, "5c2d7836-67eb-44ff-8886-f908b1ba92a3", "Category.Read", "CATEGORY.READ" },
+                    { 3, "ee997002-cff3-4f53-b29a-53cff4992759", "Category.Update", "CATEGORY.UPDATE" },
+                    { 4, "80599c10-0b8d-40be-ae1c-38936a39850c", "Category.Delete", "CATEGORY.DELETE" },
+                    { 5, "52911886-d75b-414a-9432-09b61154b061", "Post.Create", "POST.CREATE" },
+                    { 6, "5d376106-d10a-4301-b88a-e580024cb170", "Post.Read", "POST.READ" },
+                    { 7, "75bef8e2-91f0-4b04-a79a-0bbb0a4eae37", "Post.Update", "POST.UPDATE" },
+                    { 8, "e6b35a85-3868-490f-999c-1303e3c15958", "Post.Delete", "POST.DELETE" },
+                    { 9, "e486d879-c911-4712-95fd-7f8b3396fd8b", "User.Create", "USER.CREATE" },
+                    { 10, "b03ebffd-77de-4e19-88b4-741d6c88a9f4", "User.Read", "USER.READ" },
+                    { 11, "c5667f95-1afe-49a0-ab83-c2307adb80cb", "User.Update", "USER.UPDATE" },
+                    { 12, "ff1a4075-6dc6-4e68-bcbc-c246061b57d2", "User.Delete", "USER.DELETE" },
+                    { 13, "2acdbbca-8eb6-4b8f-b265-fd5b06d2b572", "Role.Create", "ROLE.CREATE" },
+                    { 14, "bfdc5879-5c56-49a7-a4a8-a45c6398f2df", "Role.Read", "ROLE.READ" },
+                    { 15, "ab0b42cc-927d-45e7-b5c6-2bf2885f6092", "Role.Update", "ROLE.UPDATE" },
+                    { 16, "c5537b9a-a80b-4b89-b012-cd73c2843381", "Role.Delete", "ROLE.DELETE" },
+                    { 17, "216de620-886f-44a0-ae63-408ea319157e", "Comment.Create", "COMMENT.CREATE" },
+                    { 18, "376a59fe-d967-464c-b485-05c7ec97b165", "Comment.Read", "COMMENT.READ" },
+                    { 19, "fc2eb524-f284-45ba-877b-36cfa305e1f5", "Comment.Update", "COMMENT.UPDATE" },
+                    { 20, "2754769f-e909-4137-b396-fd6b5b895214", "Comment.Delete", "COMMENT.DELETE" },
+                    { 21, "6249ea0e-8be7-4333-ae95-a275916b23ff", "AdminArea.Home.Read", "ADMINAREA.HOME.READ" },
+                    { 22, "bb7bf276-63ac-4de0-a86e-c6958f391615", "SuperAdmin", "SUPERADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -341,28 +387,75 @@ namespace TRA.Data.Migrations
                 columns: new[] { "Id", "About", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FacebookLink", "FirstName", "InstagramLink", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwitterLink", "TwoFactorEnabled", "UserName", "WebsiteLink", "YoutubeLink" },
                 values: new object[,]
                 {
-                    { 1, "Admin User of Travel App", 0, "5a791862-0eef-4073-aa99-22ab70535ce4", "adminuser@gmail.com", true, "https://facebook.com/adminuser", "Admin", "https://instagram.com/adminuser", "User", false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEEwDhAu1/MJIaHcKiS8F8fh26dKHJ19Q+wYF7q29gvvs/rTnZmEGstB/7HStNFOOsw==", "+905555555555", true, "img/userImages/defaultUser.png", "fb1d61ed-2e21-46b7-b007-f6f2080814f5", "https://twitter.com/adminuser", false, "adminuser", "https://programmersblog.com/", "https://youtube.com/adminuser" },
-                    { 2, "Editor User of ProgrammersBlog", 0, "7ebf0da8-d02a-460d-8d31-1061ec9e2add", "editoruser@gmail.com", true, "https://facebook.com/editoruser", "Admin", "https://instagram.com/editoruser", "User", false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEFnKa+2qWqDPbMfEYnpsU0TjtEftsHu7Re+zRb21DaS9eiEpRHUo4eCWGARaSbIpqA==", "+905555555555", true, "img/userImages/defaultUser.png", "29edf36b-727c-4457-a191-1048d6789abc", "https://twitter.com/editoruser", false, "editoruser", "https://programmersblog.com/", "https://youtube.com/editoruser" }
+                    { 1, "Admin User of Travel App", 0, "bba03a58-2ee8-4895-bbe8-942153bb96bf", "adminuser@gmail.com", true, "https://facebook.com/adminuser", "Admin", "https://instagram.com/adminuser", "User", false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEOmiWX0Vb38rdBlsymTIQGvBwJx24+ZsjBcQugbg2Jh0iWYUikN95ef/A1UY1fOM0Q==", "+905555555555", true, "img/userImages/defaultUser.png", "51b5f174-1de5-47b0-bb32-c036da37242d", "https://twitter.com/adminuser", false, "adminuser", "https://travelapp.com/", "https://youtube.com/adminuser" },
+                    { 2, "Editor User of Travel App", 0, "79db06cb-6ed8-47cb-922e-9210f51c93bb", "editoruser@gmail.com", true, "https://facebook.com/editoruser", "Editor", "https://instagram.com/editoruser", "User", false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEE+3RQBGHirmt1tmhRvF0A3cDh2SRob7+WU16ON1cmZTgdH/YE3eEls56P8OMqrAYQ==", "+905555555555", true, "img/userImages/defaultUser.png", "e53d591c-bc51-4613-a23d-7b3d720af482", "https://twitter.com/editoruser", false, "editoruser", "https://travelapp.com/", "https://youtube.com/editoruser" },
+                    { 3, "Test User of Travel App", 0, "7e69d38f-c593-403c-8593-21287f14a47a", "testuser@gmail.com", true, "https://facebook.com/testuser", "Test", "https://instagram.com/testuser", "User", false, null, "TESTUSER@GMAIL.COM", "TESTUSER", "AQAAAAIAAYagAAAAEBRcHtdlCWe7Amh0IFCWOZsw8HRtkWIVbCisXmC9AwzNVRtw04pW/IM12bWKOOObUQ==", "+905555555555", true, "img/userImages/defaultUser.png", "5517f5da-c216-468c-9642-84889f64fd2a", "https://twitter.com/testuser", false, "testUser", "https://travelapp.com/", "https://youtube.com/testuser" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "CategoryId", "CommentCount", "Content", "CreatedByName", "CreatedDate", "Date", "IsActive", "IsDeleted", "IsPinned", "ModifiedByName", "ModifiedDate", "Place", "Thumbnail", "Title", "UserId", "ViewCount" },
+                columns: new[] { "Id", "Balance", "CategoryId", "CommentCount", "Content", "CreatedByName", "CreatedDate", "Date", "Duration", "IsActive", "IsDeleted", "IsPinned", "Location", "ModifiedByName", "ModifiedDate", "Rating", "Thumbnail", "Title", "UserId", "ViewCount" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, "Camino de Santiago is a collection of ancient pilgrimage routes that converge at the Santiago de Compostela Cathedral in northwest Spain, the burial site of St. James. Some pilgrims carry a scallop shell during the journey, as its lines symbolize their own trek, and those of other pilgrims around the world. This is another long-distance adventure — to do the approximately 500-mile route in full may take 30 days or more.", "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8800), new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8798), true, false, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8800), "Spain", "img/postImages/defaultThumbnail.jpg", "Hiking trail in Spain", 1, 0 },
-                    { 2, 2, 0, "This cycling tour takes you along the Ourthe River from its mouth into the Meuse in Liège to Vieuxville and back. Highlights include cycling paths along the river bank, quiet climbs with views across the Condroz and Ardennes, the view at Roche au Faucons (last few meters access on foot only), and the rock faces at the river near Sy. The route uses RAVeL cycling paths along the river banks, but also includes climbs on both sides of the valley with great views.", "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8807), new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8806), true, false, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8807), "Belgium", "img/postImages/defaultThumbnail.jpg", "Bicycle route in Belgium", 1, 0 },
-                    { 3, 3, 0, "In terms of a best directon of travel, the Grossglockner pass is so good, it really doesnt matter which way you drive it.  We tend to prefer an approach from the south, as the rise up to the summit is longer and more sweeping, so that bit more fun to drive.  Having said that, it tends to be more popular going the other way, as people make their way south from Germany, through Austria and into the Dolomites, just south of the pass.", "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8810), new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8810), true, false, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8811), "Austria", "img/postImages/defaultThumbnail.jpg", "Driving route in Austria", 1, 0 },
-                    { 4, 4, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor iaculis nisl a ultrices. Vivamus non aliquet ante, sit amet malesuada risus. Nunc sollicitudin sed ante vel bibendum. Etiam vehicula faucibus lacus, efficitur porta dui auctor vitae. Proin auctor dapibus ligula. Quisque dignissim tincidunt lectus tempus auctor. Morbi suscipit facilisis lorem, ac lacinia quam venenatis quis. Curabitur accumsan dui nec dui.", "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8814), new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8813), true, false, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8814), "Canada", "img/postImages/defaultThumbnail.jpg", "Kayaking spot in Canada", 1, 1 },
-                    { 5, 5, 2, "In volutpat luctus finibus. Cras pulvinar, mi in elementum congue, quam quam ultrices enim, id dictum nunc nisl a ex. Proin convallis suscipit venenatis. Duis mattis eu lacus eget interdum. Etiam tincidunt, justo convallis pretium posuere, nibh orci tincidunt ligula, non pulvinar elit diam vel nibh. Fusce vel maximus mi.", "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8817), new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8816), true, false, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8818), "France", "img/postImages/defaultThumbnail.jpg", "Skiing place in France", 1, 2 },
-                    { 6, 6, 1, "Suspendisse dolor odio, dapibus eget risus ut, interdum porttitor felis. In nulla magna, commodo ac faucibus eget, pretium sit amet arcu. Integer odio ante, dapibus aliquam congue at, viverra at lectus. Pellentesque sit amet elementum mi. Phasellus purus urna, aliquam id metus et, sagittis faucibus nisi.", "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8820), new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8819), true, false, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8821), "Turkey", "img/postImages/defaultThumbnail.jpg", "Water Skii in Turkey", 1, 2 },
-                    { 7, 7, 2, "Aliquam erat volutpat. Etiam vitae auctor tellus, vel cursus mi. Integer ex eros, bibendum ac luctus ut, condimentum eu nibh. Etiam nibh neque, consectetur sed augue eu, lacinia lobortis ante. Integer ut molestie nunc.", "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8824), new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8823), true, false, false, "InitialCreate", new DateTime(2024, 4, 21, 21, 25, 23, 288, DateTimeKind.Utc).AddTicks(8824), "Greece", "img/postImages/defaultThumbnail.jpg", "Swimming areas in Greece", 1, 2 }
+                    { 1, 0, 1, 0, "Camino de Santiago is a collection of ancient pilgrimage routes that converge at the Santiago de Compostela Cathedral in northwest Spain, the burial site of St. James. Some pilgrims carry a scallop shell during the journey, as its lines symbolize their own trek, and those of other pilgrims around the world. This is another long-distance adventure — to do the approximately 500-mile route in full may take 30 days or more.", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6787), new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6783), 0, true, false, false, "Spain", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6788), 0, "img/postImages/defaultPostImage.jpg", "Hiking trail in Spain", 1, 0 },
+                    { 2, 0, 2, 0, "This cycling tour takes you along the Ourthe River from its mouth into the Meuse in Liège to Vieuxville and back. Highlights include cycling paths along the river bank, quiet climbs with views across the Condroz and Ardennes, the view at Roche au Faucons (last few meters access on foot only), and the rock faces at the river near Sy. The route uses RAVeL cycling paths along the river banks, but also includes climbs on both sides of the valley with great views.", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6792), new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6791), 0, true, false, false, "Belgium", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6793), 0, "img/postImages/defaultPostImage.jpg", "Bicycle route in Belgium", 1, 0 },
+                    { 3, 0, 3, 0, "In terms of a best directon of travel, the Grossglockner pass is so good, it really doesnt matter which way you drive it.  We tend to prefer an approach from the south, as the rise up to the summit is longer and more sweeping, so that bit more fun to drive.  Having said that, it tends to be more popular going the other way, as people make their way south from Germany, through Austria and into the Dolomites, just south of the pass.", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6835), new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6834), 0, true, false, false, "Austria", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6836), 0, "img/postImages/defaultPostImage.jpg", "Driving route in Austria", 1, 0 },
+                    { 4, 0, 4, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor iaculis nisl a ultrices. Vivamus non aliquet ante, sit amet malesuada risus. Nunc sollicitudin sed ante vel bibendum. Etiam vehicula faucibus lacus, efficitur porta dui auctor vitae. Proin auctor dapibus ligula. Quisque dignissim tincidunt lectus tempus auctor. Morbi suscipit facilisis lorem, ac lacinia quam venenatis quis. Curabitur accumsan dui nec dui.", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6839), new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6838), 0, true, false, false, "Canada", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6840), 0, "img/postImages/defaultPostImage.jpg", "Kayaking spot in Canada", 1, 1 },
+                    { 5, 0, 5, 2, "In volutpat luctus finibus. Cras pulvinar, mi in elementum congue, quam quam ultrices enim, id dictum nunc nisl a ex. Proin convallis suscipit venenatis. Duis mattis eu lacus eget interdum. Etiam tincidunt, justo convallis pretium posuere, nibh orci tincidunt ligula, non pulvinar elit diam vel nibh. Fusce vel maximus mi.", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6843), new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6842), 0, true, false, false, "France", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6843), 0, "img/postImages/defaultPostImage.jpg", "Skiing place in France", 1, 2 },
+                    { 6, 0, 6, 1, "Suspendisse dolor odio, dapibus eget risus ut, interdum porttitor felis. In nulla magna, commodo ac faucibus eget, pretium sit amet arcu. Integer odio ante, dapibus aliquam congue at, viverra at lectus. Pellentesque sit amet elementum mi. Phasellus purus urna, aliquam id metus et, sagittis faucibus nisi.", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6846), new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6845), 0, true, false, false, "Turkey", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6846), 0, "img/postImages/defaultPostImage.jpg", "Water Skii in Turkey", 1, 2 },
+                    { 7, 0, 7, 2, "Aliquam erat volutpat. Etiam vitae auctor tellus, vel cursus mi. Integer ex eros, bibendum ac luctus ut, condimentum eu nibh. Etiam nibh neque, consectetur sed augue eu, lacinia lobortis ante. Integer ut molestie nunc.", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6849), new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6848), 0, true, false, false, "Greece", "InitialCreate", new DateTime(2024, 8, 27, 16, 44, 20, 687, DateTimeKind.Utc).AddTicks(6850), 0, "img/postImages/defaultPostImage.jpg", "Swimming areas in Greece", 1, 2 }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_LikedItemId",
-                table: "Comments",
-                column: "LikedItemId");
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 1 },
+                    { 3, 1 },
+                    { 4, 1 },
+                    { 5, 1 },
+                    { 6, 1 },
+                    { 7, 1 },
+                    { 8, 1 },
+                    { 9, 1 },
+                    { 10, 1 },
+                    { 11, 1 },
+                    { 12, 1 },
+                    { 13, 1 },
+                    { 14, 1 },
+                    { 15, 1 },
+                    { 16, 1 },
+                    { 17, 1 },
+                    { 18, 1 },
+                    { 19, 1 },
+                    { 20, 1 },
+                    { 21, 1 },
+                    { 22, 1 },
+                    { 1, 2 },
+                    { 2, 2 },
+                    { 3, 2 },
+                    { 4, 2 },
+                    { 5, 2 },
+                    { 6, 2 },
+                    { 7, 2 },
+                    { 8, 2 },
+                    { 17, 2 },
+                    { 18, 2 },
+                    { 19, 2 },
+                    { 20, 2 },
+                    { 21, 2 },
+                    { 2, 3 },
+                    { 5, 3 },
+                    { 6, 3 },
+                    { 7, 3 },
+                    { 8, 3 },
+                    { 17, 3 },
+                    { 18, 3 },
+                    { 19, 3 },
+                    { 20, 3 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
@@ -370,18 +463,28 @@ namespace TRA.Data.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LikedItems_CategoryId",
-                table: "LikedItems",
-                column: "CategoryId");
+                name: "IX_Follows_FolloweeId",
+                table: "Follows",
+                column: "FolloweeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LikedItems_PostId",
-                table: "LikedItems",
+                name: "IX_Follows_FollowerId",
+                table: "Follows",
+                column: "FollowerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_CommentId",
+                table: "Likes",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_PostId",
+                table: "Likes",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LikedItems_UserId",
-                table: "LikedItems",
+                name: "IX_Likes_UserId",
+                table: "Likes",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -436,7 +539,10 @@ namespace TRA.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Follows");
+
+            migrationBuilder.DropTable(
+                name: "Likes");
 
             migrationBuilder.DropTable(
                 name: "Logs");
@@ -457,7 +563,7 @@ namespace TRA.Data.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "LikedItems");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Roles");

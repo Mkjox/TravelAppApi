@@ -9,6 +9,7 @@ namespace TRA.AutoMapper.Profiles
         public UserProfile()
         {
             CreateMap<UserAddDto, User>();
+            CreateMap<UserRegisterDto, User>();
             CreateMap<User, UserUpdateDto>();
             CreateMap<UserUpdateDto, User>();
         }

@@ -33,6 +33,8 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
             builder.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
 
+            builder.ToTable("Users");
+
             builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
             builder.Property(u => u.UserName).HasMaxLength(50);
@@ -51,8 +53,6 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
-
-            builder.ToTable("Users");
 
             var adminUser = new User
             {
@@ -75,7 +75,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString()
             };
-            adminUser.PasswordHash = CreatePasswordHash(adminUser, "adminUser");
+            adminUser.PasswordHash = CreatePasswordHash(adminUser, "adminuser");
 
             var editorUser = new User
             {
