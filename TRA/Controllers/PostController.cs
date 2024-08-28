@@ -15,12 +15,10 @@ namespace TRA.Controllers
     public class PostController : BaseController
     {
         private readonly IPostService _postService;
-        private readonly ICategoryService _categoryService;
 
-        public PostController(UserManager<User> userManager, IMapper mapper, IPostService postService, ICategoryService categoryService) : base(userManager, mapper)
+        public PostController(UserManager<User> userManager, IMapper mapper, IPostService postService) : base(userManager, mapper)
         {
             _postService = postService;
-            _categoryService = categoryService;
         }
 
         [HttpPost("Add")]
@@ -113,9 +111,15 @@ namespace TRA.Controllers
         public async Task<IActionResult> GetAllPosts()
         {
             var posts = await _postService.GetAllAsync();
-            if (posts.ResultStatus == ResultStatus.Success)
+
+            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
             {
-                return Json(posts);
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+            });
+
+            if (postResult != null)
+            {
+                return Json(postResult);
             }
 
             else
@@ -126,9 +130,15 @@ namespace TRA.Controllers
         public async Task<JsonResult> GetAllByNonDeletedAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAsync();
-            if (posts.ResultStatus == ResultStatus.Success)
+
+            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
             {
-                return Json(posts);
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            });
+
+            if (postResult != null)
+            {
+                return Json(postResult);
             }
             else
                 return Json(null);
@@ -138,9 +148,15 @@ namespace TRA.Controllers
         public async Task<JsonResult> GetAllByNonDeletedAndActiveAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
-            if (posts.ResultStatus == ResultStatus.Success)
+
+            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
             {
-                return Json(posts);
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            });
+
+            if (postResult != null)
+            {
+                return Json(postResult);
             }
             else return Json(null);
         }
@@ -149,9 +165,14 @@ namespace TRA.Controllers
         public async Task<JsonResult> GetAllDeletedPosts()
         {
             var posts = await _postService.GetAllByDeletedAsync();
-            if (posts.ResultStatus == ResultStatus.Success)
+            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
             {
-                return Json(posts);
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            });
+
+            if (postResult != null)
+            {
+                return Json(postResult);
             }
             else
                 return Json(null);
