@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
 using TRA.Services.Abstract;
+using TRA.Shared.Utilities.Results.Abstract;
 using TRA.Shared.Utilities.Results.ComplexTypes;
 
 namespace TRA.Controllers
@@ -37,8 +38,9 @@ namespace TRA.Controllers
             {
                 return Ok(result);
             }
+
             else
-                return StatusCode(500, new { Result = false, Message = "An error occured while adding the post.", Details = result.Message });
+                return NoContent();
         }
 
         [HttpPut("Update")]
@@ -51,60 +53,66 @@ namespace TRA.Controllers
             {
                 return Ok(result);
             }
+
             else
-                return StatusCode(500, new { Result = false, Message = "An error occured while updating the post.", Details = result.Message });
+                return NoContent();
         }
 
         [HttpDelete("Delete/{postId}")]
         public async Task<IActionResult> Delete(int postId)
         {
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
-            var postResult = JsonSerializer.Serialize(result);
+
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Ok(postResult);
+                return Ok(result);
             }
+
             else
-                return StatusCode(500, new { Result = false, Message = "An error occured while deleting the post.", Details = result.Message });
+                return NoContent();
         }
 
         [HttpDelete("HardDelete/{postId}")]
         public async Task<IActionResult> HardDelete(int postId)
         {
             var result = await _postService.HardDeleteAsync(postId);
-            var hardDeletePostResult = JsonSerializer.Serialize(result);
+
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Ok(hardDeletePostResult);
+                return Ok(result);
             }
+
             else
-                return StatusCode(500, new { Result = false, Message = "An error occured while permamently deleting the post.", Details = result.Message });
+                return NoContent();
         }
 
         [HttpPost("UndoDelete/{postId}")]
-        public async Task<JsonResult> UndoDelete(int postId)
+        public async Task<IActionResult> UndoDelete(int postId)
         {
             var result = await _postService.UndoDeleteAsync(postId, LoggedInUser.UserName);
-            var undoDeletePostResult = JsonSerializer.Serialize(result);
+
             if (result.ResultStatus == ResultStatus.Success)
             {
-                return Json(undoDeletePostResult);
+                return Ok(result);
             }
+
             else
-                return Json(null);
+                return NoContent();
         }
 
         //Get Post by Id
         [HttpGet("GetPost/{postId}")]
-        public async Task<JsonResult> GetPostById(int postId)
+        public async Task<IActionResult> GetPostById(int postId)
         {
             var post = await _postService.GetAsync(postId);
-            var postResult = JsonSerializer.Serialize(post, new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
 
-            return Json(postResult);
+            if (post != null)
+            {
+                return Ok(post.Data);
+            }
+
+            else
+                return NoContent();
         }
 
         [HttpGet("GetAllPosts")]
@@ -112,70 +120,55 @@ namespace TRA.Controllers
         {
             var posts = await _postService.GetAllAsync();
 
-            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+            if (posts != null)
             {
-                ReferenceHandler = ReferenceHandler.IgnoreCycles,
-            });
-
-            if (postResult != null)
-            {
-                return Json(postResult);
+                return Ok(posts);
             }
 
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("GetAllByNonDeleted")]
-        public async Task<JsonResult> GetAllByNonDeletedAsync()
+        public async Task<IActionResult> GetAllByNonDeletedAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAsync();
 
-            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+            if (posts != null)
             {
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
-            });
-
-            if (postResult != null)
-            {
-                return Json(postResult);
+                return Ok(posts.Data);
             }
+
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("GetAllByNonDeletedAndActive")]
-        public async Task<JsonResult> GetAllByNonDeletedAndActiveAsync()
+        public async Task<IActionResult> GetAllByNonDeletedAndActiveAsync()
         {
             var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
 
-            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
+            if (posts != null)
             {
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
-            });
-
-            if (postResult != null)
-            {
-                return Json(postResult);
+                return Ok(posts.Data);
             }
-            else return Json(null);
+
+            else
+                return NoContent();
         }
 
         [HttpGet("GetAllDeleted")]
-        public async Task<JsonResult> GetAllDeletedPosts()
+        public async Task<IActionResult> GetAllDeletedPosts()
         {
             var posts = await _postService.GetAllByDeletedAsync();
-            var postResult = JsonSerializer.Serialize(posts, new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
-            });
 
-            if (postResult != null)
+            if (posts != null)
             {
-                return Json(postResult);
+                return Ok(posts);
             }
+
             else
-                return Json(null);
+                return NoContent();
         }
 
     }

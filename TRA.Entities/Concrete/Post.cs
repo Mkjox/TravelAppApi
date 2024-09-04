@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TRA.Shared.Entities.Abstract;
 
@@ -20,8 +22,10 @@ namespace TRA.Entities.Concrete
         public int ViewCount { get; set; } = 0;
         public int CommentCount { get; set; } = 0;
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        [JsonIgnore]
+        public virtual Category? Category { get; set; }
         public int UserId { get; set; }
+        [JsonIgnore]
         public User User { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public bool IsPinned { get; set; } = false;

@@ -35,7 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="img\postImages\" />
+    <None Include="wwwroot\img\postImages\defaultPostImage.jpg" />
+    <None Include="wwwroot\img\userImages\defaultUser.png" />
   </ItemGroup>
 
 </Project>

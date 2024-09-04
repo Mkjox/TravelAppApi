@@ -40,6 +40,14 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 
+builder.Services.AddCors(opt =>
+    opt.AddDefaultPolicy(p =>
+    {
+        p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    })
+);
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "TRA API", Version = "v1" });
@@ -67,7 +75,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers(); // Bu satýrý ekleyin
+    endpoints.MapControllers();
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -79,4 +87,5 @@ app.UseEndpoints(endpoints =>
 //        pattern: "{controller=Home}/{action=Index}/{id?}");
 //});
 
+app.UseCors();
 app.Run();
