@@ -87,46 +87,60 @@ namespace TRA.Controllers
         public async Task<IActionResult> GetAsync(int categoryId)
         {
             var result = await _categoryService.GetAsync(categoryId);
-            if (result.ResultStatus == ResultStatus.Success)
-                return Json(result);
+
+            if (result != null)
+                return Ok(result);
+
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("GetAllCategories")]
-        public async Task<JsonResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync()
         {
             var result = await _categoryService.GetAllAsync();
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Json(result);
-            }
+
+            if (result != null)
+                return Ok(result.Data);
+
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("GetAllByDeleted")]
-        public async Task<JsonResult> GetAllByDeletedAsync()
+        public async Task<IActionResult> GetAllByDeletedAsync()
         {
             var result = await _categoryService.GetAllByDeletedAsync();
-            var categoryResult = JsonSerializer.Serialize(result.Data);
-            return Json(categoryResult);
+
+            if (result != null)
+                return Ok(result.Data);
+
+            else
+                return NoContent();
         }
 
         [HttpGet("GetAllByNonDeleted")]
         public async Task<IActionResult> GetAllByNonDeletedAsync()
         {
             var result = await _categoryService.GetAllByNonDeletedAsync();
-            var categoryResult = JsonSerializer.Serialize(result.Data);
-            return Json(categoryResult);
+
+            if (result != null)
+                return Ok(result.Data);
+
+            else
+                return NoContent();
         }
 
         [HttpGet("GetAllByNonDeletedAndActive")]
         public async Task<IActionResult> GetAllByNonDeletedAndActiveAsync()
         {
             var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
-            var categoryResult = JsonSerializer.Serialize(result.Data);
-            return Json(categoryResult);
+
+            if (result != null)
+                return Ok(result.Data);
+
+            else
+                return NoContent();
         }
 
         [HttpPost("CountCategories")]
