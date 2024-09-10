@@ -106,11 +106,11 @@ namespace TRA.Controllers
             var comments = await _commentService.GetAllAsync();
             if (comments != null)
             {
-                return Json(comments);
+                return Ok(comments.Data);
             }
 
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("GetDeletedComments")]
@@ -118,10 +118,10 @@ namespace TRA.Controllers
         {
             var comments = await _commentService.GetAllByDeletedAsync();
             if (comments != null)
-                return Json(comments);
+                return Ok(comments.Data);
 
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("GetAllByNonDeleted")]
@@ -129,10 +129,10 @@ namespace TRA.Controllers
         {
             var comments = await _commentService.GetAllByNonDeletedAsync();
             if (comments != null)
-                return Json(comments);
+                return Ok(comments.Data);
 
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("GetAllByNonDeletedAndActive")]
@@ -140,9 +140,9 @@ namespace TRA.Controllers
         {
             var comments = await _commentService.GetAllByNonDeletedAndActiveAsync();
             if (comments != null)
-                return Json(comments);
+                return Ok(comments.Data);
             else
-                return Json(null);
+                return NoContent();
         }
 
         [HttpGet("CountComments")]

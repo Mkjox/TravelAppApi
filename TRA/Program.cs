@@ -19,7 +19,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPostService, PostManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
-builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IJwtService, JwtManager>();
 
 builder.Services.AddSingleton(provider => new MapperConfiguration(cfg =>
 {
@@ -40,12 +40,13 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 
-builder.Services.AddCors(opt =>
-    opt.AddDefaultPolicy(p =>
-    {
-        p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-    })
-);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+});
 
 
 builder.Services.AddSwaggerGen(c =>
@@ -87,5 +88,5 @@ app.UseEndpoints(endpoints =>
 //        pattern: "{controller=Home}/{action=Index}/{id?}");
 //});
 
-app.UseCors();
+app.UseCors("AllowAll");
 app.Run();

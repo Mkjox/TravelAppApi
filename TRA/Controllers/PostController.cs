@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -122,7 +123,7 @@ namespace TRA.Controllers
 
             if (posts != null)
             {
-                return Ok(posts);
+                return Ok(posts.Data);
             }
 
             else
@@ -164,7 +165,7 @@ namespace TRA.Controllers
 
             if (posts != null)
             {
-                return Ok(posts);
+                return Ok(posts.Data);
             }
 
             else

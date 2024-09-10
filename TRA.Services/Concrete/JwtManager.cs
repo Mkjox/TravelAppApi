@@ -12,11 +12,11 @@ using TRA.Services.Abstract;
 
 namespace TRA.Services.Concrete
 {
-    public class JwtService : IJwtService
+    public class JwtManager : IJwtService
     {
         private readonly IConfiguration _configuration;
 
-        public JwtService(IConfiguration configuration)
+        public JwtManager(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -38,7 +38,7 @@ namespace TRA.Services.Concrete
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.UtcNow.AddDays(1),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

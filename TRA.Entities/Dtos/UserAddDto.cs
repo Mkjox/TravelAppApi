@@ -37,7 +37,7 @@ namespace TRA.Entities.Dtos
         public string PhoneNumber { get; set; }
 
         [DisplayName("Picture")]
-        [Required(ErrorMessage = "Please select a {0}.")]
+        //[Required(ErrorMessage = "Please select a {0}.")]
         [DataType(DataType.Upload)]
         public IFormFile PictureFile { get; set; }
         public string Picture { get; set; }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using TRA.Data.Concrete.EntityFramework.Contexts;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
+using TRA.Services.Abstract;
 using TRA.Services.Concrete;
 
 namespace TRA.Controllers
@@ -16,9 +17,9 @@ namespace TRA.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly JwtService _jwtService;
+        private readonly IJwtService _jwtService;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, JwtService jwtService, IMapper mapper) : base(userManager, mapper)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IJwtService jwtService, IMapper mapper) : base(userManager, mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -49,12 +50,29 @@ namespace TRA.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
-            var result = await _signInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, false, false);
+            var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
+
+            if (user == null)
+            {
+                return Unauthorized(new { Message = "Invalid email or password." });
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, userLoginDto.Password, false, false);
 
             if (!result.Succeeded)
-                return Unauthorized();
+                return Unauthorized(new { Message = "Invalid email or password." });
 
-            return Ok();
+            var token = _jwtService.GenerateToken(user);
+
+            return Ok(new { token, user });
+
+
+            //var result = await _signInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, false, false);
+
+            //if (!result.Succeeded)
+            //    return Unauthorized();
+
+            //return Ok();
         }
 
         [HttpGet("current-user")]

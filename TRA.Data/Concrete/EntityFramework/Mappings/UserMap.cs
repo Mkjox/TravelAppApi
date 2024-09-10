@@ -17,7 +17,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Id).ValueGeneratedOnAdd();
 
-            builder.Property(u => u.Picture).IsRequired();
+            //builder.Property(u => u.Picture).IsRequired();
             builder.Property(u => u.Picture).HasMaxLength(250);
 
             builder.Property(u => u.YoutubeLink).HasMaxLength(250);
@@ -62,7 +62,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 Email = "adminuser@gmail.com",
                 NormalizedEmail = "ADMINUSER@GMAIL.COM",
                 PhoneNumber = "+905555555555",
-                Picture = "img/userImages/defaultUser.png",
+                Picture = "~/img/userImages/defaultUser.png",
                 FirstName = "Admin",
                 LastName = "User",
                 About = "Admin User of Travel App",
@@ -85,7 +85,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 Email = "editoruser@gmail.com",
                 NormalizedEmail = "EDITORUSER@GMAIL.COM",
                 PhoneNumber = "+905555555555",
-                Picture = "img/userImages/defaultUser.png",
+                Picture = "~/img/userImages/defaultUser.png",
                 FirstName = "Editor",
                 LastName = "User",
                 About = "Editor User of Travel App",
@@ -108,7 +108,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 Email = "testuser@gmail.com",
                 NormalizedEmail = "TESTUSER@GMAIL.COM",
                 PhoneNumber = "+905555555555",
-                Picture = "img/userImages/defaultUser.png",
+                Picture = "~/img/userImages/defaultUser.png",
                 FirstName = "Test",
                 LastName = "User",
                 About = "Test User of Travel App",
