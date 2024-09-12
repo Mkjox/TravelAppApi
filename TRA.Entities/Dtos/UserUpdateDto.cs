@@ -36,7 +36,7 @@ namespace TRA.Entities.Dtos
 
         [DisplayName("Add a Picture")]
         [DataType(DataType.Upload)]
-        public IFormFile PictureFile { get; set; }
+        public IFormFile? PictureFile { get; set; }
 
         [DisplayName("Picture")]
         public string Picture { get; set; }
@@ -71,20 +71,15 @@ namespace TRA.Entities.Dtos
         [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
         public string InstagramLink { get; set; }
 
-        [DisplayName("LinkedIn")]
-        [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
-        [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string LinkedInLink { get; set; }
-
         [DisplayName("Youtube")]
         [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
         public string YoutubeLink { get; set; }
 
-        [DisplayName("Github")]
-        [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
-        [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string GithubLink { get; set; }
+        //[DisplayName("Github")]
+        //[MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
+        //[MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
+        //public string GithubLink { get; set; }
 
         [DisplayName("Website")]
         [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]

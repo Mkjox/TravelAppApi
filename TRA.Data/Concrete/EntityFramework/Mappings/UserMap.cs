@@ -17,17 +17,33 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Id).ValueGeneratedOnAdd();
 
-            //builder.Property(u => u.Picture).IsRequired();
+            builder.Property(u => u.Picture).IsRequired(false);
             builder.Property(u => u.Picture).HasMaxLength(250);
 
+            builder.Property(u => u.YoutubeLink).IsRequired(false);
             builder.Property(u => u.YoutubeLink).HasMaxLength(250);
+
+            builder.Property(u=>u.TwitterLink).IsRequired(false);
             builder.Property(u => u.TwitterLink).HasMaxLength(250);
+
+            builder.Property(u=>u.InstagramLink).IsRequired(false);
             builder.Property(u => u.InstagramLink).HasMaxLength(250);
+
+            builder.Property(u=>u.FacebookLink).IsRequired(false);
             builder.Property(u => u.FacebookLink).HasMaxLength(250);
+
+            builder.Property(u=>u.WebsiteLink).IsRequired(false);
             builder.Property(u => u.WebsiteLink).HasMaxLength(250);
 
+            builder.Property(u=>u.PhoneNumber).IsRequired(false);
+
+            builder.Property(u=>u.FirstName).IsRequired(false);
             builder.Property(u => u.FirstName).HasMaxLength(30);
+
+            builder.Property(u => u.LastName).IsRequired(false);
             builder.Property(u => u.LastName).HasMaxLength(30);
+
+            builder.Property(u=>u.About).IsRequired(false);
             builder.Property(u => u.About).HasMaxLength(1000);
 
             builder.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
