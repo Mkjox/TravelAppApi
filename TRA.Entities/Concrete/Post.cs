@@ -22,8 +22,7 @@ namespace TRA.Entities.Concrete
         public int ViewCount { get; set; } = 0;
         public int CommentCount { get; set; } = 0;
         public int CategoryId { get; set; }
-        [JsonIgnore]
-        public virtual Category? Category { get; set; }
+        public Category? Category { get; set; }
         public int UserId { get; set; }
         [JsonIgnore]
         public User User { get; set; }
