@@ -130,6 +130,20 @@ namespace TRA.Controllers
                 return NoContent();
         }
 
+        [HttpGet("GetAllByCategory/{categoryId}")]
+        public async Task<IActionResult> GetAllByCategory(int categoryId)
+        {
+            var posts = await _postService.GetAllByCategoryAsync(categoryId);
+
+            if (posts != null)
+            {
+                return Ok(posts.Data);
+            }
+
+            else
+                return NoContent();
+        }
+
         [HttpGet("GetAllByNonDeleted")]
         public async Task<IActionResult> GetAllByNonDeletedAsync()
         {
@@ -171,6 +185,5 @@ namespace TRA.Controllers
             else
                 return NoContent();
         }
-
     }
 }

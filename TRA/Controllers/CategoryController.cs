@@ -11,158 +11,158 @@ using TRA.Shared.Utilities.Results.ComplexTypes;
 
 namespace TRA.Controllers
 {
-    [Route("api/category")]
-    [ApiController]
-    public class CategoryController : BaseController
-    {
-        private readonly ICategoryService _categoryService;
+	[Route("api/category")]
+	[ApiController]
+	public class CategoryController : BaseController
+	{
+		private readonly ICategoryService _categoryService;
 
-        public CategoryController(UserManager<User> userManager, IMapper mapper, ICategoryService categoryService) : base(userManager, mapper)
-        {
-            _categoryService = categoryService;
-        }
+		public CategoryController(UserManager<User> userManager, IMapper mapper, ICategoryService categoryService) : base(userManager, mapper)
+		{
+			_categoryService = categoryService;
+		}
 
-        [HttpPost("Add")]
-        public async Task<IActionResult> AddAsync(CategoryAddDto categoryAddDto)
-        {
-            if (ModelState.IsValid)
-            {
-                var _categoryAddDto = Mapper.Map<CategoryAddDto>(categoryAddDto);
-                var result = await _categoryService.AddAsync(_categoryAddDto, LoggedInUser.UserName);
+		[HttpPost("Add")]
+		public async Task<IActionResult> AddAsync(CategoryAddDto categoryAddDto)
+		{
+			if (ModelState.IsValid)
+			{
+				var _categoryAddDto = Mapper.Map<CategoryAddDto>(categoryAddDto);
+				var result = await _categoryService.AddAsync(_categoryAddDto, LoggedInUser.UserName);
 
-                if (result.ResultStatus == ResultStatus.Success)
-                {
-                    return Json(result);
-                }
+				if (result.ResultStatus == ResultStatus.Success)
+				{
+					return Json(result);
+				}
 
-                else
-                    return Json(null);
-            }
+				else
+					return Json(null);
+			}
 
-            else
-                return Json(null);
-        }
+			else
+				return Json(null);
+		}
 
-        [HttpPut("Update")]
-        public async Task<IActionResult> UpdateAsync(CategoryUpdateDto categoryUpdateDto)
-        {
-            var _categoryUpdateDto = Mapper.Map<CategoryUpdateDto>(categoryUpdateDto);
-            var result = await _categoryService.UpdateAsync(_categoryUpdateDto, LoggedInUser.UserName);
+		[HttpPut("Update")]
+		public async Task<IActionResult> UpdateAsync(CategoryUpdateDto categoryUpdateDto)
+		{
+			var _categoryUpdateDto = Mapper.Map<CategoryUpdateDto>(categoryUpdateDto);
+			var result = await _categoryService.UpdateAsync(_categoryUpdateDto, LoggedInUser.UserName);
 
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Json(result);
-            }
-            else
-                return Json(null);
-        }
+			if (result.ResultStatus == ResultStatus.Success)
+			{
+				return Json(result);
+			}
+			else
+				return Json(null);
+		}
 
-        [HttpDelete("DeleteCategory/{categoryId}")]
-        public async Task<JsonResult> DeleteAsync(int categoryId)
-        {
-            var result = await _categoryService.DeleteAsync(categoryId, LoggedInUser.UserName);
-            var categoryResult = JsonSerializer.Serialize(result.Data);
-            return Json(categoryResult);
-        }
+		[HttpDelete("DeleteCategory/{categoryId}")]
+		public async Task<JsonResult> DeleteAsync(int categoryId)
+		{
+			var result = await _categoryService.DeleteAsync(categoryId, LoggedInUser.UserName);
+			var categoryResult = JsonSerializer.Serialize(result.Data);
+			return Json(categoryResult);
+		}
 
-        [HttpDelete("HardDeleteCategory/{categoryId}")]
-        public async Task<IActionResult> HardDeleteAsync(int categoryId)
-        {
-            var result = await _categoryService.HardDeleteAsync(categoryId);
-            var categoryResult = JsonSerializer.Serialize(result);
-            return Json(categoryResult);
-        }
+		[HttpDelete("HardDeleteCategory/{categoryId}")]
+		public async Task<IActionResult> HardDeleteAsync(int categoryId)
+		{
+			var result = await _categoryService.HardDeleteAsync(categoryId);
+			var categoryResult = JsonSerializer.Serialize(result);
+			return Json(categoryResult);
+		}
 
-        [HttpPost("UndoDelete/{categoryId}")]
-        public async Task<IActionResult> UndoDeleteAsync(int categoryId, string modifiedByName)
-        {
-            var result = await _categoryService.UndoDeleteAsync(categoryId, modifiedByName);
-            if (result.ResultStatus == ResultStatus.Success)
-                return Json(result);
-            else return Json(null);
+		[HttpPost("UndoDelete/{categoryId}")]
+		public async Task<IActionResult> UndoDeleteAsync(int categoryId, string modifiedByName)
+		{
+			var result = await _categoryService.UndoDeleteAsync(categoryId, modifiedByName);
+			if (result.ResultStatus == ResultStatus.Success)
+				return Json(result);
+			else return Json(null);
 
-        }
+		}
 
-        [HttpGet("GetCategoryById/{categoryId}")]
-        public async Task<IActionResult> GetAsync(int categoryId)
-        {
-            var result = await _categoryService.GetAsync(categoryId);
+		[HttpGet("GetCategoryById/{categoryId}")]
+		public async Task<IActionResult> GetAsync(int categoryId)
+		{
+			var result = await _categoryService.GetAsync(categoryId);
 
-            if (result != null)
-                return Ok(result);
+			if (result != null)
+				return Ok(result);
 
-            else
-                return NoContent();
-        }
+			else
+				return NoContent();
+		}
 
-        [HttpGet("GetAllCategories")]
-        public async Task<IActionResult> GetAllAsync()
-        {
-            var result = await _categoryService.GetAllAsync();
+		[HttpGet("GetAllCategories")]
+		public async Task<IActionResult> GetAllAsync()
+		{
+			var result = await _categoryService.GetAllAsync();
 
-            if (result != null)
-                return Ok(result.Data);
+			if (result != null)
+				return Ok(result.Data);
 
-            else
-                return NoContent();
-        }
+			else
+				return NoContent();
+		}
 
-        [HttpGet("GetAllByDeleted")]
-        public async Task<IActionResult> GetAllByDeletedAsync()
-        {
-            var result = await _categoryService.GetAllByDeletedAsync();
+		[HttpGet("GetAllByDeleted")]
+		public async Task<IActionResult> GetAllByDeletedAsync()
+		{
+			var result = await _categoryService.GetAllByDeletedAsync();
 
-            if (result != null)
-                return Ok(result.Data);
+			if (result != null)
+				return Ok(result.Data);
 
-            else
-                return NoContent();
-        }
+			else
+				return NoContent();
+		}
 
-        [HttpGet("GetAllByNonDeleted")]
-        public async Task<IActionResult> GetAllByNonDeletedAsync()
-        {
-            var result = await _categoryService.GetAllByNonDeletedAsync();
+		[HttpGet("GetAllByNonDeleted")]
+		public async Task<IActionResult> GetAllByNonDeletedAsync()
+		{
+			var result = await _categoryService.GetAllByNonDeletedAsync();
 
-            if (result != null)
-                return Ok(result.Data);
+			if (result != null)
+				return Ok(result.Data);
 
-            else
-                return NoContent();
-        }
+			else
+				return NoContent();
+		}
 
-        [HttpGet("GetAllByNonDeletedAndActive")]
-        public async Task<IActionResult> GetAllByNonDeletedAndActiveAsync()
-        {
-            var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
+		[HttpGet("GetAllByNonDeletedAndActive")]
+		public async Task<IActionResult> GetAllByNonDeletedAndActiveAsync()
+		{
+			var result = await _categoryService.GetAllByNonDeletedAndActiveAsync();
 
-            if (result != null)
-                return Ok(result.Data);
+			if (result != null)
+				return Ok(result.Data);
 
-            else
-                return NoContent();
-        }
+			else
+				return NoContent();
+		}
 
-        [HttpPost("CountCategories")]
-        public async Task<IActionResult> CountAsync()
-        {
-            var categories = await _categoryService.CountAsync();
-            var categoryResult = JsonSerializer.Serialize(categories.Data, new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
-            return Json(categoryResult);
-        }
+		[HttpPost("CountCategories")]
+		public async Task<IActionResult> CountAsync()
+		{
+			var categories = await _categoryService.CountAsync();
+			var categoryResult = JsonSerializer.Serialize(categories.Data, new JsonSerializerOptions
+			{
+				ReferenceHandler = ReferenceHandler.Preserve
+			});
+			return Json(categoryResult);
+		}
 
-        [HttpPost("CountByNonDeletedCategories")]
-        public async Task<IActionResult> CountByNonDeletedAsync()
-        {
-            var categories = await _categoryService.CountByNonDeletedAsync();
-            var categoryResult = JsonSerializer.Serialize(categories.Data, new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
-            return Json(categoryResult);
-        }
-    }
+		[HttpPost("CountByNonDeletedCategories")]
+		public async Task<IActionResult> CountByNonDeletedAsync()
+		{
+			var categories = await _categoryService.CountByNonDeletedAsync();
+			var categoryResult = JsonSerializer.Serialize(categories.Data, new JsonSerializerOptions
+			{
+				ReferenceHandler = ReferenceHandler.Preserve
+			});
+			return Json(categoryResult);
+		}
+	}
 }

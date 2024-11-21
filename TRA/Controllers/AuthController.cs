@@ -50,21 +50,27 @@ namespace TRA.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
-            var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
-
-            if (user == null)
+            if (string.IsNullOrEmpty(userLoginDto.Email) || string.IsNullOrEmpty(userLoginDto.Password))
             {
-                return Unauthorized(new { Message = "Invalid email or password." });
+                return BadRequest("Email and Password are required.");
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user.UserName, userLoginDto.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, false, false);
 
             if (!result.Succeeded)
-                return Unauthorized(new { Message = "Invalid email or password." });
+            {
+                Console.WriteLine(result.ToString());
+                return Unauthorized("Login failed. Please check your credentials.");
+            }
+
+            var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
+            if (user == null)
+            {
+                return Unauthorized("User not found.");
+            }
 
             var token = _jwtService.GenerateToken(user);
-
-            return Ok(new { token, user });
+            return Ok(new { token });
 
 
             //var result = await _signInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, false, false);
