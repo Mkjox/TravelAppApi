@@ -32,31 +32,21 @@ namespace TRA.Controllers
                 return BadRequest(new { Result = false, Message = "Please fill all the required fields.", Errors = errors });
             }
 
-            var _postAddDto = Mapper.Map<PostAddDto>(postAddDto);
-            var result = await _postService.AddAsync(_postAddDto, LoggedInUser.UserName, LoggedInUser.Id);
+            var result = await _postService.AddAsync(Mapper.Map<PostAddDto>(postAddDto), LoggedInUser.UserName, LoggedInUser.Id);
 
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Ok(result);
-            }
-
-            else
-                return NoContent();
+            return result.ResultStatus == ResultStatus.Success
+                ? Ok(result)
+                : NoContent();
         }
 
         [HttpPut("Update")]
         public async Task<IActionResult> Update(PostUpdateDto postUpdateDto)
         {
-            var _postUpdateDto = Mapper.Map<PostUpdateDto>(postUpdateDto);
-            var result = await _postService.UpdateAsync(_postUpdateDto, LoggedInUser.UserName);
+            var result = await _postService.UpdateAsync(Mapper.Map<PostUpdateDto>(postUpdateDto), LoggedInUser.UserName);
 
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Ok(result);
-            }
-
-            else
-                return NoContent();
+            return result.ResultStatus == ResultStatus.Success
+                ? Ok(result)
+                : NoContent();
         }
 
         [HttpDelete("Delete/{postId}")]
@@ -64,13 +54,9 @@ namespace TRA.Controllers
         {
             var result = await _postService.DeleteAsync(postId, LoggedInUser.UserName);
 
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Ok(result);
-            }
-
-            else
-                return NoContent();
+            return result.ResultStatus == ResultStatus.Success
+                ? Ok(result)
+                : NoContent();
         }
 
         [HttpDelete("HardDelete/{postId}")]
@@ -78,13 +64,9 @@ namespace TRA.Controllers
         {
             var result = await _postService.HardDeleteAsync(postId);
 
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Ok(result);
-            }
-
-            else
-                return NoContent();
+            return result.ResultStatus == ResultStatus.Success
+                ? Ok(result)
+                : NoContent();
         }
 
         [HttpPost("UndoDelete/{postId}")]
@@ -92,98 +74,70 @@ namespace TRA.Controllers
         {
             var result = await _postService.UndoDeleteAsync(postId, LoggedInUser.UserName);
 
-            if (result.ResultStatus == ResultStatus.Success)
-            {
-                return Ok(result);
-            }
-
-            else
-                return NoContent();
+            return result.ResultStatus == ResultStatus.Success
+                ? Ok(result)
+                : NoContent();
         }
 
         //Get Post by Id
         [HttpGet("GetPost/{postId}")]
         public async Task<IActionResult> GetPostById(int postId)
         {
-            var post = await _postService.GetAsync(postId);
+            var result = await _postService.GetAsync(postId);
 
-            if (post != null)
-            {
-                return Ok(post.Data);
-            }
-
-            else
-                return NoContent();
+            return result != null
+                ? Ok(result.Data)
+                : NoContent();
         }
 
         [HttpGet("GetAllPosts")]
         public async Task<IActionResult> GetAllPosts()
         {
-            var posts = await _postService.GetAllAsync();
+            var result = await _postService.GetAllAsync();
 
-            if (posts != null)
-            {
-                return Ok(posts.Data);
-            }
-
-            else
-                return NoContent();
+            return result != null
+                ? Ok(result.Data)
+                : NoContent();
         }
 
         [HttpGet("GetAllByCategory/{categoryId}")]
         public async Task<IActionResult> GetAllByCategory(int categoryId)
         {
-            var posts = await _postService.GetAllByCategoryAsync(categoryId);
+            var result = await _postService.GetAllByCategoryAsync(categoryId);
 
-            if (posts != null)
-            {
-                return Ok(posts.Data);
-            }
-
-            else
-                return NoContent();
+            return result != null
+                ? Ok(result.Data)
+                : NoContent();
         }
 
         [HttpGet("GetAllByNonDeleted")]
         public async Task<IActionResult> GetAllByNonDeletedAsync()
         {
-            var posts = await _postService.GetAllByNonDeletedAsync();
+            var result = await _postService.GetAllByNonDeletedAsync();
 
-            if (posts != null)
-            {
-                return Ok(posts.Data);
-            }
-
-            else
-                return NoContent();
+            return result != null
+                ? Ok(result.Data)
+                : NoContent();
         }
 
         [HttpGet("GetAllByNonDeletedAndActive")]
         public async Task<IActionResult> GetAllByNonDeletedAndActiveAsync()
         {
-            var posts = await _postService.GetAllByNonDeletedAndActiveAsync();
+            var result = await _postService.GetAllByNonDeletedAndActiveAsync();
 
-            if (posts != null)
-            {
-                return Ok(posts.Data);
-            }
-
-            else
-                return NoContent();
+            return result != null
+                ? Ok(result.Data)
+                : NoContent();
         }
 
         [HttpGet("GetAllDeleted")]
         public async Task<IActionResult> GetAllDeletedPosts()
         {
-            var posts = await _postService.GetAllByDeletedAsync();
+            var result = await _postService.GetAllByDeletedAsync();
 
-            if (posts != null)
-            {
-                return Ok(posts.Data);
-            }
-
-            else
-                return NoContent();
+            return result != null
+                ? Ok(result.Data)
+                : NoContent();
         }
     }
 }

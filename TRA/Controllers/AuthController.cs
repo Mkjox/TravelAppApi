@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TRA.Data.Concrete.EntityFramework.Contexts;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
@@ -31,30 +32,23 @@ namespace TRA.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors.Select(x => x.ErrorMessage)).ToList();
-                return BadRequest(new { Result = false, Message = "Please fill all the required fields.", Errors = errors });
+                return BadRequest(ModelState);
             }
 
-            var user = new User { UserName = userAddDto.UserName, Email = userAddDto.Email };
+            var user = Mapper.Map<User>(userAddDto);
             var result = await _userManager.CreateAsync(user, userAddDto.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                var token = _jwtService.GenerateToken(user);
-
-                return Ok(new { token, user });
+                return BadRequest(result.Errors);
             }
-            return BadRequest(new { Result = false, Message = "User Registration failed.", Errors = result.Errors });
+
+            return Ok(new { Token = _jwtService.GenerateToken(user) });
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
-            if (string.IsNullOrEmpty(userLoginDto.Email) || string.IsNullOrEmpty(userLoginDto.Password))
-            {
-                return BadRequest("Email and Password are required.");
-            }
-
             var result = await _signInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, false, false);
 
             if (!result.Succeeded)
@@ -69,16 +63,7 @@ namespace TRA.Controllers
                 return Unauthorized("User not found.");
             }
 
-            var token = _jwtService.GenerateToken(user);
-            return Ok(new { token });
-
-
-            //var result = await _signInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, false, false);
-
-            //if (!result.Succeeded)
-            //    return Unauthorized();
-
-            //return Ok();
+            return Ok(new { Token = _jwtService.GenerateToken(user) });
         }
 
         [HttpGet("current-user")]
@@ -86,6 +71,5 @@ namespace TRA.Controllers
         {
             return GetLoggedInUserInfo();
         }
-
     }
 }
