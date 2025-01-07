@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,8 +19,7 @@ namespace TRA.Entities.Concrete
 
         public DateTime CreatedAt { get; set; }
 
-
-        public User Follower { get; set; }
-        public User Followee { get; set; }
+        public virtual User Follower { get; set; }
+        public virtual User Followee { get; set; }
     }
 }

@@ -34,48 +34,48 @@ namespace TRA.Entities.Dtos
         [MaxLength(13, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(13, ErrorMessage = "{0} can't be less than {1} characters.")]
         [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         [DisplayName("Picture")]
         //[Required(ErrorMessage = "Please select a {0}.")]
         [DataType(DataType.Upload)]
         public IFormFile? PictureFile { get; set; }
-        public string Picture { get; set; }
+        public string? Picture { get; set; }
 
         [DisplayName("Name")]
         [MaxLength(30, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(2, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [DisplayName("Surname")]
         [MaxLength(30, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(2, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [DisplayName("About")]
         [MaxLength(1000, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(5, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string About { get; set; }
+        public string? About { get; set; }
 
         [DisplayName("Twitter")]
         [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string TwitterLink { get; set; }
+        public string? TwitterLink { get; set; }
 
         [DisplayName("Facebook")]
         [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string FacebookLink { get; set; }
+        public string? FacebookLink { get; set; }
 
         [DisplayName("Instagram")]
         [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string InstagramLink { get; set; }
+        public string? InstagramLink { get; set; }
 
         [DisplayName("Youtube")]
         [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string YoutubeLink { get; set; }
+        public string? YoutubeLink { get; set; }
 
         //[DisplayName("Github")]
         //[MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
@@ -85,6 +85,6 @@ namespace TRA.Entities.Dtos
         [DisplayName("Website")]
         [MaxLength(250, ErrorMessage = "{0} can't be more than {1} characters.")]
         [MinLength(20, ErrorMessage = "{0} can't be less than {1} characters.")]
-        public string WebsiteLink { get; set; }
+        public string? WebsiteLink { get; set; }
     }
 }

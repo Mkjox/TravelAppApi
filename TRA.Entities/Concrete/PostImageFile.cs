@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +8,9 @@ namespace TRA.Entities.Concrete
 {
     public class PostImageFile
     {
+        // public int Id { get; set; }
+        // public int PostId { get; set; }
+        // public string ImageUrl { get; set; }
+        // public DateTime CreatedAt { get; set; }
     }
 }
