@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TRA.Data.Abstract;
@@ -254,6 +255,36 @@ namespace TRA.Services.Concrete
         public Task<IDataResult<PostListDto>> GetAllByLikedAsync(int postId, int userId, DateTime likedDate, string createdByName)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IDataResult<PostListDto>> SearchAsync(string keyword, bool isAscending = false)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                var posts = await UnitOfWork.Posts.GetAllAsync(p => p.IsActive && !p.IsDeleted, p => p.Category, p => p.User);
+                var sortedPosts = isAscending ? posts.OrderBy(p => p.CreatedDate).ToList() : posts.OrderByDescending(p => p.CreatedDate).ToList();
+                return new DataResult<PostListDto>(ResultStatus.Success, new PostListDto
+                {
+                    Posts = sortedPosts,
+                    IsAscending = isAscending
+                });
+            }
+
+            var searchedPosts = await UnitOfWork.Posts.SearchAsync(new List<Expression<Func<Post, bool>>>
+            {
+                (p) => p.Title.Contains(keyword),
+                (p) => p.Category.Name.Contains(keyword),
+                (p) => p.Content.Contains(keyword)
+            }, p => p.Category, p => p.User);
+
+            var searchedAndSortedPosts = isAscending ? searchedPosts.OrderBy(p => p.CreatedDate).ToList() : searchedPosts.OrderByDescending(p => p.CreatedDate).ToList();
+
+            return new DataResult<PostListDto>(ResultStatus.Success, new PostListDto
+            {
+                Posts = searchedAndSortedPosts,
+                TotalCount = searchedPosts.Count,
+                IsAscending = isAscending
+            });
         }
     }
 }
