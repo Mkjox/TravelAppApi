@@ -97,6 +97,8 @@ namespace TRA.Services.Utilities
                 return $"{postTitle} titled post's view count has been increased.";
             }
 
+        }
+
         public static class Comment
         {
             public static string NotFound(bool isPlural)
@@ -145,3 +147,4 @@ namespace TRA.Services.Utilities
         }
     }
 }
+
