@@ -286,5 +286,18 @@ namespace TRA.Services.Concrete
                 IsAscending = isAscending
             });
         }
+
+        public async Task<IResult> IncreaseViewCountAsync(int postId)
+        {
+            var post = await UnitOfWork.Posts.GetAsync(p => p.Id == postId);
+            if (post != null)
+            {
+                post.ViewCount += 1;
+                await UnitOfWork.Posts.UpdateAsync(post);
+                await UnitOfWork.SaveAsync();
+                return new Result(ResultStatus.Success, Messages.Post.IncreaseViewCount(post.Title));
+            }
+            return new Result(ResultStatus.Error, Messages.Post.NotFound(isPlural: false));
+        }
     }
 }

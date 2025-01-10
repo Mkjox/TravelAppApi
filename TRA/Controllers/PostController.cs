@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using TRA.Entities.Concrete;
 using TRA.Entities.Dtos;
 using TRA.Services.Abstract;
-using TRA.Shared.Utilities.Results.Abstract;
 using TRA.Shared.Utilities.Results.ComplexTypes;
 
 namespace TRA.Controllers
@@ -138,6 +134,17 @@ namespace TRA.Controllers
             return result != null
                 ? Ok(result.Data)
                 : NoContent();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string keyword, bool isAscending)
+        {
+            var searchResult = await _postService.SearchAsync(keyword, isAscending);
+            if(searchResult.ResultStatus == ResultStatus.Success)
+            {
+                return Ok(searchResult.Data);
+            }
+            return NoContent();
         }
     }
 }

@@ -69,29 +69,33 @@ namespace TRA.Services.Utilities
 
             public static string Add(string PostTitle)
             {
-                return $"{PostTitle} titled article added successfully.";
+                return $"{PostTitle} titled post added successfully.";
             }
 
             public static string Update(string PostTitle)
             {
-                return $"{PostTitle} titled article updated successfully.";
+                return $"{PostTitle} titled post updated successfully.";
             }
 
             public static string Delete(string PostTitle)
             {
-                return $"{PostTitle} titled article deleted successfully.";
+                return $"{PostTitle} titled post deleted successfully.";
             }
 
             public static string HardDelete(string PostTitle)
             {
-                return $"{PostTitle} titled article deleted from the database successfully.";
+                return $"{PostTitle} titled post deleted from the database successfully.";
             }
 
             public static string UndoDelete(string PostTitle)
             {
-                return $"{PostTitle} titled article has been retrieved from the archive successfully.";
+                return $"{PostTitle} titled post has been retrieved from the archive successfully.";
             }
-        }
+
+            public static string IncreaseViewCount(string postTitle)
+            {
+                return $"{postTitle} titled post's view count has been increased.";
+            }
 
         public static class Comment
         {
