@@ -136,7 +136,7 @@ namespace TRA.Controllers
                 : NoContent();
         }
 
-        [HttpPost]
+        [HttpGet("Search")]
         public async Task<IActionResult> Search(string keyword, bool isAscending)
         {
             var searchResult = await _postService.SearchAsync(keyword, isAscending);
