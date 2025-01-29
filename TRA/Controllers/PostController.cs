@@ -137,14 +137,16 @@ namespace TRA.Controllers
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> Search(string keyword, bool isAscending)
+        public async Task<IActionResult> Search([FromQuery] string keyword, [FromQuery] bool isAscending = false)
         {
             var searchResult = await _postService.SearchAsync(keyword, isAscending);
-            if(searchResult.ResultStatus == ResultStatus.Success)
+
+            if (searchResult.ResultStatus == ResultStatus.Success)
             {
                 return Ok(searchResult.Data);
             }
-            return NoContent();
+
+            return BadRequest(searchResult.Message);
         }
     }
 }

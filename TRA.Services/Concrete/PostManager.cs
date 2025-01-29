@@ -261,8 +261,16 @@ namespace TRA.Services.Concrete
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                var posts = await UnitOfWork.Posts.GetAllAsync(p => p.IsActive && !p.IsDeleted, p => p.Category, p => p.User);
-                var sortedPosts = isAscending ? posts.OrderBy(p => p.CreatedDate).ToList() : posts.OrderByDescending(p => p.CreatedDate).ToList();
+                var posts = await UnitOfWork.Posts.GetAllAsync(
+                    p => p.IsActive && !p.IsDeleted,
+                    p => p.Category,
+                    p => p.User
+                    );
+
+                var sortedPosts = isAscending 
+                    ? posts.OrderBy(p => p.CreatedDate).ToList() 
+                    : posts.OrderByDescending(p => p.CreatedDate).ToList();
+
                 return new DataResult<PostListDto>(ResultStatus.Success, new PostListDto
                 {
                     Posts = sortedPosts,
@@ -277,7 +285,9 @@ namespace TRA.Services.Concrete
                 (p) => p.Content.Contains(keyword)
             }, p => p.Category, p => p.User);
 
-            var searchedAndSortedPosts = isAscending ? searchedPosts.OrderBy(p => p.CreatedDate).ToList() : searchedPosts.OrderByDescending(p => p.CreatedDate).ToList();
+            var searchedAndSortedPosts = isAscending 
+                ? searchedPosts.OrderBy(p => p.CreatedDate).ToList() 
+                : searchedPosts.OrderByDescending(p => p.CreatedDate).ToList();
 
             return new DataResult<PostListDto>(ResultStatus.Success, new PostListDto
             {
