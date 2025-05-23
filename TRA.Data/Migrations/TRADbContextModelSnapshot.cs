@@ -71,84 +71,84 @@ namespace TRA.Data.Migrations
                         {
                             Id = 1,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2378),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8903),
                             Description = "Hiking is a journey through nature's most serene landscapes—dense forests, rugged mountain peaks, hidden waterfalls—each one rewarding your effort with a beauty that can only be discovered on foot. As the sun sets and you reach the summit, the sense of accomplishment mixes with awe, reminding you of the power of simply walking through the world’s wonders.",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2379),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8904),
                             Name = "Hiking"
                         },
                         new
                         {
                             Id = 2,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2382),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8908),
                             Description = "Feel the wind in your hair and the world rushing past as you glide down open roads or twisty trails on a bicycle. Whether you’re navigating through charming countryside, coasting along the beach, or zipping through bustling city streets, biking gives you a front-row seat to experience your surroundings. It’s a thrill of speed and freedom, where every turn offers a new vista, and every pedal brings you closer to your next adventure.",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2382),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8909),
                             Name = "Bicycle"
                         },
                         new
                         {
                             Id = 3,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2384),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8912),
                             Description = "The open road stretches ahead, promising new discoveries at every bend. There’s something intoxicating about a road trip—the thrill of spontaneous detours, the soundtrack of your favorite tunes, and the freedom to explore wherever your heart desires.",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2385),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8913),
                             Name = "Drive"
                         },
                         new
                         {
                             Id = 4,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2387),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8915),
                             Description = "Whether you’re navigating tranquil lakes, winding rivers, or riding the exhilarating currents of the ocean, kayaking is a personal journey into the heart of nature. As you skim over the water’s surface, you become part of the landscape, able to reach secret coves, hidden islands, and serene spots inaccessible by any other means.",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2387),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8916),
                             Name = "Kayak"
                         },
                         new
                         {
                             Id = 5,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2389),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8919),
                             Description = "Slicing through fresh powder as you carve your way down a snow-covered mountain is a rush like no other. Skiing is the perfect blend of adrenaline and elegance—each swoop and turn making you feel weightless as the world becomes a blur of white and blue. From high alpine peaks with panoramic views to cozy mountain resorts where hot cocoa awaits, skiing offers a thrill that lingers long after the day’s last run.",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2390),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8920),
                             Name = "Ski"
                         },
                         new
                         {
                             Id = 6,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2391),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8922),
                             Description = "Feel the exhilaration as you rise out of the water, your skis skimming across the surface, and you pick up speed behind a powerful boat. Water skiing is pure adrenaline—the rush of wind in your face and the splash of water at your feet as you cut through waves. Each turn and jump offers a new challenge, a test of balance, and an opportunity to push yourself. It's the ultimate way to combine water, speed, and thrill, leaving you craving more.",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2392),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8923),
                             Name = "Water Ski"
                         },
                         new
                         {
                             Id = 7,
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2394),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8926),
                             Description = "Underneath the surface, you’re free to lose yourself in the tranquility of the underwater world or power through a refreshing workout. Swimming is both a peaceful escape and a personal challenge, offering a sense of freedom that stays with you long after you leave the water.",
                             IsActive = true,
                             IsDeleted = false,
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(2394),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(8927),
                             Name = "Swim"
                         });
                 });
@@ -232,13 +232,13 @@ namespace TRA.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CommentId")
+                    b.Property<int?>("CommentId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("PostId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("integer");
 
                     b.Property<int>("UserId")
@@ -389,15 +389,15 @@ namespace TRA.Data.Migrations
                             CommentCount = 0,
                             Content = "Camino de Santiago is a collection of ancient pilgrimage routes that converge at the Santiago de Compostela Cathedral in northwest Spain, the burial site of St. James. Some pilgrims carry a scallop shell during the journey, as its lines symbolize their own trek, and those of other pilgrims around the world. This is another long-distance adventure — to do the approximately 500-mile route in full may take 30 days or more.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1036),
-                            Date = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1033),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5700),
+                            Date = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5698),
                             Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
                             Location = "Spain",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1037),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5701),
                             Rating = 0,
                             Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Hiking trail in Spain",
@@ -412,15 +412,15 @@ namespace TRA.Data.Migrations
                             CommentCount = 0,
                             Content = "This cycling tour takes you along the Ourthe River from its mouth into the Meuse in Liège to Vieuxville and back. Highlights include cycling paths along the river bank, quiet climbs with views across the Condroz and Ardennes, the view at Roche au Faucons (last few meters access on foot only), and the rock faces at the river near Sy. The route uses RAVeL cycling paths along the river banks, but also includes climbs on both sides of the valley with great views.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1041),
-                            Date = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1040),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5707),
+                            Date = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5706),
                             Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
                             Location = "Belgium",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1042),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5708),
                             Rating = 0,
                             Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Bicycle route in Belgium",
@@ -435,15 +435,15 @@ namespace TRA.Data.Migrations
                             CommentCount = 0,
                             Content = "In terms of a best directon of travel, the Grossglockner pass is so good, it really doesnt matter which way you drive it.  We tend to prefer an approach from the south, as the rise up to the summit is longer and more sweeping, so that bit more fun to drive.  Having said that, it tends to be more popular going the other way, as people make their way south from Germany, through Austria and into the Dolomites, just south of the pass.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1047),
-                            Date = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1045),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5712),
+                            Date = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5711),
                             Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
                             Location = "Austria",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1047),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5713),
                             Rating = 0,
                             Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Driving route in Austria",
@@ -458,15 +458,15 @@ namespace TRA.Data.Migrations
                             CommentCount = 1,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor iaculis nisl a ultrices. Vivamus non aliquet ante, sit amet malesuada risus. Nunc sollicitudin sed ante vel bibendum. Etiam vehicula faucibus lacus, efficitur porta dui auctor vitae. Proin auctor dapibus ligula. Quisque dignissim tincidunt lectus tempus auctor. Morbi suscipit facilisis lorem, ac lacinia quam venenatis quis. Curabitur accumsan dui nec dui.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1050),
-                            Date = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1049),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5718),
+                            Date = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5716),
                             Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
                             Location = "Canada",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1051),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5718),
                             Rating = 0,
                             Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Kayaking spot in Canada",
@@ -481,15 +481,15 @@ namespace TRA.Data.Migrations
                             CommentCount = 2,
                             Content = "In volutpat luctus finibus. Cras pulvinar, mi in elementum congue, quam quam ultrices enim, id dictum nunc nisl a ex. Proin convallis suscipit venenatis. Duis mattis eu lacus eget interdum. Etiam tincidunt, justo convallis pretium posuere, nibh orci tincidunt ligula, non pulvinar elit diam vel nibh. Fusce vel maximus mi.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1054),
-                            Date = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1053),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5723),
+                            Date = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5722),
                             Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
                             Location = "France",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1054),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5723),
                             Rating = 0,
                             Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Skiing place in France",
@@ -504,15 +504,15 @@ namespace TRA.Data.Migrations
                             CommentCount = 1,
                             Content = "Suspendisse dolor odio, dapibus eget risus ut, interdum porttitor felis. In nulla magna, commodo ac faucibus eget, pretium sit amet arcu. Integer odio ante, dapibus aliquam congue at, viverra at lectus. Pellentesque sit amet elementum mi. Phasellus purus urna, aliquam id metus et, sagittis faucibus nisi.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1057),
-                            Date = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1056),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5740),
+                            Date = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5739),
                             Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
                             Location = "Turkey",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1058),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5740),
                             Rating = 0,
                             Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Water Skii in Turkey",
@@ -527,15 +527,15 @@ namespace TRA.Data.Migrations
                             CommentCount = 2,
                             Content = "Aliquam erat volutpat. Etiam vitae auctor tellus, vel cursus mi. Integer ex eros, bibendum ac luctus ut, condimentum eu nibh. Etiam nibh neque, consectetur sed augue eu, lacinia lobortis ante. Integer ut molestie nunc.",
                             CreatedByName = "InitialCreate",
-                            CreatedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1061),
-                            Date = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1060),
+                            CreatedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5745),
+                            Date = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5744),
                             Duration = 0,
                             IsActive = true,
                             IsDeleted = false,
                             IsPinned = false,
                             Location = "Greece",
                             ModifiedByName = "InitialCreate",
-                            ModifiedDate = new DateTime(2024, 9, 12, 10, 58, 9, 526, DateTimeKind.Utc).AddTicks(1062),
+                            ModifiedDate = new DateTime(2025, 5, 23, 16, 42, 33, 60, DateTimeKind.Utc).AddTicks(5745),
                             Rating = 0,
                             Thumbnail = "img/postImages/defaultPostImage.jpg",
                             Title = "Swimming areas in Greece",
@@ -576,154 +576,154 @@ namespace TRA.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "52835445-c626-4fd3-8110-15c34232730a",
+                            ConcurrencyStamp = "d511add9-41f5-4910-981b-f7b1b87ce211",
                             Name = "Category.Create",
                             NormalizedName = "CATEGORY.CREATE"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "9b364e67-c210-4eb2-bc91-3c245da04b0e",
+                            ConcurrencyStamp = "9315cb61-e510-48a2-ba09-13f130ad5305",
                             Name = "Category.Read",
                             NormalizedName = "CATEGORY.READ"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "2c2ca3e9-ef85-49a8-b1e2-e27a295d179e",
+                            ConcurrencyStamp = "5da2be25-e7e9-441e-b770-fba351958794",
                             Name = "Category.Update",
                             NormalizedName = "CATEGORY.UPDATE"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "0c4e9a64-6bd5-4752-8d18-71ebd1d58412",
+                            ConcurrencyStamp = "d1f8ccbf-ab9f-4c2f-8ddc-6a77b30b27c7",
                             Name = "Category.Delete",
                             NormalizedName = "CATEGORY.DELETE"
                         },
                         new
                         {
                             Id = 5,
-                            ConcurrencyStamp = "dd663ce0-6608-4f52-8258-89a2f92eb0a8",
+                            ConcurrencyStamp = "4e02be21-b1b7-4244-8ced-82ad2d1c05e7",
                             Name = "Post.Create",
                             NormalizedName = "POST.CREATE"
                         },
                         new
                         {
                             Id = 6,
-                            ConcurrencyStamp = "dc650c79-ee90-4a4b-a03c-db8563497f0d",
+                            ConcurrencyStamp = "95f7e067-051c-4a9c-a319-c44e503ef34a",
                             Name = "Post.Read",
                             NormalizedName = "POST.READ"
                         },
                         new
                         {
                             Id = 7,
-                            ConcurrencyStamp = "a2731662-ca92-405b-aa9b-ba1a1bbff145",
+                            ConcurrencyStamp = "83458386-81c6-41c8-bb42-d1eafbf67d91",
                             Name = "Post.Update",
                             NormalizedName = "POST.UPDATE"
                         },
                         new
                         {
                             Id = 8,
-                            ConcurrencyStamp = "75f1c25c-3d0f-4832-b740-60ab368ba65c",
+                            ConcurrencyStamp = "c4371684-42b6-4deb-8873-0e3d114ed65f",
                             Name = "Post.Delete",
                             NormalizedName = "POST.DELETE"
                         },
                         new
                         {
                             Id = 9,
-                            ConcurrencyStamp = "ee594128-c8b3-4db7-a3e2-45e31917e75f",
+                            ConcurrencyStamp = "6cf54b66-c0f3-4d94-9c6f-5afc275ac423",
                             Name = "User.Create",
                             NormalizedName = "USER.CREATE"
                         },
                         new
                         {
                             Id = 10,
-                            ConcurrencyStamp = "df129047-e098-4fd4-9366-dc0087f349a2",
+                            ConcurrencyStamp = "3f43c007-0ca3-4d45-9bf9-8bd254329173",
                             Name = "User.Read",
                             NormalizedName = "USER.READ"
                         },
                         new
                         {
                             Id = 11,
-                            ConcurrencyStamp = "e36ab727-8174-40f1-918c-ce46e0f95fee",
+                            ConcurrencyStamp = "fd9ab20e-423c-4348-bfde-273d1422246e",
                             Name = "User.Update",
                             NormalizedName = "USER.UPDATE"
                         },
                         new
                         {
                             Id = 12,
-                            ConcurrencyStamp = "f2347943-ecd7-475b-accb-cc0f5903e3fe",
+                            ConcurrencyStamp = "36ff12ef-cc2d-4164-9411-0b36cdd0be0e",
                             Name = "User.Delete",
                             NormalizedName = "USER.DELETE"
                         },
                         new
                         {
                             Id = 13,
-                            ConcurrencyStamp = "621bf266-a19c-4cc2-9af8-40fb2f0e55ae",
+                            ConcurrencyStamp = "44e2ae22-f7be-46a8-8a61-4bb8181d210e",
                             Name = "Role.Create",
                             NormalizedName = "ROLE.CREATE"
                         },
                         new
                         {
                             Id = 14,
-                            ConcurrencyStamp = "32be0e26-002a-4631-8064-354c371103d9",
+                            ConcurrencyStamp = "7f23c5a3-7ba0-4bcf-ae56-c3037196c068",
                             Name = "Role.Read",
                             NormalizedName = "ROLE.READ"
                         },
                         new
                         {
                             Id = 15,
-                            ConcurrencyStamp = "d00f8be7-6b0b-4bb2-bf19-daf776d0cc23",
+                            ConcurrencyStamp = "a6da1616-9d87-40f6-97e1-72d6a653f196",
                             Name = "Role.Update",
                             NormalizedName = "ROLE.UPDATE"
                         },
                         new
                         {
                             Id = 16,
-                            ConcurrencyStamp = "b6c7636b-d358-4cd6-8707-19ddf5acb79d",
+                            ConcurrencyStamp = "8927a7c8-d548-4186-94b1-dcae51bd572a",
                             Name = "Role.Delete",
                             NormalizedName = "ROLE.DELETE"
                         },
                         new
                         {
                             Id = 17,
-                            ConcurrencyStamp = "b1b21f32-e3a1-473e-9f76-279cc0d9e2d1",
+                            ConcurrencyStamp = "f5c5848a-5999-4510-ba8b-9f4b0f6da9d8",
                             Name = "Comment.Create",
                             NormalizedName = "COMMENT.CREATE"
                         },
                         new
                         {
                             Id = 18,
-                            ConcurrencyStamp = "b6d2bc1e-5410-4909-b58b-bf5a327b2c3b",
+                            ConcurrencyStamp = "e9ce205c-99c2-4681-8fd9-d99ca22ab675",
                             Name = "Comment.Read",
                             NormalizedName = "COMMENT.READ"
                         },
                         new
                         {
                             Id = 19,
-                            ConcurrencyStamp = "b41be95a-2024-4e1f-be5e-cbfbfa52a7a0",
+                            ConcurrencyStamp = "103a2b8e-8fad-4fa7-aad4-d173a4ae69f6",
                             Name = "Comment.Update",
                             NormalizedName = "COMMENT.UPDATE"
                         },
                         new
                         {
                             Id = 20,
-                            ConcurrencyStamp = "d89bc0bd-8141-4259-bf53-effbecde0ac2",
+                            ConcurrencyStamp = "2db22009-e94d-4304-80f7-bdac0c2b1697",
                             Name = "Comment.Delete",
                             NormalizedName = "COMMENT.DELETE"
                         },
                         new
                         {
                             Id = 21,
-                            ConcurrencyStamp = "5ce0ff2f-a738-4d77-9449-b8fc6ce403fa",
+                            ConcurrencyStamp = "4990b335-0069-4ad4-b0e1-0c73f56ad934",
                             Name = "AdminArea.Home.Read",
                             NormalizedName = "ADMINAREA.HOME.READ"
                         },
                         new
                         {
                             Id = 22,
-                            ConcurrencyStamp = "8ade6c98-4514-4e7e-b320-8fde57b3ab6d",
+                            ConcurrencyStamp = "7dd95621-2689-460b-b269-9470be3f7698",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });
@@ -779,17 +779,9 @@ namespace TRA.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("FacebookLink")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
-
                     b.Property<string>("FirstName")
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
-
-                    b.Property<string>("InstagramLink")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(30)
@@ -825,10 +817,6 @@ namespace TRA.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
-                    b.Property<string>("TwitterLink")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -838,10 +826,6 @@ namespace TRA.Data.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("WebsiteLink")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
-
-                    b.Property<string>("YoutubeLink")
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
@@ -862,78 +846,66 @@ namespace TRA.Data.Migrations
                             Id = 1,
                             About = "Admin User of Travel App",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "09954d92-a96d-4cf2-9d01-cc88957e0ce1",
+                            ConcurrencyStamp = "d32c3ea2-30f5-48b3-9408-bb7214093c4f",
                             Email = "adminuser@gmail.com",
                             EmailConfirmed = true,
-                            FacebookLink = "https://facebook.com/adminuser",
                             FirstName = "Admin",
-                            InstagramLink = "https://instagram.com/adminuser",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF7horcDPDvq9veDdxDlF+xoOcD4fdlQ0AQ12HK0M4j9t2Re2O9fbO6A9UFcwEp3fA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK0g/gyE1vZCMOjFrqvDm3tNjazB8sxnCMckqVELfrT1uZsYBWZzaHf7Q3+pUWlQxw==",
                             PhoneNumber = "+905555555555",
                             PhoneNumberConfirmed = true,
                             Picture = "~/img/userImages/defaultUser.png",
-                            SecurityStamp = "ece1dd0a-079a-455a-be5c-27bd48b3bb69",
-                            TwitterLink = "https://twitter.com/adminuser",
+                            SecurityStamp = "5ff8ad74-b2ea-4690-9a5b-ae5f1756f133",
                             TwoFactorEnabled = false,
                             UserName = "adminuser",
-                            WebsiteLink = "https://travelapp.com/",
-                            YoutubeLink = "https://youtube.com/adminuser"
+                            WebsiteLink = "https://travelapp.com/"
                         },
                         new
                         {
                             Id = 2,
                             About = "Editor User of Travel App",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e651ec71-e2d9-4f06-a7a9-bbc97c35217b",
+                            ConcurrencyStamp = "6235b59f-e69b-4f8c-a3cd-e0366784d07a",
                             Email = "editoruser@gmail.com",
                             EmailConfirmed = true,
-                            FacebookLink = "https://facebook.com/editoruser",
                             FirstName = "Editor",
-                            InstagramLink = "https://instagram.com/editoruser",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITORUSER@GMAIL.COM",
                             NormalizedUserName = "EDITORUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBgNrfbqLDTR4i4jdeFWXxJsEdwa5gv82r+Rcb5cVPfs/rvdOcVV/cQ2CjQriAt4nw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMy8nzMgp5sK21woVnoQnt/5So5EVSLcw+CTus4ZJDrLcTBAreA28XnkUWB2HIe0/A==",
                             PhoneNumber = "+905555555555",
                             PhoneNumberConfirmed = true,
                             Picture = "~/img/userImages/defaultUser.png",
-                            SecurityStamp = "ee2030dd-667d-4f0f-b90a-6c723ff5b1fa",
-                            TwitterLink = "https://twitter.com/editoruser",
+                            SecurityStamp = "e7526b4b-6bf6-4caa-860c-c2f86a931e70",
                             TwoFactorEnabled = false,
                             UserName = "editoruser",
-                            WebsiteLink = "https://travelapp.com/",
-                            YoutubeLink = "https://youtube.com/editoruser"
+                            WebsiteLink = "https://travelapp.com/"
                         },
                         new
                         {
                             Id = 3,
                             About = "Test User of Travel App",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dfc32dac-113a-4be1-b1f6-8e9d43c6f9e0",
+                            ConcurrencyStamp = "91b83bc0-144d-4ae8-bcca-8341051aeffe",
                             Email = "testuser@gmail.com",
                             EmailConfirmed = true,
-                            FacebookLink = "https://facebook.com/testuser",
                             FirstName = "Test",
-                            InstagramLink = "https://instagram.com/testuser",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "TESTUSER@GMAIL.COM",
                             NormalizedUserName = "TESTUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJwn22V58e/gbu8XkKO8zK+I1B6w1AfpRlTKPpN9EOwkrrDP7dc4meajtsJPTmLj8Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOXkhK53YRS7HHcABB/H65N7VdC0YV9eyBp9ma4iTd+mn7F0CA8mErnnCJBRsJm19A==",
                             PhoneNumber = "+905555555555",
                             PhoneNumberConfirmed = true,
                             Picture = "~/img/userImages/defaultUser.png",
-                            SecurityStamp = "49d25d87-7f5f-4bae-841d-25b441305401",
-                            TwitterLink = "https://twitter.com/testuser",
+                            SecurityStamp = "e28eaa22-120e-404b-93a8-75358de86534",
                             TwoFactorEnabled = false,
                             UserName = "testUser",
-                            WebsiteLink = "https://travelapp.com/",
-                            YoutubeLink = "https://youtube.com/testuser"
+                            WebsiteLink = "https://travelapp.com/"
                         });
                 });
 
@@ -1277,14 +1249,12 @@ namespace TRA.Data.Migrations
                     b.HasOne("TRA.Entities.Concrete.Comment", "Comment")
                         .WithMany("Likes")
                         .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TRA.Entities.Concrete.Post", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TRA.Entities.Concrete.User", "User")
                         .WithMany("Likes")

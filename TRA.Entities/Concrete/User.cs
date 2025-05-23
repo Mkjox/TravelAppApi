@@ -13,16 +13,14 @@ namespace TRA.Entities.Concrete
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
-        public ICollection<Post> Posts { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
+
         public string About { get; set; }
-        public string YoutubeLink { get; set; }
-        public string TwitterLink { get; set; }
-        public string InstagramLink { get; set; }
-        public string FacebookLink { get; set; }
         public string WebsiteLink { get; set; }
 
-        public ICollection<Like> Likes { get; set; }
-        public ICollection<Follow> Followers { get; set; }
-        public ICollection<Follow> Followees { get; set; }
+        public virtual ICollection<Like> Likes { get; set; } = new List<Like>();
+        public virtual ICollection<Follow> Followers { get; set; } = new List<Follow>();
+        public virtual ICollection<Follow> Followees { get; set; } = new List<Follow>();
     }
 }

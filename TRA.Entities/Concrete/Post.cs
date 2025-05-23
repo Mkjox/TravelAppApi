@@ -15,20 +15,24 @@ namespace TRA.Entities.Concrete
         public string Content { get; set; }
         public string Location {  get; set; }
         public string Thumbnail { get; set; }
+
         public int Balance { get; set; }
         public int Rating { get; set; }
         public int Duration { get; set; }
         public DateTime Date { get; set; }
         public int ViewCount { get; set; } = 0;
         public int CommentCount { get; set; } = 0;
+
         public int CategoryId { get; set; }
-        public Category? Category { get; set; }
+        public virtual Category Category { get; set; }
+
         public int UserId { get; set; }
         [JsonIgnore]
-        public User User { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public virtual User User { get; set; }
+
         public bool IsPinned { get; set; } = false;
 
-        public ICollection<Like> Likes { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<Like> Likes { get; set; } = new List<Like>();
     }
 }

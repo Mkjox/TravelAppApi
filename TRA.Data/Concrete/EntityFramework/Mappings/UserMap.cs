@@ -20,18 +20,6 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
             builder.Property(u => u.Picture).IsRequired(false);
             builder.Property(u => u.Picture).HasMaxLength(250);
 
-            builder.Property(u => u.YoutubeLink).IsRequired(false);
-            builder.Property(u => u.YoutubeLink).HasMaxLength(250);
-
-            builder.Property(u=>u.TwitterLink).IsRequired(false);
-            builder.Property(u => u.TwitterLink).HasMaxLength(250);
-
-            builder.Property(u=>u.InstagramLink).IsRequired(false);
-            builder.Property(u => u.InstagramLink).HasMaxLength(250);
-
-            builder.Property(u=>u.FacebookLink).IsRequired(false);
-            builder.Property(u => u.FacebookLink).HasMaxLength(250);
-
             builder.Property(u=>u.WebsiteLink).IsRequired(false);
             builder.Property(u => u.WebsiteLink).HasMaxLength(250);
 
@@ -82,11 +70,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 FirstName = "Admin",
                 LastName = "User",
                 About = "Admin User of Travel App",
-                TwitterLink = "https://twitter.com/adminuser",
-                InstagramLink = "https://instagram.com/adminuser",
-                YoutubeLink = "https://youtube.com/adminuser",
                 WebsiteLink = "https://travelapp.com/",
-                FacebookLink = "https://facebook.com/adminuser",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString()
@@ -105,11 +89,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 FirstName = "Editor",
                 LastName = "User",
                 About = "Editor User of Travel App",
-                TwitterLink = "https://twitter.com/editoruser",
-                InstagramLink = "https://instagram.com/editoruser",
-                YoutubeLink = "https://youtube.com/editoruser",
                 WebsiteLink = "https://travelapp.com/",
-                FacebookLink = "https://facebook.com/editoruser",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString()
@@ -128,11 +108,7 @@ namespace TRA.Data.Concrete.EntityFramework.Mappings
                 FirstName = "Test",
                 LastName = "User",
                 About = "Test User of Travel App",
-                TwitterLink = "https://twitter.com/testuser",
-                InstagramLink = "https://instagram.com/testuser",
-                YoutubeLink = "https://youtube.com/testuser",
                 WebsiteLink = "https://travelapp.com/",
-                FacebookLink = "https://facebook.com/testuser",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString()

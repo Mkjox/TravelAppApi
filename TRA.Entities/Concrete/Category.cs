@@ -12,7 +12,8 @@ namespace TRA.Entities.Concrete
     {
         public string Name { get; set; }
         public string Description { get; set; }
+
         [JsonIgnore]
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
     }
 }
